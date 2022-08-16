@@ -1,0 +1,58 @@
+<div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Number</th>
+        <th>View</th>
+        <th>Status</th>
+        <th>Action</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="documentsArr.length > 0">
+      <tr *ngFor="let document of documentsArr; let i = index">
+        <td>{{ document.type }}</td>
+        <th>{{ document.documentNumber }}</th>
+        <td>
+          <a (click)="onClickDocument(document)">
+            <i class="zmdi zmdi-file-text"></i>
+          </a>
+        </td>
+        <td>{{ document.status }}</td>
+        <td>
+          <select
+            [(ngModel)]="document.status"
+            (change)="activationChange(document.id, document.status)"
+          >
+            <option *ngFor="let status of statusArr" value="{{ status }}">
+              {{ status }}
+            </option>
+          </select>
+        </td>
+        <td>
+          <button
+            *ngIf="document.type == 'CANCELLED_CHEQUE'"
+            class="btn btn-primary"
+            (click)="documentDetails(document.id, 'bank')"
+          >
+            View Details
+          </button>
+          <button
+            *ngIf="document.type == 'RERA'"
+            class="btn btn-primary"
+            (click)="documentDetails(document.id, 'rera')"
+          >
+            View Details
+          </button>
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="documentsArr.length == 0">
+      <tr>
+        <td colspan="10" class="text-center">No data available!</td>
+        <!-- <td><button class="btn" (click)="activationChange(,$event)" value="REJECTED">REJECTED</button></td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,86 @@
+<main class="page-content">
+  <div class="container">
+    <div class="row">
+      <div class="col add_mail_section">
+        <form
+          [formGroup]="emailAddForm"
+          autocomplete="off"
+          (ngSubmit)="addMail($event)"
+          autocomplete="off"
+        >
+          <div class="add_mail_div">
+            <input
+              type="email"
+              [(ngModel)]="email"
+              name="0"
+              id="email"
+              class="form-control"
+              formControlName="Email"
+              placeholder="Email Id"
+              required
+              [ngClass]="{ 'is-invalid': submitted && validation.Email.errors }"
+              maxlength="35"
+            />
+            <div
+              *ngIf="submitted && validation.Email.errors"
+              class="invalid-feedback"
+            >
+              Email is required
+            </div>
+          </div>
+          <div class="add_btn_div">
+            <button class="btn add_btn" id="addBtn">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="mail_list_section">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table table-striped table-hover table-responsive">
+            <thead>
+              <tr>
+                <th width="10%;">Email ID</th>
+                <th width="10%;">Added On</th>
+                <th width="10%;">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of emailDataArr">
+                <td width="10%;">{{ data.emailToAddress }}</td>
+                <td width="10%;">{{ data.createdDate }}</td>
+                <td width="10%;">
+                  <span
+                    class="icon_space"
+                    id="{{ data.emailId }}"
+                    (click)="deleteMail($event)"
+                    ><i
+                      class="fas fa-trash-alt delete_icon"
+                      id="{{ data.emailId }}"
+                    ></i
+                    >Delete</span
+                  ><span
+                    id="{{ data.emailId }}"
+                    title="{{ data.emailToAddress }}"
+                    (click)="editMail($event)"
+                    ><i
+                      class="fas fa-edit edit_icon"
+                      id="{{ data.emailId }}"
+                      title="{{ data.emailToAddress }}"
+                    ></i
+                    >Edit</span
+                  >
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="emailDataArr.length == 0">
+              <tr>
+                <td colspan="4" class="text-center">No data available!</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

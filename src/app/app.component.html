@@ -1,0 +1,26 @@
+<div *ngIf="currentUrl">
+  <div></div>
+  <div>
+    <app-login *ngIf="!this.authenticationService.isLoggedin()"></app-login>
+    <div *ngIf="this.authenticationService.isLoggedin()">
+      <div class="page-wrapper chiller-theme toggled">
+        <div>
+          <app-side-bar></app-side-bar>
+        </div>
+        <div>
+          <div
+            *ngIf="pageLoader"
+            class="myloader d-flex justify-content-center align-items-center"
+          >
+            <img
+              src="{{ loader }}"
+              (error)="onImgError($event)"
+              alt=""
+              class="loader"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

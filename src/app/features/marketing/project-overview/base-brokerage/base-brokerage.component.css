@@ -1,0 +1,42 @@
+.imagesize{
+    height: 200px;
+    width:200px;
+}
+agm-map {
+    height: 520px;
+  }
+  .pro_form1 label.highlight{
+    border-bottom: 0.5px solid #b1b6bb;
+  }
+  .pro_form1 .text_date:read-only{
+    background-color: #d4d2d2;
+  }
+
+
+
+  .add_brokerage a {
+    border-radius: 4px;
+    background-color: #f7941e;
+    font-size: 14px;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.1px;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    float: right;
+    padding: 15px 22px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+
+  .mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  .status-tbl {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }

@@ -1,0 +1,8 @@
+.forgot_link{
+    color:#551a8b !important;
+    text-decoration: none !important;
+}
+.forgot_link:hover{
+    color:#551a8b !important;
+    text-decoration: underline !important;
+}

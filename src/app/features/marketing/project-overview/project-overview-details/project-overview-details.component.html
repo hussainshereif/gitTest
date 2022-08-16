@@ -1,0 +1,186 @@
+<div class="content_div">
+  <div class="abt_proj">
+    <div class="row mb_4">
+      <div class="col_6">
+        <h3 class="title mb_2">Brigade Exotica</h3>
+        <p class="text_xs dark_text_2">#CRM3254</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col_12">
+        <div class="tabs_wrapper">
+          <ul class="tabs">
+            <li
+              [class.active]="selectedtab === 'tab1'"
+              (click)="selectedtab = 'tab1'"
+              id="tab1"
+            >
+              About Project
+            </li>
+            <!--     <li
+              [class.active]="selectedtab === 'tab2'"
+              (click)="selectedtab = 'tab2'"
+              id="tab2"
+            >
+              Tower
+            </li>
+            <li id="tab3">Configuration</li> -->
+            <li
+              [class.active]="selectedtab === 'tab4'"
+              (click)="selectedtab = 'tab4'"
+              id="tab4"
+            >
+              Location
+            </li>
+            <li
+              id="tab5"
+              [class.active]="selectedtab === 'tab5'"
+              (click)="selectedtab = 'tab5'"
+            >
+              Collaterals
+            </li>
+            <li
+              id="tab6"
+              [class.active]="selectedtab === 'tab6'"
+              (click)="selectedtab = 'tab6'"
+            >
+              Gallery
+            </li>
+            <li
+              id="tab7"
+              [class.active]="selectedtab === 'tab7'"
+              (click)="selectedtab = 'tab7'"
+              *ngIf="!isConnectreClient"
+            >
+              FAQ
+            </li>
+            <li
+              id="tab8"
+              [class.active]="selectedtab === 'tab8'"
+              (click)="selectedtab = 'tab8'"
+              *ngIf="!isConnectreClient"
+            >
+              Incentives
+            </li>
+            <li
+              id="tab11"
+              [class.active]="selectedtab === 'tab11'"
+              (click)="selectedtab = 'tab11'"
+              *ngIf="!isConnectreClient"
+            >
+              Scheme
+            </li>
+            <li
+              id="tab9"
+              [class.active]="selectedtab === 'tab9'"
+              (click)="selectedtab = 'tab9'"
+              *ngIf="!isConnectreClient"
+            >
+              MRP
+            </li>
+            <li
+              id="tab10"
+              [class.active]="selectedtab === 'tab10'"
+              (click)="selectedtab = 'tab10'"
+            >
+              Amenities
+            </li>
+          </ul>
+          <!-- tabs -->
+          <div class="tabs_container" *ngIf="selectedtab === 'tab1'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab1'"
+              data-tab="tab1"
+            >
+              <app-projects-overview-edit></app-projects-overview-edit>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab2'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab2'"
+              data-tab="tab2"
+            >
+              <app-tower></app-tower>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab4'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab4'"
+              data-tab="tab4"
+            >
+              <app-locations [projectId]="projectId"></app-locations>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab5'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab5'"
+              data-tab="tab5"
+            >
+              <app-downloads [projectId]="projectId"></app-downloads>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab6'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab6'"
+              data-tab="tab6"
+            >
+              <app-gallery [projectId]="projectId"></app-gallery>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab7'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab7'"
+              data-tab="tab7"
+            >
+              <app-faq [projectId]="projectId"></app-faq>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab8'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab8'"
+              data-tab="tab8"
+            >
+              <app-incentives [projectId]="projectId"></app-incentives>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab9'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab9'"
+              data-tab="tab9"
+            >
+              <app-mrp [projectId]="projectId"></app-mrp>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab10'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab10'"
+              data-tab="tab8"
+            >
+              <app-amenities [projectId]="projectId"></app-amenities>
+            </div>
+          </div>
+          <div class="tabs_container" *ngIf="selectedtab === 'tab11'">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'tab11'"
+              data-tab="tab11"
+            >
+              <app-scheme [projectId]="projectId"></app-scheme>
+
+              <!-- tab content -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

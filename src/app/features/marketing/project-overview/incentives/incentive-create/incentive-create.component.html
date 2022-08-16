@@ -1,0 +1,100 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Add Incentive</h6>
+    <p class="modal_title text_xs">Add a Incentive File</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onClose()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <form [formGroup]="addForm" (ngSubmit)="saveIncentive()" autocomplete="off">
+      <div class="row">
+        <div class="col_12">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Title</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="caption"
+              placeholder="Enter Title"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['caption'])"
+              [field]="'Caption'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12 mb_2">
+          <div class="input_wrap mb_3">
+            <div class="d_flex">
+              <input
+                type="file"
+                id="real-file"
+                #imgupload
+                hidden="hidden"
+                (change)="uploadFile($event)"
+                class="inpt_field"
+              />
+              <button
+                type="button"
+                (click)="imgupload.click()"
+                id="custom-button"
+              >
+                <img
+                  src="../../../../../../assets/images_new/icons/file-upload.svg"
+                  alt=""
+                />
+              </button>
+              <div
+                class="file_txt"
+                style="display: flex; flex-direction: column"
+              >
+                <span class="subtext">Upload Incentive Document</span>
+                <span class="info" *ngIf="!fileName" id="custom-text"
+                  >No file chosen, yet.</span
+                >
+                <span class="info" *ngIf="fileName" id="custom-text">{{
+                  fileName
+                }}</span>
+              </div>
+              <div class="login_error" *ngIf="submitted">
+                <div *ngIf="!fileName">Document is required</div>
+                <div
+                  [hidden]="
+                    (bgValidation.valid && bgValidation.insize) ||
+                    (!bgValidation.valid && !bgValidation.insize)
+                  "
+                >
+                  Invalid image!
+                </div>
+                <div [hidden]="bgValidation.insize">
+                  Image size cannot exceed 10 MB
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <button
+          class="btn btn_secondary close"
+          type="button"
+          (click)="onClose()"
+        >
+          Cancel
+        </button>
+        <button class="btn btn_primary pop_btn" type="submit">Add</button>
+      </div>
+    </form>
+  </div>
+  <!-- modal_body -->
+</div>

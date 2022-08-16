@@ -1,0 +1,18 @@
+<div>
+  <div class="mar_top">
+    <form [formGroup]="rejectForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div class="hd_phr">
+        <h6><b>Please specify why this document is rejected</b></h6>
+      </div>
+      <div>
+        <input type="text" class="form-control" formControlName="reason" required>
+        <div *ngIf="submitted && f.reason.invalid" class="error">
+          Reason required.
+        </div>
+      </div>
+      <div class="btn_div">
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

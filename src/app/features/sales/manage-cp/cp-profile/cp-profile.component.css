@@ -1,0 +1,46 @@
+.imagesize{
+    height: 200px;
+    width:200px;
+}
+agm-map {
+    height: 520px;
+  }
+  .pro_form1 label.highlight{
+    border-bottom: 0.5px solid #b1b6bb;
+  }
+  .pro_form1 .text_date:read-only{
+    background-color: #d4d2d2;
+  }
+
+  .profile_details {
+    margin-bottom: 1rem;
+    /* margin-left: 77px; */
+  }
+  .calender_btn {
+    height: 28px;
+    padding-top: 0px;
+}
+  .profile_date{
+    margin-left: 77px;
+  }
+  .margin_left{
+    margin-left: 10px;
+  }
+
+  .date-pic {
+    display:inline;
+    width: 27%;
+    margin-right: 9px;
+  }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance:textfield;
+}

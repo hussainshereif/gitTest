@@ -1,0 +1,111 @@
+<div class="row_n">
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="laddersList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      [globalFilterFields]="[
+        'id',
+        'name',
+        'type',
+        'startDate',
+        'endDate',
+        'group.name'
+      ]"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row allign_center">
+          <div class="col_6">
+            <h3 class="title mb_1 text_md">Ladders list</h3>
+            <p class="text_xs dark_text_2">List of existing ladders</p>
+          </div>
+          <div class="col_6">
+            <div class="d_flex justify_end">
+              <span class="p-input-icon-left tbl_search">
+                <i class="pi pi-search"></i>
+                <input
+                  class="search_groups"
+                  pInputText
+                  type="text"
+                  (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Search..."
+                />
+              </span>
+              <button class="tbl_filter">
+                <div class="icon">
+                  <img src="assets/images_new/icons/filter.svg" alt="" />
+                </div>
+              </button>
+              <button class="btn btn_primary" (click)="createLadder()">
+                Add New
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#ID</th>
+          <th>Ladder Name</th>
+          <th>TYPE</th>
+          <th>Group Name</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-product>
+        <tr (click)="showDetails(product.id)">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>
+            <span class="success_text italic">{{ product.type }}</span>
+          </td>
+          <td>{{ product.group.name }}</td>
+          <td>{{ product.startDate }}</td>
+          <td>{{ product.endDate }}</td>
+          <td>
+            <div
+              class="badge"
+              [ngClass]="{
+                badge_light_warning: !product.active,
+                badge_light_success: product.active
+              }"
+            >
+              {{ product.active ? "Active" : "Inactive" }}
+            </div>
+          </td>
+          <td (click)="$event.stopPropagation()">
+            <a
+              class="warning_text me_3"
+              (click)="editLadder(product.id)"
+              href="javascript:void(0)"
+              >Edit</a
+            ><a
+              class="danger_text me_3"
+              (click)="onDeleteLadder(product.id)"
+              href="javascript:void(0)"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-center" colspan="8">No data available!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

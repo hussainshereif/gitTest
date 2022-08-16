@@ -1,0 +1,69 @@
+<main class="page-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="form-group col-md-12">
+              <h1>Opportunity
+                <!-- <span class="import_list pull-right"><a href="#" (click)="importClick()">Import List</a></span> -->
+              </h1>
+
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="form-group col-md-12">
+              <table class="table table-striped table-hover table-responsive w-100 table_leads_123">
+                <thead>
+                  <tr>
+                    <th width="10%"> Opportunity ID</th>
+                    <th width="12%"> Name</th>
+                    <th width="10%">Mobile Number</th>
+
+                    <th width="12%">Email ID</th>
+                    <th width="10%">Project ID</th>
+                    <th width="10%">Project Name</th>
+
+                    <th width="10%">Stage</th>
+                    <th width="10%">Last Visit</th>
+                    <th width="15%">Source CP Name</th>
+
+                    <th width="15%">CP Mobile</th>
+                    <th width="15%">CP Email</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="OppurtunityList.length>0">
+                  <tr *ngFor="let cp of OppurtunityList;let i=index">
+                    <td>{{cp.wdLeadId}}</td>
+                    <td>{{cp.wdLeadName}}</td>
+                    <td>{{cp.wdLeadNumber}}</td>
+
+                    <td>{{cp.wdLeadEmailId}}</td>
+                    <td>{{cp.wdProjectId}}</td>
+                    <td>{{cp.wdProjectName}}</td>
+
+                    <td>{{cp.wdStatus}}</td>
+                    <td>{{cp.wdCreatedOn | date}}</td><!--check with chettan-->
+                    <td>{{cp.wdCpName}}</td>
+
+                    <td>{{cp.wdCpNumber}}</td>
+                    <td>{{cp.wdCpEmailId}}</td>
+                  </tr>
+
+                </tbody>
+
+                <tbody *ngIf="OppurtunityList.length==0">
+                  <tr>
+                    <td colspan="11" class="text-center">No data available!</td>
+                  </tr>
+                </tbody>
+              </table>
+          </div>
+      </div>
+
+  </div>
+
+
+<div *ngIf="sizeofTable>recordsPerPage"> 
+  <ngb-pagination [collectionSize]="sizeofTable" [rotate]="true" [boundaryLinks]="true" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage" aria-label="Default pagination" (pageChange)="paginatedSearch(offset)" ></ngb-pagination>
+  </div> 
+  
+  </main>

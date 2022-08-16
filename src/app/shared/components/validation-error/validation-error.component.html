@@ -1,0 +1,7 @@
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <span
+    class="login_error"
+    *ngIf="submit || (control.invalid && control.dirty)"
+    >{{ errorMsg }}</span
+  >
+</div>

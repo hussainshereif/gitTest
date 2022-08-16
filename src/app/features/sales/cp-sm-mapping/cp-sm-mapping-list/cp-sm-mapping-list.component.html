@@ -1,0 +1,263 @@
+<div class="wrap">
+  <div class="content_div">
+    <div class="main_heading">
+      <div class="row_n">
+        <div class="col_12 mb_4">
+          <div class="">
+            <div class="row allign_center">
+              <div class="col_6">
+                <h3 class="title mb_1 text_md">
+                  {{ userName }}
+                </h3>
+                <!--  <p class="text_xs dark_text_2">
+                                      BDSM0021
+                                  </p> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col_12 mb_4">
+          <div class="assign_sm_head">
+            <div class="row allign_center">
+              <div class="col_6">
+                <h6 class="title">
+                  <span class="me_3">CP List</span>
+                  <span>
+                    <button
+                      class="btn btn_primary visible pop_btn"
+                      (click)="selectedSM()"
+                      [disabled]="arrObj.length == 0"
+                    >
+                      Assign to SM
+                    </button>
+                    <!-- add class hidden to hide and remove class visible -->
+                  </span>
+                </h6>
+              </div>
+              <div class="col_6">
+                <div class="d_flex justify_end">
+                  <a class="btn link px_0 me_3" href="{{ smExcel }}"
+                    >Download Sample</a
+                  >
+                  <input
+                    class="import_input"
+                    type="file"
+                    #fileInput
+                    name="fileInput"
+                    (change)="uploadExcel($event)"
+                  />
+                  <button
+                    class="btn btn_primary_g me_3"
+                    (click)="fileInput.click()"
+                  >
+                    Import List
+                  </button>
+                  <button class="btn btn_primary pop_f_btn" (click)="openNav()">
+                    Filter
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col_12 mb_3">
+          <p-table
+            #dt
+            [value]="cpList"
+            [rows]="10"
+            [lazy]="true"
+            [paginator]="true"
+            (onLazyLoad)="paginatedSearch($event)"
+            responsiveLayout="scroll"
+            [totalRecords]="totalRecords"
+            [globalFilterFields]="['cpMaster.registrationDate']"
+            [rowHover]="true"
+            dataKey="id"
+            [(selection)]="arrObj"
+            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [showCurrentPageReport]="true"
+            styleClass="p-datatable-striped"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                </th>
+                <th>CP Name</th>
+                <th>Sales</th>
+                <th>Company</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th pSortableColumn="cpMaster.registrationDate">
+                  Reg Date
+                  <p-sortIcon field="cpMaster.registrationDate"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-cpList let-rowIndex="rowIndex">
+              <tr>
+                <td>
+                  <p-tableCheckbox [value]="cpList"></p-tableCheckbox>
+                </td>
+                <td>{{ cpList.name }}</td>
+                <td>{{ cpList.cpMaster.salesPersonName }}</td>
+                <td>{{ cpList.company }}</td>
+                <td>{{ cpList.email }}</td>
+                <td>{{ cpList.mobileNumber }}</td>
+                <td>
+                  {{ cpList.cpMaster.registrationDate | date: "dd/MM/yyyy" }}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+              <tr>
+                <td class="text-center" colspan="7">No data available!</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-sidebar [(visible)]="showFilter" position="right">
+  <div class="filter_header mb_4">
+    <h5 class="filter_title text_xl">Filter</h5>
+    <p class="filter_title text_xs">Filter down the CP list</p>
+    <!-- filter title -->
+    <!--     <div class="close_wrap">
+            <span title="Close" class="btn_close btn btn_close_white close"></span>
+        </div> -->
+    <!-- close -->
+  </div>
+  <!-- filter header -->
+  <div class="filter_body">
+    <form [formGroup]="filterForm">
+      <div class="row mb_3">
+        <div class="col_12">
+          <div class="input_wrap">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label">City</label>
+              <p-dropdown
+                [options]="cities"
+                autoDisplayFirst="false"
+                placeholder="City"
+                formControlName="city"
+                optionLabel="value"
+                optionValue="value"
+                (onChange)="getFilterSubRegion($event.value)"
+              >
+                <ng-template let-item pTemplate="item">
+                  <div *ngIf="item.value.length > 25; else Not">
+                    {{ item.value | slice: 0:24 }} ..
+                  </div>
+                  <ng-template #Not>{{ item.value }}</ng-template>
+                </ng-template>
+              </p-dropdown>
+              <div *ngIf="submitted && f.city.invalid" class="login_error">
+                <span>Please select city</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label">Sub Region</label>
+              <p-dropdown
+                [options]="subRegionList"
+                autoDisplayFirst="false"
+                placeholder="Sub Region"
+                formControlName="region"
+                optionLabel="value"
+                optionValue="value"
+                (onChange)="getFilterMicroMarket($event.value)"
+              >
+                <ng-template let-item pTemplate="item">
+                  <div *ngIf="item.value.length > 25; else NotFit">
+                    {{ item.value | slice: 0:24 }} ..
+                  </div>
+                  <ng-template #NotFit>{{ item.value }}</ng-template>
+                </ng-template>
+              </p-dropdown>
+              <div *ngIf="submitted && f.region.invalid" class="login_error">
+                <span>Please select sub-region</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap filter_br">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label">Micromarket</label>
+              <p-dropdown
+                [options]="microMarketList"
+                autoDisplayFirst="false"
+                placeholder="Micromarket"
+                formControlName="market"
+                optionLabel="value"
+                optionValue="value"
+              >
+                <ng-template let-item pTemplate="item">
+                  <div *ngIf="item.value.length > 25; else NotSet">
+                    {{ item.value | slice: 0:24 }} ..
+                  </div>
+                  <ng-template #NotSet>{{ item.value }}</ng-template>
+                </ng-template>
+              </p-dropdown>
+              <div *ngIf="submitted && f.market.invalid" class="login_error">
+                <span>Please select micro-market</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label">Status</label>
+            <p-dropdown
+              [options]="status"
+              autoDisplayFirst="false"
+              placeholder="Status"
+              formControlName="status"
+              optionLabel="value"
+              optionValue="value"
+            ></p-dropdown>
+            <div *ngIf="submitted && f.status.invalid" class="validationError">
+              <span>Please select status</span>
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label">SM</label>
+            <p-dropdown
+              [options]="SMList"
+              autoDisplayFirst="false"
+              placeholder="SM"
+              formControlName="salesM"
+              optionLabel="name"
+              optionValue="id"
+            >
+              <ng-template let-item pTemplate="item">
+                <div *ngIf="item.name.length > 25; else Short">
+                  {{ item.name | slice: 0:24 }} ..
+                </div>
+                <ng-template #Short>{{ item.name }}</ng-template>
+              </ng-template>
+            </p-dropdown>
+            <div *ngIf="submitted && f.salesM.invalid" class="validationError">
+              <span>Please select SM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <a class="btn btn_secondary close" (click)="clearFilter()">Clear all</a>
+        <button class="btn btn_primary pop_f_btn" (click)="filterFormSubmit()">
+          Apply Filter
+        </button>
+      </div>
+    </form>
+  </div>
+</p-sidebar>

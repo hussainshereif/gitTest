@@ -1,0 +1,51 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Add Project</h6>
+    <p class="modal_title text_xs">Add New Project</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="cancel()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <form [formGroup]="addProjectForm">
+      <div class="row">
+        <div class="col_12 mb_1">
+          <div class="input_wrap">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label">Projects</label>
+            <p-dropdown
+              [options]="projectList"
+              autoDisplayFirst="false"
+              placeholder="Choose the project"
+              formControlName="project"
+              optionLabel="projectName"
+              optionValue="id"
+            >  <ng-template let-item pTemplate="item">
+              <div *ngIf="item.projectName.length > 25; else NotSet">
+                {{ item.projectName | slice: 0:24 }} ..
+              </div>
+              <ng-template #NotSet>{{ item.projectName }}</ng-template>
+            </ng-template></p-dropdown>
+            <div *ngIf="submitted && !f.project.valid">
+              <span class="login_error">Please select project</span>
+            </div>
+          </div>
+         </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <a class="btn btn_secondary close" (click)="cancel()">Cancel</a>
+        <a class="btn btn_primary_g" (click)="addSMProject()">Add</a>
+      </div>
+    </form>
+  </div>
+  <!-- modal_body -->
+</div>
+<!-- modal content -->

@@ -1,0 +1,91 @@
+<div class="ladder">
+  <div class="row">
+    <div class="form-group col-md-8">
+      <h4>Ladder List
+        <div class="add_projects pull-right">
+          <a (click)="addLadder()">
+            Add Ladder</a>
+        </div>
+      </h4>
+    </div>
+    <div class="form-group col-md-8">
+      <div class="pro_form1">
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let list of ladderDetails;">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{list. groupName}}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-panel-description class="status-tbl"></mat-panel-description>
+            <table border="1" class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Ladder Name</th>
+                  <th>Start Date</th>
+                  <th>End Date</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="list.ladderList.length>0">
+                <tr *ngFor="let ll of list.ladderList;let i=index">
+                  <td (click)="listLadderDetails(ll.ladId)" style="color: #145aa8;cursor: pointer;">{{ll.ladName}}</td>
+                  <td>{{ll.ladStartDate}}</td>
+                  <td>{{ll.ladEndDate}}</td>
+                  <td>
+                    <a (click)="addLadderRange(ll.ladId)"><i class="zmdi zmdi-plus-circle"></i></a> &nbsp;
+                    <a (click)="editLadderRange(ll.ladId,ll.ladName,ll.ladStartDate,ll.ladEndDate,list.groupId)"><i
+                        class="zmdi zmdi-edit"></i></a>
+                    <a (click)="deleteLadder(ll.ladId)"><i class="zmdi zmdi-delete ml-2"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody *ngIf="list.ladderList.length==0">
+                <tr>
+                  <td colspan="7" class="text-center">No data available!</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </div>
+
+    <!-- <div class="col-md-8 col-xs-12">
+      <div class="pro_form1">
+        <div class="add_projects pull-right">
+          <a style="padding: 10px 8px !important; margin-bottom: 10px;" (click)="addLadder()">Add Ladder</a>
+        </div>
+        <table class="table table-striped table-hover w-100">
+          <thead>
+            <tr>
+              <th>Ladder Name</th>
+              <th>Start Date </th>
+              <th>End Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="ladderList.length>0">
+            <tr *ngFor="let ll of ladderList;let i=index">
+              <td (click)="listLadderDetails(ll.ladId)" style="color: #145aa8;cursor: pointer;">{{ll.ladName}}</td>
+              <td>{{ll.ladStartDate}}</td>
+              <td>{{ll.ladEndDate}}</td>
+              <td>
+                <a (click)="addLadderRange(ll.ladId)"><i class="zmdi zmdi-plus-circle"></i></a> &nbsp;
+                <a (click)="editLadderRange(ll.ladId,ll.ladName,ll.ladStartDate,ll.ladEndDate)"><i
+                    class="zmdi zmdi-edit"></i></a>
+                <a (click)="deleteLadder(ll.ladId)"><i class="zmdi zmdi-delete ml-2"></i></a>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="ladderList.length==0">
+            <tr>
+              <td colspan="7" class="text-center">No data available!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div> -->
+  </div>
+</div>

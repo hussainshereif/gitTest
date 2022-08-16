@@ -1,0 +1,61 @@
+<div class="wrap">
+  <header class="header">
+    <div class="page_title">
+      <h1 class="title">
+        {{ title }}
+      </h1>
+      <breadcrumb #parent>
+        <div class="breadcrumb">
+          <span *ngFor="let route of parent.breadcrumbs">
+            <a
+              *ngIf="!route.terminal"
+              class="breadcrumb_item"
+              [routerLink]="[route.url]"
+            >
+              {{ route.displayName }}
+            </a>
+            <a
+              *ngIf="route.terminal"
+              class="breadcrumb_item active"
+              aria-current="page"
+              >{{ route.displayName }}</a
+            >
+          </span>
+          <span *ngIf="breadCrumbsArr.length == 0">
+            <a class="breadcrumb_item active">{{ title }}</a>
+          </span>
+        </div>
+      </breadcrumb>
+    </div>
+    <div class="navbar">
+      <a routerLink="notifications" routerLinkActive="active">
+        <div class="notifications active">
+          <img src="assets/images_new/icons/notification.svg" alt="" />
+        </div>
+      </a>
+      <div class="nav_menu_profile" data-modal=".menu_profile">
+        <div class="user">
+          <img
+            class="w_100"
+            src="{{ imageUrl }}"
+            onerror="this.src='assets/images/user-icon.jpg'"
+            alt=""
+          />
+        </div>
+        <div class="menu_profile visible">
+          <div class="nav_menu_list">
+            <!-- <a class="menu_item" routerLink="profile" routerLinkActive="active">
+              My Profile
+            </a> -->
+            <a class="menu_item" (click)="logout()"> Log Out </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="content_div">
+    <div class="main_heading">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

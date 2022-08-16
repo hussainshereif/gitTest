@@ -1,0 +1,332 @@
+<form
+  #addlocationForm="ngForm"
+  autocomplete="off"
+  (ngSubmit)="addlocationForm.form.valid && saveHighlights()"
+  novalidate
+>
+  <!-- Location Section -->
+  <div class="row_n">
+    <div class="col_12">
+      <div class="selected_grup">
+        <h6 class="title">Location Details</h6>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Location Title</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name="mapTitle"
+          [(ngModel)]="LocationList.googleLocation"
+          #mapTitle="ngModel"
+          maxlength="150"
+          placeholder="Enter Location Title"
+          required
+        />
+        <small
+          *ngIf="mapTitle.errors && addlocationForm.submitted"
+          class="error_message"
+        >
+          <div [hidden]="!mapTitle.errors.required">
+            Location title is required
+          </div>
+          <div [hidden]="!mapTitle.errors.maxlength">Max length exceeded</div>
+        </small>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Latitude</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name="latitude"
+          [(ngModel)]="LocationList.latitude"
+          #latitude="ngModel"
+          maxlength="150"
+          placeholder="Enter Latitude"
+          required
+        />
+        <small
+          *ngIf="latitude.errors && addlocationForm.submitted"
+          class="error_message"
+        >
+          <div [hidden]="!latitude.errors.required">Latitude is required</div>
+          <div [hidden]="!latitude.errors.maxlength">Max length exceeded</div>
+        </small>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Longitude</label>
+        <input
+          type="text"
+          class="inpt_field"
+          placeholder="Enter Longitude"
+          type="text"
+          name="longitude"
+          maxlength="150"
+          [(ngModel)]="LocationList.longitude"
+          #longitude="ngModel"
+          required
+        />
+        <small
+          *ngIf="longitude.errors && addlocationForm.submitted"
+          class="error_message"
+        >
+          <div [hidden]="!longitude.errors.required">Longitude is required</div>
+          <div [hidden]="!longitude.errors.maxlength">Max length exceeded</div>
+        </small>
+      </div>
+    </div>
+  </div>
+  <div class="row_n">
+    <div class="col_12">
+      <div class="dashed_b_t"></div>
+    </div>
+    <div class="col_12">
+      <div class="selected_grup">
+        <h6 class="title">Highlights</h6>
+      </div>
+    </div>
+    <div class="col_12">
+      <div class="accordin_wrap mb_4">
+        <div
+          class="accordin_itm active"
+          *ngFor="let highLightsPhTitle of highLightsPhTitles; let m = index"
+        >
+          <!-- Highligh Section -->
+          <div class="itm_head">
+            <div class="title">{{ highLightsPhTitle }}</div>
+            <div class="icon btn p_0">
+              <a (click)="addHighlights(highLightsPhTitle)">
+                <img [src]="accrdingImgUrl" alt=""
+              /></a>
+            </div>
+          </div>
+          <div *ngFor="let highlightItem of highLightsListArray; let i = index">
+            <div
+              class="itm_body"
+              *ngIf="
+                highlightItem.title == highLightsPhTitle &&
+                highlightItem.title != ''
+              "
+            >
+              <div class="sub_item">
+                <div class="left">
+                  <div class="row_n">
+                    <div class="col_lg_6">
+                      <div class="input_wrap mb_0">
+                        <label class="input_label required">Title</label>
+                        <input
+                          type="text"
+                          class="inpt_field"
+                          name="phName{{ i }}"
+                          [(ngModel)]="highlightItem.name"
+                          #phName="ngModel"
+                          pattern="[a-zA-Z0-9. ]*"
+                          placeholder="Enter Title"
+                          required
+                        />
+                        <small
+                          *ngIf="
+                            !phName.valid &&
+                            phName.errors &&
+                            addlocationForm.submitted
+                          "
+                          class="error_message float-left w-100"
+                        >
+                          <div [hidden]="!phName.errors.required">
+                            Highlight title is required
+                          </div>
+                          <div class="small" [hidden]="phName.valid">
+                            Allowed characters: a-z, A-Z, 0-9.
+                          </div>
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col_lg_6">
+                      <div class="input_wrap mb_0">
+                        <label class="input_label required">Distance</label>
+                        <input
+                          type="text"
+                          class="inpt_field"
+                          name="phDescription{{ i }}"
+                          [(ngModel)]="highlightItem.description"
+                          maxlength="150"
+                          #phDescription="ngModel"
+                          pattern="[a-zA-Z0-9. ]*"
+                          placeholder="Enter Distance"
+                          required
+                        />
+                        <small
+                          *ngIf="
+                            !phDescription.valid &&
+                            phDescription.errors &&
+                            addlocationForm.submitted
+                          "
+                          class="error_message float-left w-100"
+                        >
+                          <div [hidden]="!phDescription.errors.required">
+                            Highlight distance is required
+                          </div>
+                          <div class="small" [hidden]="phDescription.valid">
+                            Allowed characters: a-z, A-Z, 0-9.
+                          </div>
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="right">
+                  <a
+                    class="btn pop_btn p_0"
+                    (click)="RemoveHighlights(i, highlightItem)"
+                    ><img [src]="deleteImgUrl" alt=""
+                  /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="d_flex justify_end mb_3 mt_4"
+            *ngIf="hideRow(highLightsPhTitle)"
+          >
+            <button
+              class="btn btn_primary_g"
+              (click)="addHighlights(highLightsPhTitle)"
+            >
+              Add Row
+            </button>
+          </div>
+        </div>
+        <!-- Additional Highligh Section -->
+        <div class="accordin_itm active">
+          <div class="itm_head">
+            <div class="title">Others</div>
+            <div class="icon btn p_0">
+              <a (click)="addAdditionalHighlights()">
+                <img [src]="accrdingImgUrl" alt=""
+              /></a>
+            </div>
+          </div>
+          <div
+            *ngFor="
+              let additionalhighlightItem of additionalHighLightsListArray;
+              let i = index;
+              trackBy: customTrackBy
+            "
+          >
+            <div class="itm_body">
+              <div class="sub_item">
+                <div class="left">
+                  <div class="row_n">
+                    <div class="col_lg_6">
+                      <div class="input_wrap mb_0">
+                        <label class="input_label required">Title</label>
+                        <input
+                          type="text"
+                          class="inpt_field"
+                          name="pahTitle{{ i }}"
+                          [(ngModel)]="additionalhighlightItem.title"
+                          required
+                          #pahTitle="ngModel"
+                          pattern="[a-zA-Z0-9. ]*"
+                        />
+                        <small
+                          *ngIf="
+                            !pahTitle.valid &&
+                            pahTitle.errors &&
+                            addlocationForm.submitted
+                          "
+                          class="error_message float-left w-100"
+                        >
+                          <div
+                            class="small"
+                            [hidden]="!pahTitle.errors.required"
+                          >
+                            Additional highlight title is required
+                          </div>
+                          <div class="small" [hidden]="pahTitle.valid">
+                            Allowed characters: a-z, A-Z, 0-9.
+                          </div>
+                        </small>
+                      </div>
+                    </div>
+                    <div class="col_lg_6">
+                      <div class="input_wrap mb_0">
+                        <label class="input_label required">Distance</label>
+                        <input
+                          type="text"
+                          class="inpt_field"
+                          name="pahDescription{{ i }}"
+                          [(ngModel)]="additionalhighlightItem.description"
+                          maxlength="150"
+                          #pahDescription="ngModel"
+                          pattern="[a-zA-Z0-9. ]*"
+                          placeholder="Enter Distance"
+                          required
+                        />
+                        <small
+                          *ngIf="
+                            !pahDescription.valid &&
+                            pahDescription.errors &&
+                            addlocationForm.submitted
+                          "
+                          class="error_message float-left w-100"
+                        >
+                          <div [hidden]="!pahDescription.errors.required">
+                            Additional highlight distance is required
+                          </div>
+                          <div class="small" [hidden]="phDescription.valid">
+                            Allowed characters: a-z, A-Z, 0-9.
+                          </div>
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="right">
+                  <a
+                    class="btn pop_btn p_0"
+                    (click)="
+                      RemoveAdditionalHighlights(i, additionalhighlightItem)
+                    "
+                    ><img [src]="deleteImgUrl" alt=""
+                  /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="d_flex justify_end mb_3 mt_4"
+            *ngIf="additionalHighLightsListArray.length > 0"
+          >
+            <button
+              class="btn btn_primary_g"
+              (click)="addAdditionalHighlights()"
+            >
+              Add Row
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row allign_center mb_4">
+    <div class="col_12">
+      <div class="d_flex justify_end">
+        <button
+          class="btn btn_primary pop_btn"
+          type="submit"
+          [disabled]="locationSubmit"
+        >
+          Save Details
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

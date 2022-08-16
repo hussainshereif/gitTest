@@ -1,0 +1,82 @@
+.theme_main_div{
+    background-color: #fff;
+    padding: 180px 0px 240px 0px;
+    text-align: center;
+    margin-bottom: 500px;
+    overflow: hidden;
+}
+.theme_inside_box{
+    width: 25%;
+    border: 2px solid rgb(66, 64, 64);
+    display: inline-block;
+    margin-top: 60px 20px;
+    position: relative;
+    padding: 20px 0px;
+ } 
+.field_set{
+    position: absolute;
+    border: none;
+    top: -11px;
+    left: 10px;
+    z-index: 1;
+    background-color: #fff;
+}
+.heading{
+    margin: 30px auto;
+}
+.content_phr{
+    width: 70%;
+    display: inline-block;
+    text-align: center;
+    font-size: 18px;
+}
+.content_color{
+    width: 30%;
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+.color_sketch{
+    position: absolute;
+    top: 20px;
+    left: 0;
+    z-index: 10;
+}
+.color_span{
+    width: 20px;
+    height: 20px;
+    border: .5px solid rgb(141, 139, 139);
+    padding: 0.5px 8px;
+    z-index: 3;
+}
+.color_span:hover{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=14, Direction=0, Color=#878787)";/*IE 8*/
+-moz-box-shadow: 0 0 14px #878787;/*FF 3.5+*/
+-webkit-box-shadow: 0 0 14px #878787;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+box-shadow: 0 0 14px #878787;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+filter: progid:DXImageTransform.Microsoft.Shadow(Strength=14, Direction=135, Color=#878787); /*IE 5.5-7*/
+}
+.margin_left{
+    margin-left: 180px;
+}
+.page-content{
+    position: relative;
+}
+.exitLayer{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba(66, 63, 63, 0.198);
+    z-index: 5;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.highliteBox{
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=14, Direction=0, Color=#878787)";/*IE 8*/
+-moz-box-shadow: 0 0 14px -2px #878787;/*FF 3.5+*/
+-webkit-box-shadow: 0 0 14px -2px #878787;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+box-shadow: 0 0 14px -2px #878787;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+filter: progid:DXImageTransform.Microsoft.Shadow(Strength=14, Direction=135, Color=#878787); /*IE 5.5-7*/
+background-color: beige;
+}

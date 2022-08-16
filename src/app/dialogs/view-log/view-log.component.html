@@ -1,0 +1,66 @@
+<div class="modal_content">
+  <div class="modal_header mb_2">
+    <h6 class="modal_title text_xl">View Log</h6>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onCancel()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <div class="row">
+      <div class="col_12">
+        <p-table
+          #dt
+          [value]="logList"
+          [rows]="10"
+          [lazy]="true"
+          [paginator]="true"
+          (onLazyLoad)="paginatedSearch($event)"
+          responsiveLayout="scroll"
+          [totalRecords]="totalRecords"
+          [rowHover]="true"
+          dataKey="id"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [showCurrentPageReport]="true"
+          styleClass="p-datatable-striped"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>#CP ID</th>
+              <th>Entry</th>
+              <th>Failed ID</th>
+              <th>File Name</th>
+              <th>Contact</th>
+              <th>Reason</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-logs let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="logs">
+              <td>{{ logs.crmId }}</td>
+              <td>{{logs.createdOn|date}</td>
+              <td>{{ logs.id }}</td>
+              <td>{{ logs.fileName }}</td>
+              <td>{{ logs.mobileNumber }}</td>
+              <td>
+                {{ logs.reason }}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td class="text-center" colspan="6">No data available!</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <!-- modal_body -->
+</div>
+<!-- modal content -->

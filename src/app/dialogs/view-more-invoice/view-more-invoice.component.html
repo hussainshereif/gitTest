@@ -1,0 +1,76 @@
+<table class="table table-striped table-hover table-responsive">
+  <tr>
+    <td>
+        <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i> 
+          Invoice Number</td>
+    <td>{{data.invoiceData.invoNumber}}</td>
+  </tr>
+
+  <tr>
+      <td>   
+            <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i> 
+            Booking or sale date</td>
+      <td>{{data.invoiceData.bookingOrSaleDate?(data.invoiceData.bookingOrSaleDate|date:'medium') : ""}}</td>
+   </tr>
+
+  
+
+    <tr>
+          <td>
+             <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i>   
+            Invoice Amount</td>
+          <td>{{data.invoiceData.invoAmount}}</td>
+     </tr>
+
+      <tr>
+            <td>
+                 <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i> 
+                  Invoice Status</td>
+            <td>{{data.invoiceData.invoStatus}}</td>
+       </tr>
+
+       <tr>
+          <td>
+              <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i> 
+              Category</td>
+          <td>{{data.invoiceData.invoCategory}}</td>
+     </tr>
+
+     <tr>
+        <td>
+              <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i> 
+              Project SFDC</td>
+        <td>{{data.invoiceData.projectSfdcId}}</td>
+   </tr>
+
+
+   <tr>
+      <td>
+            <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i> 
+            CP User Name</td>
+      <td>{{data.invoiceData.cpUserName}}</td>
+ </tr>
+
+ <tr>
+      <td>
+            <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i> 
+            CP C4C ID</td>
+      <td>{{data.invoiceData.cpSfdcId}}</td>
+ </tr>
+
+ <tr>
+    <td>
+      <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i>        
+      Client Name</td>
+    <td>{{data.invoiceData.invoClientName}}</td>
+</tr>
+
+      <tr>
+            <td>
+                  <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i> 
+                  Payment Type</td>
+            <td>{{data.invoiceData.payoutStatus}}</td>
+       </tr>
+
+     
+</table>

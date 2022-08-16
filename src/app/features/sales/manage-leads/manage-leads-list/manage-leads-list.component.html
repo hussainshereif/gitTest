@@ -1,0 +1,193 @@
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <h1>
+          <!-- Leads -->
+
+          <div class="import_list pull-right">
+            <input
+              style="display: none"
+              type="file"
+              #fileInput
+              [(ngModel)]="currentFile"
+              name="fileInput"
+              (change)="uploadExcel($event)"
+            />
+            <a (click)="fileInput.click()"> Import List</a>
+          </div>
+          <!-- <a  href="https://s3-ap-southeast-1.amazonaws.com/edleweisswingman/cpexcelTest/Sample.xlsx"> -->
+          <!-- <a href="https://loyalie.s3-ap-southeast-1.amazonaws.com/FileUploadMldl/LeadExcelMLDLSample.xlsx"> -->
+          <a href="{{ leadExcel }}">
+            <img class="samplexlsx" src="assets\images\sampleExcel.png" />
+          </a>
+        </h1>
+        <span class="log-btn">
+          <a
+            (click)="viewLog()"
+            style="
+              padding: 4px 8px !important;
+              margin-right: 10px;
+              margin-top: 4px;
+            "
+            >View Log</a
+          >
+        </span>
+        <span>
+          <label class="search-label">Search by</label>
+          <select
+            class="margin_left dropDown-style dropdown-search"
+            #searchType
+          >
+            <option *ngFor="let lead of leadOptions" value="{{ lead }}">
+              {{ lead }}
+            </option>
+          </select>
+        </span>
+
+        <span class="margin_left">
+          <input
+            type="text"
+            class="search-style search-style-lead"
+            placeholder="Enter Search Value"
+            #searchVal
+            name="sortVal"
+            autocomplete="off"
+          />
+
+          <i
+            class="fa fa-search search-icon search-icon-lead"
+            (click)="getLeadList(0, 10, searchType.value, searchVal.value)"
+          ></i>
+        </span>
+        <div>
+          <span>
+            <label class="search-label">Search by</label>
+            <select
+              class="margin_left dropDown-style dropdown-search"
+              #sortType
+            >
+              <option *ngFor="let lead of leadOptions" value="{{ lead }}">
+                {{ lead }}
+              </option>
+            </select>
+          </span>
+
+          <span class="margin_left">
+            <input
+              type="text"
+              class="search-style search-style-lead"
+              placeholder="Enter Search Value"
+              #sortValue
+              name="sortVal"
+              autocomplete="off"
+            />
+            <i
+              class="fa fa-download search-icon searchexcel"
+              (click)="downloadExcel('', sortType.value, sortValue.value)"
+            ></i>
+            <!-- <button
+              style="height: 30px"
+              class="margin_left"
+              type="submit"
+              (click)="downloadExcel('', sortType.value, sortValue.value)"
+            >
+              Download Excel
+            </button> -->
+          </span>
+        </div>
+      </div>
+      <div class="processing_status_div">
+        <span class="processing_status">{{ uploadStatus }}</span>
+      </div>
+      <div *ngIf="isProcessingVisible" class="processing_status_div">
+        <span class="processing_status">Processing...</span>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <table
+          class="table table-striped table-hover table-responsive w-100 table_leads_123"
+        >
+          <thead>
+            <tr>
+              <th width="10%">Lead ID</th>
+              <!-- <th width="10%"> Booking ID</th> -->
+              <th width="12%">Name</th>
+              <!-- <th width="10%">Mobile Number</th>
+                <th width="12%">Email ID</th> -->
+              <th width="10%">Project ID</th>
+              <th width="10%">Project Name</th>
+              <th width="8%">Status</th>
+              <th width="10%">Source CP ID</th>
+              <th width="12%">CP Name</th>
+              <th width="10%">CP Mobile</th>
+              <th width="12%">CP Email</th>
+              <!-- <th width="10%">Rating</th> -->
+              <th width="10%">Booking Date</th>
+              <th width="10%">Lead Expires In</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="LeadList.length > 0">
+            <tr *ngFor="let cp of LeadList; let i = index">
+              <td>{{ cp.crmId }}</td>
+              <!-- <td>{{cp.booking.crmId}}</td> -->
+              <td>{{ cp.lead.name }}</td>
+              <!-- <td>{{cp.lead.mobileNumber}}</td>
+                <td>{{cp.lead.email}}</td> -->
+              <td>{{ cp.projectsCrmId }}</td>
+              <td>{{ cp.projectName }}</td>
+              <td>
+                <!-- <span *ngIf="cp.bkStatus==1" class="sil_vr"> {{cp.bkStatus}}</span>
+                  <span *ngIf="cp.bkStatus==2" class="gbk"> {{cp.bkStatus}}</span>
+                  <div
+                    *ngIf="cp.bkStatus=='Follow-up'||cp.bkStatus=='Visit Proposed'||cp.bkStatus=='Open'||cp.bkStatus=='Visit Confirmed'||cp.bkStatus=='Qualified' || cp.bkStatus=='Registration Complete'"
+                    class="d-flex align-items-center">
+                    <i class="zmdi zmdi-circle text-success f-10 mr-1"></i>
+                    <span> {{cp.bkStatus}}</span>
+                  </div>
+  
+                  <div
+                    *ngIf="cp.bkStatus=='Not Interested'||cp.bkStatus=='Not Contactable'||cp.bkStatus=='Lost'||cp.bkStatus=='Unqualified'"
+                    class="d-flex align-items-center">
+                    <i class="zmdi zmdi-circle text-danger f-10 mr-1"></i>
+                    <span> {{cp.bkStatus}}</span>
+                  </div> -->
+                <div class="d-flex align-items-center">
+                  <i class="zmdi zmdi-circle text-success f-10 mr-1"></i>
+                  <span> {{ cp.status }}</span>
+                </div>
+              </td>
+              <td>{{ cp.cpCrmId }}</td>
+              <td>{{ cp.teamMemberName }}</td>
+              <td>{{ cp.teamMemberMobile }}</td>
+              <td>{{ cp.teamMemberEmail }}</td>
+              <!-- <td>{{cp.bkRating}}</td> -->
+              <td *ngIf="cp.booking != null">
+                {{ cp.booking.bookingDate | date: "dd MMM, yyyy" }}
+              </td>
+              <td *ngIf="cp.booking == null"></td>
+              <td>{{ cp.leadExpiry | date: "dd MMM, yyyy" }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="LeadList.length == 0">
+            <tr>
+              <td colspan="11" class="text-center">No data available!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="sizeofTable > recordsPerPage">
+    <ngb-pagination
+      [collectionSize]="sizeofTable"
+      [(page)]="offset"
+      [maxSize]="3"
+      [pageSize]="recordsPerPage"
+      aria-label="Default pagination"
+      (pageChange)="paginatedSearch(offset)"
+    ></ngb-pagination>
+  </div>
+</main>

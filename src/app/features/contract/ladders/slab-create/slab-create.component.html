@@ -1,0 +1,179 @@
+<div class="content_div">
+  <div class="row_n">
+    <div class="col_12 mb_4">
+      <div class="">
+        <div class="row_n allign_center">
+          <div class="col_2">
+            <div class="wizard_outer">
+              <a href="#" class="step active">
+                <div class="item">1</div>
+                <div class="discription">
+                  Basic <br />
+                  Details
+                </div>
+              </a>
+              <a href="#" class="step active">
+                <div class="item">2</div>
+                <div class="discription">
+                  Slabs & <br />
+                  Rewards
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form class="dialog-form" [formGroup]="form">
+    <div *ngIf="this.form?.get('slabs')">
+      <div
+        formArrayName="slabs"
+        *ngFor="let slab of this.form.get('slabs')['controls']; let i = index"
+      >
+        <div [formGroupName]="i" class="row_n mb_4">
+          <div class="col_6">
+            <div class="mb_3">
+              <h6 class="text_sm fw_600">Slab {{ i + 1 }}</h6>
+              <small>Rewards for your hard work</small>
+            </div>
+          </div>
+          <div class="col_6">
+            <div
+              *ngIf="!slab.value.id"
+              class="d_flex justify_end allign_center h_100"
+              (click)="deleteSlabGroup(i)"
+            >
+              <a
+                href="javascript:void(0)"
+                class="danger_text fw_600 text_xs underline"
+              >
+                Delete Slab
+              </a>
+            </div>
+          </div>
+          <div class="col_lg_4">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label required">Slab Name</label>
+              <input
+                *ngIf="
+                  (ladderType === 'BASE' && i !== 0) || ladderType !== 'BASE'
+                "
+                type="text"
+                formControlName="type"
+                class="inpt_field"
+                placeholder="Enter Slab Name"
+              />
+              <p-dropdown
+                *ngIf="ladderType == 'BASE' && i == 0"
+                [options]="brokerageSlabBase"
+                formControlName="type"
+                [disabled]="
+                  ladderType === 'BASE' && i === 0 ? 'disabled' : null
+                "
+              ></p-dropdown>
+            </div>
+          </div>
+          <div class="col_lg_4">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label required">{{
+                ladderType != "BASE"
+                  ? "Additional Brokerage Type"
+                  : "Brokerage Type"
+              }}</label>
+
+              <p-dropdown
+                [options]="brokerageTypes"
+                placeholder="Select Brokerage Type"
+                formControlName="brokerageType"
+                [disabled]="slab.value.id ? 'disabled' : null"
+              ></p-dropdown>
+            </div>
+          </div>
+          <div class="col_lg_4">
+            <div class="input_wrap">
+              <label class="input_label required">{{
+                ladderType != "BASE"
+                  ? "Additional Brokerage Value"
+                  : "Brokerage Value"
+              }}</label>
+              <p-inputNumber
+                *ngIf="slab.value.brokerageType !== 'PERCENTAGE'"
+                formControlName="brokerageValue"
+                mode="decimal"
+                [minFractionDigits]="2"
+                placeholder="Enter Brokerage Value"
+                [disabled]="slab.value.id ? 'disabled' : null"
+              ></p-inputNumber>
+              <p-inputNumber
+                *ngIf="slab.value.brokerageType === 'PERCENTAGE'"
+                formControlName="brokerageValue"
+                mode="decimal"
+                [minFractionDigits]="2"
+                placeholder="Enter Brokerage Value"
+                [min]="0"
+                [max]="100"
+                [disabled]="slab.value.id ? 'disabled' : null"
+                suffix="%"
+              ></p-inputNumber>
+            </div>
+          </div>
+          <div
+            class="col_lg_4"
+            *ngIf="(ladderType === 'BASE' && i !== 0) || ladderType !== 'BASE'"
+          >
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label required">Range Type</label>
+              <p-dropdown
+                [options]="rangeTypes"
+                formControlName="rangeType"
+                placeholder="Select Range Type"
+                [disabled]="slab.value.id ? 'disabled' : null"
+              ></p-dropdown>
+            </div>
+          </div>
+          <div
+            class="col_4"
+            *ngIf="(ladderType === 'BASE' && i !== 0) || ladderType !== 'BASE'"
+          >
+            <div class="input_wrap">
+              <label class="input_label required">Range Start</label>
+              <p-inputNumber
+                formControlName="rangeStart"
+                placeholder="Enter Range Start "
+                [disabled]="slab.value.id ? 'disabled' : null"
+              ></p-inputNumber>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row_n mb_4">
+    <div class="col_12">
+      <div class="brdr_btm_l2 mt_2 pb_4">
+        <div class="btn btn_primary_g" (click)="addNewSlabGroup()">
+          Add Slabs
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row_n allign_center mb_4 py_2">
+    <div class="col_4">
+      <div class="selected_grup">
+        <h6 class="title">Action</h6>
+      </div>
+    </div>
+    <div class="col_8">
+      <div class="d_flex justify_end">
+        <button (click)="onBack()" type="button" class="btn btn_secondary me_2">
+          Cancel
+        </button>
+        <button type="submit" (click)="onFinish()" class="btn btn_primary">
+          Finish
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

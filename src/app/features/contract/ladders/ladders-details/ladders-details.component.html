@@ -1,0 +1,429 @@
+<div class="row_n allign_center mb_4">
+  <div class="col_6">
+    <h3 class="title mb_2">{{ ladderData?.name }}</h3>
+    <p class="text_xs dark_text_2">#{{ ladderData?.id }}</p>
+  </div>
+  <div class="col_6">
+    <div class="d_flex justify_end">
+      <a class="btn btn_secondary me_2" (click)="onEdit(ladderData?.id)"
+        >Edit</a
+      >
+      <button class="btn btn_danger pop_btn" (click)="onDelete(ladderData.id)">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+<div class="row_n mb_4">
+  <div class="col_3">
+    <h3 class="title text_lg mb_2">
+      {{
+        ladderAggregateData.bookingsCount
+          ? ladderAggregateData.bookingsCount
+          : 0
+      }}
+    </h3>
+    <p class="text_xs dark_text_2">Total No Bookings</p>
+  </div>
+  <div class="col_3">
+    <h3 class="title text_lg mb_2">
+      {{
+        ladderAggregateData.totalBookingsValue
+          ? ladderAggregateData.totalBookingsValue
+          : 0
+      }}
+    </h3>
+    <p class="text_xs dark_text_2">Total Value Bookings</p>
+  </div>
+  <div class="col_3">
+    <h3 class="title text_lg mb_2">
+      {{
+        ladderAggregateData.totalBrokerage
+          ? ladderAggregateData.totalBrokerage
+          : 0
+      }}
+    </h3>
+    <p class="text_xs dark_text_2">Total Brokerage</p>
+  </div>
+  <div class="col_3">
+    <h3 class="title text_lg mb_2">
+      {{
+        (ladderAggregateData.avgBrokeragePercentage
+          ? ladderAggregateData.avgBrokeragePercentage
+          : 0
+        ) | number: "1.0-0"
+      }}
+    </h3>
+    <p class="text_xs dark_text_2">Avg Brokerage %</p>
+  </div>
+</div>
+<div class="row_n">
+  <div class="col_12">
+    <div class="tabs_wrapper">
+      <ul class="tabs">
+        <li
+          [class.active]="selectedtab === 'tab1'"
+          id="tab1"
+          (click)="selectedtab = 'tab1'"
+        >
+          Configurations
+        </li>
+        <li
+          [class.active]="selectedtab === 'tab2'"
+          id="tab2"
+          (click)="selectedtab = 'tab2'"
+        >
+          Booking Details
+        </li>
+      </ul>
+      <!-- tabs -->
+      <div class="tabs_container">
+        <div
+          class="tab_content"
+          [class.active]="selectedtab === 'tab1'"
+          data-tab="tab1"
+        >
+          <form
+            [formGroup]="editForm"
+            (ngSubmit)="editDetails()"
+            autocomplete="off"
+          >
+            <div class="row_n">
+              <div class="col_12">
+                <div class="selected_grup">
+                  <h6 class="title">Basic Details</h6>
+                </div>
+              </div>
+              <div class="col_lg_12">
+                <div class="input_wrap">
+                  <label class="input_label required">Type</label>
+                  <input
+                    type="text"
+                    class="inpt_field"
+                    placeholder="Select type of ladder"
+                    formControlName="type"
+                    readonly
+                  />
+                </div>
+              </div>
+              <div class="col_lg_4">
+                <div class="input_wrap calendar_icon">
+                  <label class="input_label required">Start Date</label>
+                  <p-calendar
+                    formControlName="startDate"
+                    placeholder="DD/MM/YYYY"
+                    [disabled]="'disabled'"
+                  ></p-calendar>
+                </div>
+              </div>
+              <div class="col_lg_4">
+                <div class="input_wrap calendar_icon">
+                  <label class="input_label required">End Date</label>
+                  <p-calendar
+                    formControlName="endDate"
+                    placeholder="DD/MM/YYYY"
+                    [disabled]="'disabled'"
+                  ></p-calendar>
+                </div>
+              </div>
+              <div class="col_lg_4">
+                <div class="input_wrap calendar_icon">
+                  <label class="input_label required">Cut Off Date</label>
+                  <p-calendar
+                    formControlName="cutOffDate"
+                    placeholder="DD/MM/YYYY"
+                    [disabled]="'disabled'"
+                  ></p-calendar>
+                </div>
+              </div>
+              <div class="col_lg_12 mb_2">
+                <div class="input_wrap">
+                  <label class="input_label required">Description</label>
+                  <textarea
+                    class="tet_field"
+                    id="Address"
+                    autocomplete="off"
+                    formControlName="description"
+                    placeholder="Enter Description"
+                    readonly
+                  ></textarea>
+                </div>
+              </div>
+              <div class="col_lg_12 mb_4">
+                <div class="selected_grup">
+                  <h6 class="title">User Types</h6>
+                  <div class="selected_wrap">
+                    <div class="grup_item success">
+                      <div class="caption">
+                        <h5 class="name">
+                          {{ this.editForm.value.userType }}
+                        </h5>
+                      </div>
+                      <button class="btn" type="button">
+                        <img
+                          src="../../assets/images_new/icons/remove.svg"
+                          alt=""
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col_12">
+                <div class="input_wrap mb_4">
+                  <div class="form_check form_check_inline">
+                    <p-checkbox
+                      formControlName="retrospective"
+                      [binary]="true"
+                      inputId="inlineCheckbox1"
+                      [disabled]="'disabled'"
+                    ></p-checkbox>
+                    <label for="inlineCheckbox1"> Retrospective Ladder </label>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            <div class="row_n">
+              <div class="col_12 mb_4">
+                <div class="brdr_btm_l2 brdr_top_l2">
+                  <div class="row_n">
+                    <div class="col_6 py_4 brdr_rgt_l2">
+                      <div class="mb_3">
+                        <h6 class="text_sm fw_600">Projects</h6>
+                        <small
+                          >Add the projects wants to link with the
+                          ladders</small
+                        >
+                      </div>
+                      <div class="selected_grup">
+                        <h6 class="title">Selected Projects</h6>
+                        <div class="selected_wrap">
+                          <div
+                            class="grup_item"
+                            *ngFor="let proj of selectedProjects"
+                          >
+                            <div class="caption">
+                              <h5 class="name">
+                                {{ proj.projectName }}
+                              </h5>
+                              <h6 class="place">#{{ proj.id }}</h6>
+                            </div>
+                            <button class="btn" type="button">
+                              <img
+                                src="../../assets/images_new/icons/remove.svg"
+                              />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col_6 py_4">
+                      <div class="mb_3">
+                        <h6 class="text_sm fw_600">Groups</h6>
+                        <small
+                          >Add the Groups wants to link with the ladders</small
+                        >
+                      </div>
+                      <div class="input_wrap dropdown_arrow">
+                        <label class="input_label required">Groups</label>
+                        <p-dropdown
+                          [options]="cpGroupList"
+                          formControlName="groupId"
+                          optionLabel="name"
+                          optionValue="id"
+                          [disabled]="'disabled'"
+                        ></p-dropdown>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <form class="dialog-form" [formGroup]="editForm">
+            <div *ngIf="this.editForm?.get('slabs')">
+              <div
+                formArrayName="slabs"
+                *ngFor="
+                  let slab of this.editForm.get('slabs')['controls'];
+                  let i = index
+                "
+              >
+                <div [formGroupName]="i" class="row_n mb_4">
+                  <div class="col_6">
+                    <div class="mb_3">
+                      <h6 class="text_sm fw_600">Slab {{ i + 1 }}</h6>
+                      <small>Rewards for your hard work</small>
+                    </div>
+                  </div>
+                  <div class="col_6"></div>
+                  <div class="col_lg_4">
+                    <div class="input_wrap dropdown_arrow">
+                      <label class="input_label required">Slab Name</label>
+                      <input
+                        type="text"
+                        formControlName="type"
+                        class="inpt_field"
+                        name=""
+                        placeholder="Select Type"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="col_lg_4">
+                    <div class="input_wrap dropdown_arrow">
+                      <label class="input_label required">{{
+                        this.editForm.value.type != "BASE"
+                          ? "Additional Brokerage Type"
+                          : "Brokerage Type"
+                      }}</label>
+                      <input
+                        type="text"
+                        formControlName="brokerageType"
+                        class="inpt_field"
+                        name=""
+                        placeholder="Select Brokerage Type"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="col_lg_4">
+                    <div class="input_wrap">
+                      <label class="input_label required">{{
+                        this.editForm.value.type != "BASE"
+                          ? "Additional Brokerage Value"
+                          : "Brokerage Value"
+                      }}</label>
+                      <p-inputNumber
+                        formControlName="brokerageValue"
+                        placeholder="Enter Brokerage Value"
+                        [disabled]="'disabled'"
+                      ></p-inputNumber>
+                    </div>
+                  </div>
+                  <div
+                    class="col_lg_4"
+                    *ngIf="
+                      (this.editForm.value.type === 'BASE' && i !== 0) ||
+                      this.editForm.value.type !== 'BASE'
+                    "
+                  >
+                    <div class="input_wrap dropdown_arrow">
+                      <label class="input_label required">Range Type</label>
+                      <input
+                        type="text"
+                        formControlName="rangeType"
+                        class="inpt_field"
+                        name=""
+                        placeholder="Select Range Type"
+                        readonly
+                      />
+                    </div>
+                  </div>
+                  <div class="col_4">
+                    <div
+                      class="input_wrap"
+                      *ngIf="
+                        (this.editForm.value.type === 'BASE' && i !== 0) ||
+                        this.editForm.value.type !== 'BASE'
+                      "
+                    >
+                      <label class="input_label required">Range Start</label>
+                      <p-inputNumber
+                        formControlName="rangeStart"
+                        placeholder="Enter Range Start "
+                        [disabled]="'disabled'"
+                      ></p-inputNumber>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="tab_content" [class.active]="selectedtab === 'tab2'">
+          <div class="row_n">
+            <div class="col_12 mb_4">
+              <div class="">
+                <div class="row_n allign_center">
+                  <div class="col_6">
+                    <h3 class="title mb_1 text_md">Booking Table</h3>
+                    <p class="text_xs dark_text_2">Booking details</p>
+                  </div>
+                  <div class="col_6">
+                    <div class="d_flex justify_end"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col_12 mb_3">
+              <p-table
+                #dt
+                [value]="bookingList"
+                [rows]="recordsPerPage"
+                [paginator]="true"
+                [lazy]="true"
+                (onLazyLoad)="paginatedSearch($event)"
+                [totalRecords]="totalRecords"
+                [globalFilterFields]="[
+                  'bookingId',
+                  'bookingName',
+                  'parentUserName',
+                  'brokerage',
+                  'totalPaid'
+                ]"
+                responsiveLayout="scroll"
+                [rowHover]="true"
+                dataKey="id"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                [showCurrentPageReport]="true"
+                styleClass="p-datatable-striped"
+              >
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>
+                      <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                    </th>
+                    <th pSortableColumn="bookingId">
+                      #ID <p-sortIcon field="bookingId"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="parentUserName">
+                      CP Name<p-sortIcon field="parentUserName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="bookingName">
+                      LEAD Name <p-sortIcon field="bookingName"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="brokerage">
+                      Brokerage<p-sortIcon field="brokerage"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="totalPaid">
+                      Total Paid <p-sortIcon field="totalPaid"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="totalAdjustments">
+                      Adjustments
+                      <p-sortIcon field="totalAdjustments"></p-sortIcon>
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-brokerage>
+                  <tr (click)="showDetails(brokerage.id)">
+                    <td>
+                      <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                    </td>
+                    <td>{{ brokerage.bookingId }}</td>
+                    <td>{{ brokerage.parentUserName }}</td>
+                    <td>{{ brokerage.bookingName }}</td>
+                    <td>{{ brokerage.brokerage }}</td>
+                    <td>{{ brokerage.totalPaid }}</td>
+                    <td>{{ brokerage.totalAdjustments }}</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- tab content -->
+    </div>
+  </div>
+</div>

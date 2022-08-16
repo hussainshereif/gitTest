@@ -1,0 +1,161 @@
+.add_sm_btn {
+  background-color: #f7941e;
+  color: #ffffff;
+  float: right;
+  margin-bottom: 20px;
+  margin-left: 15px;
+  padding: 10px;
+}
+
+.disableselect {
+  background-color: gray !important;
+}
+
+.download_cp a {
+  background-color: #f7941e;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  float: right;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 900;
+  height: 45px;
+  letter-spacing: 0.1px;
+  line-height: normal;
+  margin-right: 10px;
+  padding: 15px 10px;
+  position: relative;
+  text-transform: uppercase;
+  transition: all 500ms ease;
+  width: 120px;
+}
+
+.download_cp a::before {
+  content: "";
+  height: 20px;
+  position: absolute;
+  right: 18px;
+  top: 13px;
+  transform: rotate(-180deg);
+  width: 20px;
+  -moz-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  -webkit-transform: rotate(-180deg);
+}
+
+.download_cp a:hover {
+  color: #fff;
+  opacity: 0.7;
+  transition: all 500ms ease;
+}
+
+.import_input {
+  display: none;
+}
+
+.import_list a {
+  background-color: #f7941e;
+  border-radius: 4px;
+  color: #ffffff;
+  cursor: pointer;
+  float: right;
+  font-size: 14px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 900;
+  height: 45px;
+  letter-spacing: 0.1px;
+  line-height: normal;
+  padding: 15px 22px;
+  position: relative;
+  text-transform: uppercase;
+  transition: all 500ms ease;
+  width: 154px;
+}
+
+.import_list a::before {
+  background: url(src/assets/images/import.svg) no-repeat right center;
+  content: "";
+  height: 20px;
+  position: absolute;
+  right: 18px;
+  top: 13px;
+  transform: rotate(-180deg);
+  width: 20px;
+  -moz-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  -webkit-transform: rotate(-180deg);
+}
+
+.import_list a:hover {
+  color: #fff;
+  opacity: 0.7;
+  transition: all 500ms ease;
+}
+
+.log-btn a {
+  background-color: #034ea2;
+  border-radius: 4px;
+  color: #ffffff !important;
+  cursor: pointer;
+  float: right;
+  font-size: 10px;
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.1px;
+  line-height: normal;
+  margin-bottom: 10px;
+  padding: 15px 22px;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.processing_status_div {
+  display: block;
+  width: 100%;
+}
+
+.processing_status {
+  color: red;
+  float: right;
+  font-size: 16px;
+  margin-right: 17px;
+  text-align: right;
+  width: 20%;
+}
+
+.samplexlsx {
+  display: block;
+  float: right;
+  margin-right: 5px;
+  width: 32px;
+}
+
+.smId_td {
+  color: #145aa8;
+  cursor: pointer;
+}
+
+.upload-btn-wrapper input[type="file"] {
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .download_cp {
+    float: left;
+    margin-top: 15px;
+    width: 100%;
+  }
+
+  .import_list {
+    float: left;
+    margin-top: 15px;
+    width: 100%;
+  }
+}

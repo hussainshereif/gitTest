@@ -1,0 +1,593 @@
+<form [formGroup]="editForm" (ngSubmit)="addDetails()" autocomplete="off">
+  <div class="row_n">
+    <div class="col_12">
+      <div class="selected_grup">
+        <h6 class="title">Basic Details</h6>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Project Title</label>
+        <input
+          type="text"
+          class="inpt_field"
+          formControlName="projectTitle"
+          name=""
+          placeholder="Enter Project Title"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['projectTitle'])"
+          [field]="'Project Title'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Project CRM ID</label>
+        <input
+          type="text"
+          class="inpt_field"
+          formControlName="crmId"
+          name=""
+          placeholder="Enter Project CRM ID"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['crmId'])"
+          [field]="'Project CRM ID'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Project Name</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="projectName"
+          placeholder="Enter Project Name"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['projectName'])"
+          [field]="'Project Name'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_12 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Project Description</label>
+        <textarea
+          class="tet_field"
+          id="Address"
+          formControlName="projectDescription"
+          autocomplete="off"
+          placeholder="Enter Description"
+        ></textarea>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['projectDescription'])"
+          [field]="'Project Description'"
+        ></app-validation-error>
+      </div>
+    </div>
+  </div>
+  <div class="row_n">
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <div class="d_flex">
+          <input
+            type="file"
+            id="real-file"
+            hidden="hidden"
+            #projectLogoupload
+            (change)="uploadFile('projectLogo', $event)"
+            class="inpt_field"
+          />
+          <button
+            type="button"
+            id="custom-button"
+            (click)="projectLogoupload.click()"
+          >
+            <img src="../../assets/images_new/icons/file-upload.svg" alt="" />
+          </button>
+          <div class="file_txt" style="display: flex; flex-direction: column">
+            <span class="subtext">Upload Project logo </span>
+            <span class="info" *ngIf="!projectLogo" id="custom-text"
+              >No file chosen, yet.</span
+            >
+            <span class="info" *ngIf="projectLogo" id="custom-text">{{
+              projectLogo
+            }}</span>
+          </div>
+        </div>
+        <small class="small">Width: 78px, Height: 72px, Max size: 2Mb</small>
+        <div class="login_error" *ngIf="editForm.value.submitted">
+          <div *ngIf="!projectLogo">Project logo is required</div>
+          <div
+            [hidden]="
+              (projectLogoValidation.valid && projectLogoValidation.insize) ||
+              (!projectLogoValidation.valid && !projectLogoValidation.insize)
+            "
+          >
+            Invalid image!
+          </div>
+          <div [hidden]="projectLogoValidation.insize">
+            Image size cannot exceed 10 MB
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap d_flex mb_3">
+        <input
+          type="file"
+          id="real-file"
+          hidden="hidden"
+          #backgroundImageupload
+          (change)="uploadFile('backgroundImage', $event)"
+          class="inpt_field"
+        />
+        <button
+          type="button"
+          id="custom-button"
+          (click)="backgroundImageupload.click()"
+        >
+          <img src="../../assets/images_new/icons/file-upload.svg" alt="" />
+        </button>
+        <div class="file_txt" style="display: flex; flex-direction: column">
+          <span class="subtext">Upload Background Image</span>
+          <span class="info" *ngIf="!backgroundImage" id="custom-text"
+            >No file chosen, yet.</span
+          >
+          <span class="info" *ngIf="backgroundImage" id="custom-text">{{
+            backgroundImage
+          }}</span>
+        </div>
+        <div class="login_error" *ngIf="editForm.value.submitted">
+          <div *ngIf="!backgroundImage">Background Image is required</div>
+          <div
+            [hidden]="
+              (backgroundImageValidation.valid &&
+                backgroundImageValidation.insize) ||
+              (!backgroundImageValidation.valid &&
+                !backgroundImageValidation.insize)
+            "
+          >
+            Invalid image!
+          </div>
+          <div [hidden]="backgroundImageValidation.insize">
+            Image size cannot exceed 10 MB
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row_n">
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Number of Towers</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="tower"
+          placeholder="Enter Number of Towers"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['tower'])"
+          [field]="'Number of Towers'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Apartment Configurations</label>
+        <p-multiSelect
+          [options]="apartmentList"
+          formControlName="apartment"
+          optionLabel="Text"
+          optionValue="Value"
+        ></p-multiSelect>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['apartment'])"
+          [field]="'Apartment'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap dropdown_arrow mb_3">
+        <label class="input_label required">Construction Status </label>
+        <p-dropdown [options]="constructionStatusList" formControlName="status">
+        </p-dropdown>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['status'])"
+          [field]="'Construction Status '"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Starting from (INR)</label>
+        <p-inputNumber
+          formControlName="rate"
+          placeholder="Price Range Starting from"
+        ></p-inputNumber>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['rate'])"
+          [field]="'Starting from'"
+        ></app-validation-error>
+      </div>
+    </div>
+  </div>
+  <div class="row_n">
+    <div class="col_12">
+      <div class="dashed_b_t"></div>
+    </div>
+    <div class="col_12">
+      <div class="selected_grup">
+        <h6 class="title">About Builder</h6>
+      </div>
+    </div>
+    <div class="col_12">
+      <div class="row_n">
+        <div class="col_lg_4 mb_3">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Builder Name</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="developedBy"
+              placeholder="Enter Builder Name"
+            />
+            <app-validation-error
+              [submit]="editForm.value.submitted"
+              [control]="editForm.get(['developedBy'])"
+              [field]="'Builder Name'"
+            ></app-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row_n">
+        <div class="col_lg_4 mb_2">
+          <div class="input_wrap mb_3">
+            <div class="d_flex">
+              <input
+                type="file"
+                id="real-file"
+                #developerLogoupload
+                hidden="hidden"
+                (change)="uploadFile('developerLogo', $event)"
+                class="inpt_field"
+              />
+              <button
+                type="button"
+                id="custom-button"
+                (click)="developerLogoupload.click()"
+              >
+                <img
+                  src="../../assets/images_new/icons/file-upload.svg"
+                  alt=""
+                />
+              </button>
+              <div
+                class="file_txt"
+                style="display: flex; flex-direction: column"
+              >
+                <span class="subtext">Upload Developer Logo</span>
+                <span class="info" *ngIf="!developerLogo" id="custom-text"
+                  >No file chosen, yet.</span
+                >
+                <span class="info" *ngIf="developerLogo" id="custom-text">{{
+                  developerLogo
+                }}</span>
+              </div>
+            </div>
+            <small class="small"
+              >Width: 78px, Height: 72px, Max size: 2Mb</small
+            >
+            <div class="login_error" *ngIf="editForm.value.submitted">
+              <div *ngIf="!developerLogo">Developer Logo is required</div>
+              <div
+                [hidden]="
+                  (developerLogoValidation.valid &&
+                    developerLogoValidation.insize) ||
+                  (!developerLogoValidation.valid &&
+                    !developerLogoValidation.insize)
+                "
+              >
+                Invalid image!
+              </div>
+              <div [hidden]="developerLogoValidation.insize">
+                Image size cannot exceed 10 MB
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col_lg_12 mb_2">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">About Developer</label>
+            <textarea
+              class="tet_field"
+              id="Address"
+              autocomplete="off"
+              formControlName="aboutDeveloper"
+              placeholder="Description About Developer"
+            ></textarea>
+            <app-validation-error
+              [submit]="editForm.value.submitted"
+              [control]="editForm.get(['aboutDeveloper'])"
+              [field]="'Description About Developer'"
+            ></app-validation-error>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row_n">
+    <div class="col_12">
+      <div class="dashed_b_t"></div>
+    </div>
+    <div class="col_12">
+      <div class="selected_grup">
+        <h6 class="title">ADDRESS</h6>
+      </div>
+    </div>
+    <div class="col_lg_6 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Address Line 1</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="address"
+          placeholder="Enter Address Line 1"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['address'])"
+          [field]="'Address'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_6 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label">Address Line 2</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="address1"
+          placeholder="Enter Address Line 2"
+        />
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">City</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="city"
+          placeholder="Enter City"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['city'])"
+          [field]="'City'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label">State</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="state"
+          placeholder="Enter State"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="row_n">
+    <div class="col_12">
+      <div class="dashed_b_t"></div>
+    </div>
+    <div class="col_12">
+      <div class="selected_grup">
+        <h6 class="title">General information</h6>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Area (sq.mts)</label>
+        <p-inputNumber
+          formControlName="area"
+          placeholder="Enter Area"
+        ></p-inputNumber>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['area'])"
+          [field]="'Area'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Website Url</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="websiteUrl"
+          placeholder="Enter Website Url"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['websiteUrl'])"
+          [field]="'Website Url'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">RERA Number</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="reraNumber"
+          placeholder="Enter RERA Number"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['reraNumber'])"
+          [field]="'RERA Number'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_2">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">RERA Website Url</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="reraWebsite"
+          placeholder="Enter RERA Website Url"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['reraWebsite'])"
+          [field]="'RERA Website Url'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Offer Status</label>
+        <p-dropdown
+          [options]="offerList"
+          formControlName="offerStatus"
+          optionLabel="Text"
+          optionValue="value"
+        ></p-dropdown>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['offerStatus'])"
+          [field]="'Offer Status'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Priority </label>
+        <p-inputNumber
+          formControlName="priority"
+          placeholder="Enter Priority"
+        ></p-inputNumber>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['priority'])"
+          [field]="'Priority'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Sales Team Email</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="salesTeamEmail"
+          placeholder="Enter Sales Team Email"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['salesTeamEmail'])"
+          [field]="'Sales Team Email'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Select Possession Date</label>
+        <p-calendar
+          formControlName="possessionDate"
+          placeholder="DD/MM/YYYY"
+          [minDate]="minDate"
+          [maxDate]="maxDate"
+        ></p-calendar>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['possessionDate'])"
+          [field]="'Possession Date'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4 mb_3">
+      <div class="input_wrap mb_3">
+        <label class="input_label required">Lead Expiration Days</label>
+        <input
+          type="text"
+          class="inpt_field"
+          name=""
+          formControlName="leadExpiry"
+          placeholder="Select Lead Expiration Days"
+        />
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['leadExpiry'])"
+          [field]="'Lead Expiration Days'"
+        ></app-validation-error>
+      </div>
+    </div>
+  </div>
+  <div class="row_n">
+    <div class="col_12">
+      <div class="dashed_b_t"></div>
+    </div>
+    <div class="col_12">
+      <div class="selected_grup">
+        <h6 class="title">Disclaimer</h6>
+      </div>
+    </div>
+    <div class="col_lg_12 mb_2">
+      <div class="input_wrap">
+        <label class="input_label required">Disclaimer</label>
+        <textarea
+          class="tet_field"
+          id="Address"
+          formControlName="disclaimer"
+          autocomplete="off"
+          placeholder="Enter Disclaimer"
+        ></textarea>
+        <app-validation-error
+          [submit]="editForm.value.submitted"
+          [control]="editForm.get(['disclaimer'])"
+          [field]="'Disclaimer'"
+        ></app-validation-error>
+      </div>
+    </div>
+  </div>
+  <div class="row allign_center mb_4">
+    <div class="col_12">
+      <div class="d_flex justify_end">
+        <button class="btn btn_primary pop_btn" data-modal=".success_msg">
+          Save Details
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

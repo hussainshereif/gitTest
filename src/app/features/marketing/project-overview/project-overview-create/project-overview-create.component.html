@@ -1,0 +1,270 @@
+<div class="content_div">
+  <form [formGroup]="addForm" (ngSubmit)="addDetails()" autocomplete="off">
+    <div class="add_proj">
+      <div class="row_n">
+        <div class="col_12">
+          <div class="selected_grup">
+            <h6 class="title">Basic Details</h6>
+          </div>
+        </div>
+        <div class="col_lg_4 mb_2">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Project Title</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="title"
+              placeholder="Enter Project Title"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['title'])"
+              [field]="'Project Title'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_4 mb_2">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Project CRM ID</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="crmId"
+              placeholder="Enter Project CRM ID"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['crmId'])"
+              [field]="'Project CRM ID'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_4 mb_2">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Project Name</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="projectName"
+              placeholder="Enter Project Name"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['projectName'])"
+              [field]="'Project Name'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_12 mb_2">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Project Description</label>
+            <textarea
+              class="tet_field"
+              id="Address"
+              autocomplete="off"
+              formControlName="description"
+              placeholder="Enter Description"
+            ></textarea>
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['description'])"
+              [field]="'Project Description'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_4 mb_3">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Apartment Configurations</label>
+            <p-multiSelect
+              [options]="apartmentList"
+              formControlName="apartment"
+              optionLabel="Text"
+              optionValue="Value"
+            ></p-multiSelect>
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['apartment'])"
+              [field]="'Apartment'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_4 mb_3">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Starting from (INR)</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="rate"
+              placeholder="Price Range Starting from"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['rate'])"
+              [field]="'Starting from'"
+            ></app-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row_n">
+        <div class="col_12">
+          <div class="dashed_b_t"></div>
+        </div>
+        <div class="col_12">
+          <div class="selected_grup">
+            <h6 class="title">General information</h6>
+          </div>
+        </div>
+        <div class="col_lg_4 mb_3">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">RERA Number</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="reraNo"
+              placeholder="Enter RERA Number"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['reraNo'])"
+              [field]="'RERA Number'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_4 mb_3">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Sales Team Email</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="salesTeamEmail"
+              placeholder="Enter Sales Team Email"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['salesTeamEmail'])"
+              [field]="'Sales Team Email'"
+            ></app-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row_n">
+        <div class="col_12">
+          <div class="dashed_b_t"></div>
+        </div>
+        <div class="col_12">
+          <div class="selected_grup">
+            <h6 class="title">Address</h6>
+          </div>
+        </div>
+        <div class="col_lg_6 mb_2">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Address Line 1</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="address1"
+              placeholder="Enter Address Line 1"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['address1'])"
+              [field]="'Address Line'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_6 mb_3">
+          <div class="input_wrap mb_3">
+            <label class="input_label">Address Line 1</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="address2"
+              placeholder="Enter Address Line 2"
+            />
+          </div>
+        </div>
+        <div class="col_lg_4 mb_2">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">City</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="city"
+              placeholder="Enter City"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['city'])"
+              [field]="'City'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_4 mb_3">
+          <div class="input_wrap mb_3">
+            <label class="input_label">State</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="state"
+              placeholder="Enter State"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row_n">
+        <div class="col_12">
+          <div class="dashed_b_t"></div>
+        </div>
+        <div class="col_12">
+          <div class="selected_grup">
+            <h6 class="title">Disclaimer</h6>
+          </div>
+        </div>
+        <div class="col_lg_12 mb_2">
+          <div class="input_wrap">
+            <label class="input_label required">Disclaimer</label>
+            <textarea
+              class="tet_field"
+              id="Address"
+              autocomplete="off"
+              formControlName="disclaimer"
+              placeholder="Enter Disclaimer"
+            >
+            </textarea>
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['disclaimer'])"
+              [field]="'Disclaimer'"
+            ></app-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row_n allign_center mb_4">
+        <div class="col_12">
+          <div class="d_flex justify_end">
+            <button
+              class="btn btn_secondary me_2"
+              type="button"
+              (click)="onBack()"
+            >
+              Cancel
+            </button>
+            <button class="btn btn_primary pop_btn" data-modal=".success_msg">
+              Create Project
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

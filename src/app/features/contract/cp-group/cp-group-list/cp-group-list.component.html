@@ -1,0 +1,103 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <p-table
+      #dt
+      [value]="cpGroupList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      [globalFilterFields]="['id', 'name', 'priority']"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row allign_center">
+          <div class="col_6">
+            <h3 class="title mb_1 text_md">CP Groups</h3>
+            <p class="text_xs dark_text_2">List of CP Groups</p>
+          </div>
+          <div class="col_6">
+            <div class="d_flex justify_end">
+              <span class="p-input-icon-left tbl_search">
+                <i class="pi pi-search"></i>
+                <input
+                  class="search_groups"
+                  pInputText
+                  type="text"
+                  (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Search..."
+                />
+              </span>
+              <button class="tbl_filter">
+                <div class="icon">
+                  <img src="assets/images_new/icons/filter.svg" alt="" />
+                </div>
+              </button>
+              <button class="btn btn_primary" (click)="createCpGroup()">
+                Add New
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">
+            #Group ID <p-sortIcon field="id"></p-sortIcon>
+          </th>
+          <th pSortableColumn="name">
+            Group Name <p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="ladders">
+            Ladders <p-sortIcon field="ladders"></p-sortIcon>
+          </th>
+          <th pSortableColumn="priority">
+            Priority <p-sortIcon field="priority"></p-sortIcon>
+          </th>
+          <th pSortableColumn="usersSize">
+            No: of Members
+            <p-sortIcon field="usersSize"></p-sortIcon>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-group>
+        <tr (click)="showDetails(group.id)">
+          <td>
+            <span class="dark_text_2">#{{ group.id }}</span>
+          </td>
+          <td>{{ group.name }}</td>
+          <td>
+            <span class="dark_text_2 italic">{{ group.ladders }}</span>
+          </td>
+          <td>{{ group.priority }}</td>
+          <td>{{ group.usersSize }}</td>
+          <td (click)="$event.stopPropagation()">
+            <a
+              class="warning_text me_3"
+              (click)="editCpGroup(group.id)"
+              href="javascript:void(0)"
+              >Edit</a
+            ><a
+              class="danger_text me_3"
+              (click)="deleteCpGroup(group.id)"
+              href="javascript:void(0)"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-center" colspan="6">No data available!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

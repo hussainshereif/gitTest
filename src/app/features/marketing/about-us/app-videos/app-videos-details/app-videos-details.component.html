@@ -1,0 +1,45 @@
+<div>
+  <div class="row" style="width: 100%">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="pro_form1">
+        <div class="collateral_btn_div1 mt-2">
+          <a>
+            <i class="fas fa-arrow-left" (click)="onBack()"></i>
+          </a>
+          <h6 class="mt-6 header-list">Back to listing</h6>
+          <button
+            class="button-Link float-right"
+            style="color: #f7941e"
+            (click)="onDelete(videoData.id)"
+          >
+            Delete
+          </button>
+          <button
+            class="button-Link float-right mr-4"
+            (click)="onEdit(videoData)"
+          >
+            Edit
+          </button>
+        </div>
+        <div class="">
+          <div class="collateral_btn_div2">
+            <div class="row">
+              <div class="col-8">
+                <h5 class="heading-style mt-6 header-list">
+                  {{ videoData.title }}
+                </h5>
+                <iframe width="100%" height="300" [src]="viewURL"></iframe>
+                <label class="mt-4">{{ videoData.description }}</label>
+                <div>
+                  <div class="heading-style-sub">
+                    Content Type : {{ videoData.contentType }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

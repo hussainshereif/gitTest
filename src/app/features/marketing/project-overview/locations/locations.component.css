@@ -1,0 +1,13 @@
+.imagesize{
+    height: 200px;
+    width:200px;
+}
+agm-map {
+    height: 520px;
+  }
+  .pro_form1 label.highlight{
+    border-bottom: 0.5px solid #b1b6bb;
+  }
+  .pro_form1 .text_date:read-only{
+    background-color: #d4d2d2;
+  }

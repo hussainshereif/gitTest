@@ -1,0 +1,42 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onCancel()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <div class="row">
+      <div class="col_12 mb_1">
+        <div class="icon text_center mb_2">
+          <img
+            src="../../../../../assets/images_new/icons/success-icon.svg"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="col_12 mb_4">
+        <div class="caption">
+          <h5 class="text_center mb_2">{{ data.title }}</h5>
+          <p class="dark_text_2 text_center">{{ data.message }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="d_flex justify_space_between">
+      <button class="btn btn_secondary close" (click)="onCancel()">
+        {{ data.negativelabel }}
+      </button>
+      <button class="btn btn_primary" (click)="onSuccess()">
+        {{ data.positivelabel }}
+      </button>
+    </div>
+  </div>
+  <!-- modal_body -->
+</div>
+<!-- modal content -->

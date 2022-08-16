@@ -1,0 +1,16 @@
+.heading-style-sub {
+  color: #93949b;
+  font-size: 15px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  position: absolute;
+  top: 20px;
+}
+
+.select_height {
+  height: 38px;
+  padding: 0px;
+}

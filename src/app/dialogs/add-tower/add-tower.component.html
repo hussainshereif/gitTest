@@ -1,0 +1,84 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">{{ headingText }}</h6>
+    <p class="modal_title text_xs" *ngIf="data.type != 2">{{ subText }}</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onCancel()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <form [formGroup]="addTowerForm" autocomplete="off">
+      <div class="row mb_3">
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">Tower Name</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              placeholder="Enter Tower Name"
+              formControlName="name"
+              id="name"
+            />
+            <div class="login_error" *ngIf="submitted && f.name.invalid">
+              Minimum 2 characters required
+            </div>
+            <div class="login_error" *ngIf="f.name.errors?.pattern">
+              Please enter a valid Name.
+            </div>
+            <div class="login_error" *ngIf="f.name.errors?.maxlength">
+              Name length exceed 125 characters
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label required">Phase</label>
+            <p-dropdown
+              [options]="phaseList"
+              formControlName="phase"
+              optionLabel="value"
+              optionValue="value"
+            >
+            </p-dropdown>
+            <div class="login_error" *ngIf="submitted && f.phase.invalid">
+              Phase required
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">RERA Number</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              placeholder="Enter RERA Number"
+              formControlName="reraNumber"
+              id="reraNumber"
+            />
+          </div>
+          <div class="login_error" *ngIf="submitted && f.reraNumber.invalid">
+            RERA Number required
+          </div>
+          <div class="login_error" *ngIf="f.reraNumber.errors?.maxlength">
+            RERA Number exceed 125 characters
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <a class="btn btn_secondary close" (click)="onCancel()">Cancel</a>
+        <button class="btn btn_primary" (click)="onSubmit()">Add</button>
+      </div>
+    </form>
+  </div>
+  <!-- modal_body -->
+</div>
+<!-- modal content -->

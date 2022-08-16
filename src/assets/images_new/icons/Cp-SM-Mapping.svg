@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.063" height="20.063" viewBox="0 0 20.063 20.063">
+  <g id="Cp-SM-Mapping" transform="translate(-7 -564.926)">
+    <g id="Group_1234" data-name="Group 1234" transform="translate(-32.791 188.17)">
+      <ellipse id="Ellipse_27" data-name="Ellipse 27" cx="2.339" cy="2.339" rx="2.339" ry="2.339" transform="translate(47.292 383.472)" fill="none" stroke="#566577" stroke-miterlimit="10" stroke-width="1"/>
+      <path id="Path_351" data-name="Path 351" d="M16,161.691a3.593,3.593,0,0,1,6.1,0" transform="translate(30.74 228.413)" fill="none" stroke="#566577" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+    </g>
+    <g id="Ellipse_83" data-name="Ellipse 83" transform="translate(7 567.755) rotate(-45)" fill="none" stroke="#072040" stroke-width="1.2">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.4" fill="none"/>
+    </g>
+    <g id="Ellipse_84" data-name="Ellipse 84" transform="translate(21.404 582.161) rotate(-45)" fill="none" stroke="#072040" stroke-width="1.2">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.4" fill="none"/>
+    </g>
+    <line id="Line_86" data-name="Line 86" x2="2" y2="2" transform="translate(21.076 579.004)" fill="none" stroke="#072040" stroke-width="1"/>
+    <line id="Line_87" data-name="Line 87" x2="2.441" y2="2.451" transform="translate(10.543 568.461)" fill="none" stroke="#072040" stroke-width="1"/>
+    <g id="Ellipse_85" data-name="Ellipse 85" transform="translate(9.828 584.988) rotate(-135)" fill="none" stroke="#072040" stroke-width="1.2">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.4" fill="none"/>
+    </g>
+    <g id="Ellipse_86" data-name="Ellipse 86" transform="translate(24.234 570.584) rotate(-135)" fill="none" stroke="#072040" stroke-width="1.2">
+      <circle cx="2" cy="2" r="2" stroke="none"/>
+      <circle cx="2" cy="2" r="1.4" fill="none"/>
+    </g>
+    <line id="Line_88" data-name="Line 88" x2="2" y2="2" transform="translate(21.076 570.912) rotate(-90)" fill="none" stroke="#072040" stroke-width="1"/>
+    <line id="Line_89" data-name="Line 89" x2="2.441" y2="2.451" transform="translate(10.533 581.445) rotate(-90)" fill="none" stroke="#072040" stroke-width="1"/>
+    <circle id="Ellipse_87" data-name="Ellipse 87" cx="6" cy="6" r="6" transform="translate(11 569)" fill="none" stroke="#072040" stroke-width="1.2"/>
+  </g>
+</svg>

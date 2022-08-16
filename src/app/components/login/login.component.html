@@ -1,0 +1,135 @@
+<div *ngIf="!isUrlInvalid">
+  <section class="login_full" *ngIf="!showForgotPassword">
+    <div class="wrap">
+      <div class="login_left">
+        <div class="wrap">
+          <div class="login_left_outer">
+            <div class="logo">
+              <img src="assets/images_new/logo/reloy.svg" alt="" />
+            </div>
+            <div class="caption">
+              <h1 class="title text_white">
+                {{ mainText }}
+              </h1>
+              <h6 class="subtitle text_white">
+                {{ subText }}
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="login_right" *ngIf="formUsername">
+        <div class="wrap">
+          <div class="login_right_outer">
+            <div class="logo">
+              <img src="{{ logo }}" alt="" />
+            </div>
+            <h1 class="title">Sign in</h1>
+            <p class="subtitle">Login to manage your account</p>
+            <form class="form" [formGroup]="loginUsername">
+              <div
+                class="input_wrap"
+                [ngClass]="{ error: submittedUsername && f.username.invalid }"
+              >
+                <label class="input_label">Enter User ID</label>
+                <input
+                  type="email"
+                  class="inpt_field"
+                  name=""
+                  placeholder="Enter Email Address"
+                  formControlName="username"
+                  required
+                />
+                <div
+                  class="login_error"
+                  *ngIf="submittedUsername && f.username.invalid"
+                >
+                  Email required
+                </div>
+              </div>
+              <div class="login_alert" *ngIf="isError">
+                {{ errorMessage }}
+              </div>
+              <div class="input_wrap">
+                <button class="btn btn_primary" (click)="onUsernameSubmit()">
+                  Next
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="login_right" *ngIf="formPassword">
+        <div class="wrap">
+          <div class="login_right_outer">
+            <div class="logo">
+              <img src="{{ logo }}" alt="" />
+            </div>
+            <h1 class="title">Sign in</h1>
+            <p class="subtitle">
+              Hello {{ username }} <br />
+              Please enter your password to continue <br />
+              <a class="link mt_2 d_block" (click)="backToEmail()"
+                >Change email address</a
+              >
+            </p>
+            <form action="" class="form" [formGroup]="loginPassword">
+              <div
+                class="input_wrap"
+                [ngClass]="{ error: submittedPassword && p.password.invalid }"
+              >
+                <label class="input_label">Enter Password</label>
+                <input
+                  type="password"
+                  class="inpt_field"
+                  name=""
+                  placeholder="Password"
+                  formControlName="password"
+                  required
+                />
+                <div
+                  class="login_error"
+                  *ngIf="submittedPassword && p.password.errors"
+                >
+                  <div *ngIf="p.password.errors.required">
+                    Password required
+                  </div>
+                  <div *ngIf="p.password.errors.minlength">
+                    Password must be atleast 8 characters in length
+                  </div>
+                  <div *ngIf="p.password.errors.maxlength">
+                    Password cannot exceed 16 characters
+                  </div>
+                </div>
+              </div>
+              <div class="login_alert" *ngIf="isError">
+                {{ errorMessage }}
+              </div>
+              <div class="input_wrap d_flex justify_end">
+                <a class="link" (click)="forgotPassword()">Forgot Password?</a>
+              </div>
+              <div class="input_wrap">
+                <button class="btn btn_primary" (click)="onPasswordSubmit()">
+                  Login to your account
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div *ngIf="showForgotPassword">
+    <app-forgot-passwords
+      [userEmail]="emailAddress"
+      [token]="token"
+      (changeEmail)="backToEmail()"
+      (cancelForgotPassword)="cancelForgotPassword()"
+    ></app-forgot-passwords>
+  </div>
+</div>
+<div *ngIf="isUrlInvalid">
+  <app-wrong-route></app-wrong-route>
+</div>

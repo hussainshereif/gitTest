@@ -1,0 +1,242 @@
+<main class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <h1>Rewards Info</h1>
+               
+
+            </div>
+        </div>
+
+
+
+
+<div class="project_nav">
+  
+  <ul>
+    <li [ngClass]="{'active':tabId==1}"><a (click)="tabActivation(1)">Benefits</a></li>
+    <li [ngClass]="{'active':tabId==3}"><a (click)="tabActivation(3)">FAQ</a></li>
+    <li [ngClass]="{'active':tabId==4}"><a (click)="tabActivation(4)">Redeem</a></li>
+  </ul>
+</div>
+
+ <div class="tab-inner-content bg-white p-4 border">
+
+  <div class="Benefits" *ngIf="tabId==1"> 
+
+
+          <div class="row">
+
+
+
+            <div class="col-md-4 col-xs-4" >
+              <div class="pro_form1">
+                <form autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-1"><img src="assets\images\Silver.png" width="50"></div>
+                            
+                           
+                           <div class="col-md-11">
+                              <h6 class="font-weight-bold" style="margin-top: 10px;margin-left: 10px;">Silver</h6>
+            
+                             <p class="Sales-Suppor mt-4">Lorem Ipsum</p>
+                             
+                             <ul class="ulList">
+                               <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                               <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                             </ul>
+               
+                             <p class="Sales-Suppor mt-4">Lorem Ipsum</p>
+                             <ul class="ulList">
+                               <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                               <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                             </ul>
+                            </div> 
+                          
+                        </div>
+                </form>
+              </div> 
+            </div>
+
+
+
+            <div class="col-md-4 col-xs-4">
+                <div class="pro_form1">
+                  <form autocomplete="off">
+                      <div class="row">
+                          <div class="col-md-1"><img src="assets\images\Gold.png" width="50"></div>
+                              
+                             
+                             <div class="col-md-11">
+                                <h6 class="font-weight-bold" style="margin-top: 10px;margin-left: 10px;">Gold</h6>
+              
+                               <p class="Sales-Suppor mt-4">Lorem Ipsum</p>
+                               
+                               <ul class="ulList">
+                                 <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                                 <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                               </ul>
+                 
+                               <p class="Sales-Suppor mt-4">Lorem Ipsum</p>
+                               <ul class="ulList">
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                               </ul>
+                              </div> 
+                            
+                          </div>
+                  </form>
+                </div> 
+              </div>
+
+
+
+
+              
+            <div class="col-md-4 col-xs-4">
+                <div class="pro_form1">
+                  <form autocomplete="off">
+                      <div class="row">
+                          <div class="col-md-1"><img src="assets\images\Platinum.png" width="50"></div>
+                              
+                             
+                             <div class="col-md-11">
+                                <h6 class="font-weight-bold" style="margin-top: 10px;margin-left: 10px;">Platinum</h6>
+              
+                               <p class="Sales-Suppor mt-4">Lorem Ipsum</p>
+                               
+                               <ul class="ulList">
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                               </ul>
+                 
+                               <p class="Sales-Suppor mt-4">Lorem Ipsum</p>
+                               <ul class="ulList">
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                                <li>Lorem Ipsum is simply dummy text of the printing and typesetting industry</li>
+                               </ul>
+                              </div> 
+                            
+                          </div>
+                  </form>
+                </div> 
+              </div>
+
+              
+
+
+          </div>
+        </div>  
+        <!-- Benefits --> 
+
+
+
+  <div class="Earn" *ngIf="tabId==2"> 
+            <div class="row">
+              <div class="col-md-7 col-xs-12">
+                <div class="">
+                  <form autocomplete="off">
+                    <div class="row">
+                    <div class="col-md-1"><img src="assets\images\rewardCup.png"></div>
+                        
+                       
+                       <div class="col-md-11">
+
+                        <table class="table text-center text-dark" cellspacing="10" cellpadding="10" style="width: 350px;">
+                          <tr class="thead">
+                            <td>Number of walkins in a quarter</td>
+                            <td>HappiEdge Badges earned</td>
+                          </tr>
+                          <tr>
+                            <td><strong>04</strong></td>
+                            <td><strong>04</strong></td>
+                          </tr>
+                          <tr class="thead">                            
+                            <td>Number of deals in a quarter</td>
+                            <td>HappiEdge Badges earned</td>
+                          </tr>
+                            <tr>
+                            <td><strong>04</strong></td>
+                            <td><strong>04</strong></td>
+                          </tr>
+                            <tr>
+                            <td><strong>04</strong></td>
+                            <td><strong>04</strong></td>
+                          </tr>
+                            <tr>
+                            <td><strong>04</strong></td>
+                            <td><strong>04</strong></td>
+                          </tr>
+                        </table>
+
+                       </div> 
+                      
+                    </div>
+                  </form>
+                </div> 
+              </div>
+            </div>
+          </div>  
+
+          <!-- Earn --> 
+
+          
+
+ <div class="FAQ" *ngIf="tabId==3">
+  
+<div class="pro_form1">
+        <form autocomplete="off">
+          <div class="form-group">
+            <table class="table table-striped table-hover table-responsive w-100 table_download">
+              <thead>
+                <tr>
+                  <th width="22%">Question</th>
+                  <th width="32%">Answers</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rewards of rewardsList;let i=index;">
+                  <td>
+                    <span name="qstn" readonly>{{rewards.question}}</span>
+                  </td>
+                  <td>
+                    <span name="ans" readonly>{{rewards.answer}}</span>
+                  </td>
+                  
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+
+</div>  
+
+            <!-- FAQ --> 
+
+            
+  <div class="Redeem" *ngIf="tabId==4">
+  <div class="row">
+    <div class="col-md-8 col-xs-12">
+      <div class="pro_form1">
+        <form autocomplete="off">
+          <div class="form-group">
+            <textarea name="redeem" [(ngModel)]="redeem"  readonly></textarea> 
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>  
+              <!-- Redeem --> 
+ 
+
+  <div class="clearfix"></div>
+</div>
+        
+       
+      
+    </div>
+</main>

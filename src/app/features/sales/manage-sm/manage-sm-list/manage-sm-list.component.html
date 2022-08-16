@@ -1,0 +1,90 @@
+<div class="content_div">
+  <div class="main_heading">
+    <div class="row">
+      <div class="col_12 mb_4">
+        <div class="">
+          <div class="row allign_center">
+            <div class="col_6">
+              <h3 class="title mb_1 text_md">SM list</h3>
+              <p class="text_xs dark_text_2">List of existing SM</p>
+            </div>
+            <div class="col_6">
+              <div class="d_flex justify_end">
+                <a class="btn link pe_0 me_3 pop_btn" (click)="viewLog()"
+                  >View Log</a
+                >
+                <a class="btn link px_0 me_3" href="{{ smExcel }}"
+                  >Download Sample</a
+                >
+                <input
+                  class="import_input"
+                  type="file"
+                  #fileInput
+                  name="fileInput"
+                  (change)="uploadExcel($event)"
+                />
+                <button
+                  class="btn btn_primary_g me_3"
+                  (click)="fileInput.click()"
+                >
+                  Import List
+                </button>
+                <a class="btn btn_primary pop_btn" (click)="addSM()">Add SM</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col_12 mb_3">
+        <p-table
+          #dt
+          [value]="smList"
+          [rows]="10"
+          [lazy]="true"
+          [paginator]="true"
+          (onLazyLoad)="paginatedSearch($event)"
+          responsiveLayout="scroll"
+          [totalRecords]="totalRecords"
+          [rowHover]="true"
+          dataKey="id"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [showCurrentPageReport]="true"
+          styleClass="p-datatable-striped"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>#ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Mobile Number</th>
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-sm let-rowIndex="rowIndex">
+            <tr [pSelectableRow]="sm">
+              <td (click)="onClickSMId(sm.id, sm.crmId, sm.name)">
+                {{ sm.crmId | nullValuesConverter }}
+              </td>
+              <td (click)="onClickSMId(sm.id, sm.crmId, sm.name)">
+                {{ sm.name }}
+              </td>
+              <td (click)="onClickSMId(sm.id, sm.crmId, sm.name)">
+                {{ sm.email }}
+              </td>
+              <td (click)="onClickSMId(sm.id, sm.crmId, sm.name)">
+                {{ sm.mobileNumber }}
+              </td>
+              <td>
+                <a class="warning_text me_3" (click)="onEditSM(sm.id, sm)"
+                  >Edit</a
+                ><a class="danger_text me_3" (click)="onDeleteSM(sm.id)"
+                  >Delete</a
+                >
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

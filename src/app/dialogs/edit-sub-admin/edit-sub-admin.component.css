@@ -1,0 +1,58 @@
+.error{
+    color: red;
+}
+.form_left{
+    width: 47%;
+    display: inline-block;
+    margin-bottom: 15px;
+}
+.form_right{
+    width: 47%;
+    display: inline-block;
+    margin-left: 6%;
+    margin-bottom: 15px;
+}
+.cancel_btn{
+    float: left;
+    font-size: 19px;
+}
+.sub_admin_btn{
+    color: white;
+    background-color: #f7941e;
+    float: right;
+    font-size: 19px;
+}
+.heading{
+    color: #000000;
+    font-weight: 900;
+    font-size: 24px;
+}
+.mobile_num_div{
+    display: inline-block;
+    width: 72%;
+}
+.dialCode_div{
+    display: inline-block;
+    width: 23%;
+    margin-right: 5%;
+}
+.mobile_error{
+    padding-left: 28%
+}
+.reset_span{
+    color: rgb(83, 83, 240);
+    text-decoration: underline;
+}
+.reset_span:hover{
+    text-decoration:none;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+.close_icon{
+    float: right;
+}

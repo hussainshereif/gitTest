@@ -1,0 +1,73 @@
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <!-- <h1>Brokerage Details</h1> -->
+        <!-- <div class="pull-right" style="color:red;float:right">{{uploadStatus}}</div> -->
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <table class="table table-striped table-hover table-responsive w-100 table_leads_123">
+          <thead>
+            <tr>
+              <th width="10%">Lead Name</th>
+              <th width="10%">Project Name</th>
+              <th width="10%">Agreement Value</th>
+              <!-- <th width="10%">Group Name</th> -->
+              <!-- <th width="10%">Group Entry Date</th> -->
+              <!-- <th width="5%">Base Brokerage (%)</th> -->
+              <!-- <th width="10%">Base Brokerage Created Date</th> -->
+              <!-- <th width="5%">Ladder Name</th> -->
+              <!-- <th width="5%">Ladder Created Date</th> -->
+              <!-- <th width="10%">Ladder Value (%)</th> -->
+              <!-- <th width="10%">Loyalty Value (%)</th> -->
+              <!-- <th width="5%">Loyalty</th> -->
+              <th width="10%">Total Brokerage</th>
+              <!-- <th width="10%">Total With GST</th> -->
+              <th width="10%">Registration Date</th>
+              <th width="15%">Date</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="detailedBrokerageList.length > 0">
+            <tr *ngFor="let cp of detailedBrokerageList; let i = index">
+              <td>{{ cp.leadName }}</td>
+              <td>{{ cp.projectName }}</td>
+              <td>{{ cp.agreementValue }}</td>
+              <!-- <td>{{cp.groupName}}</td> -->
+              <!-- <td>{{cp.groupEtryDate}}</td> -->
+              <!-- <td>{{cp.brokBaseValue}}</td> -->
+              <!-- <td>{{cp.brokCreatedOn}}</td> -->
+              <!-- <td>{{cp.ladderName}}</td> -->
+              <!-- <td>{{cp.ladderDate}}</td> -->
+              <!-- <td>{{cp.brokCurrLadValue}}</td> -->
+              <!-- <td>{{cp.brokCurrLoyaltyValue}}</td> -->
+              <!-- <td *ngIf="cp.brokCurrLoyaltyId==1">Silver</td>
+                <td *ngIf="cp.brokCurrLoyaltyId==2">Gold</td>
+                <td *ngIf="cp.brokCurrLoyaltyId==3">Platinum</td>
+                <td *ngIf="cp.brokCurrLoyaltyId==4">Black</td>
+                <td *ngIf="cp.brokCurrLoyaltyId==5">Titanium</td>
+                <td *ngIf="cp.brokCurrLoyaltyId==''"></td> -->
+              <td>{{ cp.calculatedBrokerage }}</td>
+              <!-- <td>{{cp.gstOnBrokerage}}</td> -->
+              <td>{{ cp.registrationPaymentDate | date: "dd/MM/yyyy" }}</td>
+              <td>{{ cp.bookingDate | date: "dd/MM/yyyy" }}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="detailedBrokerageList.length == 0">
+            <tr>
+              <td colspan="10" class="text-center">No data available!</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <p>* Current GST : {{curr_gst}} %</p> -->
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="sizeofTable > recordsPerPage">
+    <ngb-pagination [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage"
+      aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+  </div>
+</main>

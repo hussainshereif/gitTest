@@ -1,0 +1,33 @@
+.add_mail_section{
+    width: 100%;
+    padding-top: 70px;
+}
+.add_mail_div{
+    float: left;
+    width: 30%;
+    margin-right: 10px;
+}
+.add_btn_div{
+    width:67% ;
+    float: left;
+}
+.add_btn{
+    background-color:#1359a7;
+    color: #fff;
+}
+.mail_list_section{
+    width: 100%;
+    margin-top: 20px;
+    float: left;
+}
+.icon_space{
+    margin-right: 7px;
+}
+.delete_icon{
+    color:#dc3545;
+    font-size: 15px;
+}
+.edit_icon{
+    color: #17a2b8;
+    font-size: 15px;
+}

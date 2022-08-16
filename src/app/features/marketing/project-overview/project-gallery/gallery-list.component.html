@@ -1,0 +1,102 @@
+<div class="row_n">
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="galleryList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      [globalFilterFields]="['id', 'fileName', 'galleryType', 'caption']"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row allign_center">
+          <div class="col_6">
+            <h3 class="title mb_1 text_md">Gallery</h3>
+            <p class="text_xs dark_text_2">List of gallery</p>
+          </div>
+          <div class="col_6">
+            <div class="d_flex justify_end">
+              <span class="p-input-icon-left tbl_search">
+                <i class="pi pi-search"></i>
+                <input
+                  class="search_groups"
+                  pInputText
+                  type="text"
+                  (input)="dt.filterGlobal($event.target.value, 'contains')"
+                  placeholder="Search..."
+                />
+              </span>
+              <button class="tbl_filter">
+                <div class="icon">
+                  <img
+                    src="../../../../../assets/images_new/icons/filter.svg"
+                    alt=""
+                  />
+                </div>
+              </button>
+              <button class="btn btn_primary" (click)="createGallery()">
+                Upload Media
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">#ID <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="fileName">
+            Title<p-sortIcon field="fileName"></p-sortIcon>
+          </th>
+          <th pSortableColumn="galleryType">
+            Show in <p-sortIcon field="galleryType"></p-sortIcon>
+          </th>
+          <th pSortableColumn="caption">
+            Caption <p-sortIcon field="caption"></p-sortIcon>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-gallery>
+        <tr (click)="showDetails(gallery.id)">
+          <td>
+            <span class="dark_text_2">#{{ gallery.id }}</span>
+          </td>
+          <td>{{ gallery.fileName }}</td>
+
+          <td>{{ gallery.galleryType }}</td>
+          <td>{{ gallery.caption }}</td>
+          <td (click)="$event.stopPropagation()">
+            <a
+              class="link_primary me_3 pop_btn"
+              (click)="preview(gallery)"
+              href="javascript:void(0)"
+              data-modal=".view_image"
+              >View</a
+            >
+            <a
+              class="link_warning me_3 pop_btn"
+              (click)="editGallery(gallery)"
+              href="javascript:void(0)"
+              data-modal=".edit_gallery"
+              >Edit</a
+            ><a
+              class="danger_text me_3 link_danger pop_btn"
+              (click)="deleteGallery(gallery.id)"
+              href="javascript:void(0)"
+              data-modal=".del_confirm_gal"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

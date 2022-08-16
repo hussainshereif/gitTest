@@ -1,0 +1,20 @@
+.add_btn_div,
+.title_div {
+  display: inline;
+  width: 50%;
+  float: left;
+}
+
+.add_project_btn {
+  float: right;
+  margin-bottom: 30px;
+}
+
+.projectName_td {
+  color: #034ea2;
+  cursor: pointer;
+}
+
+.projectName_td:hover {
+  text-decoration: underline;
+}

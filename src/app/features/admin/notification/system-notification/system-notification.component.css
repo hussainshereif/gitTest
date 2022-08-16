@@ -1,0 +1,30 @@
+.heading-style-inline {
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #231f20;
+  position: absolute;
+}
+
+.heading-style-sub {
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: #93949b;
+  position: absolute;
+}
+
+.scrollable_form {
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+.edit_button_style {
+  color: #f7941e;
+  max-width: 14% !important;
+}

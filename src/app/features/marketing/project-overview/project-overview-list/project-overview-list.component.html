@@ -1,0 +1,106 @@
+<div class="content_div">
+  <div class="main_heading">
+    <div class="row_n">
+      <div class="col_12 mb_4">
+        <div class="">
+          <div class="row_n allign_center">
+            <div class="col_6">
+              <h3 class="title">Project List</h3>
+            </div>
+            <div class="col_6">
+              <div class="d_flex justify_end">
+                <div class="tbl_search">
+                  <div class="icon"></div>
+                  <input
+                    class="search_groups"
+                    (input)="dt.filterGlobal($event.target.value, 'contains')"
+                    type="text"
+                    placeholder="Search Projects"
+                  />
+                </div>
+                <button (click)="addProjects()" class="btn btn_primary">
+                  Add Project
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col_12 mb_3">
+        <p-table
+          #dt
+          [value]="ProjectList"
+          [rows]="10"
+          [paginator]="true"
+          [globalFilterFields]="filterFields"
+          responsiveLayout="scroll"
+          [totalRecords]="totalRecords"
+          [rowHover]="true"
+          dataKey="id"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [showCurrentPageReport]="true"
+          styleClass="p-datatable-striped"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="crmId">Project ID</th>
+              <th pSortableColumn="projectName">Project Name</th>
+              <th pSortableColumn="developedBy">Builder Name</th>
+              <th>Location</th>
+              <th>Pricing</th>
+              <th>Actions</th>
+              <th>Status</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-project let-rowIndex="rowIndex">
+            <tr>
+              <td>{{ project.crmId }}</td>
+              <td>{{ project.projectName }}</td>
+              <td>{{ project.developedBy }}</td>
+              <td>{{ project.address }}</td>
+              <td>{{ project.rate }}</td>
+              <td>
+                <a
+                  class="link_warning me_3 pop_btn"
+                  href=""
+                  (click)="editProjectList(project.id, event)"
+                  >Edit</a
+                ><a
+                  class="danger_text me_3 link_danger pop_btn"
+                  href=""
+                  (click)="deleteProjectList(project.id, event)"
+                  >Delete</a
+                >
+              </td>
+              <td>
+                <button
+                  class="btn btn_primary"
+                  *ngIf="!project.launched"
+                  (click)="
+                    changeActiveStatus(rowIndex, project, project.launched)
+                  "
+                >
+                  Launch
+                </button>
+                <button
+                  class="btn btn_warning"
+                  *ngIf="project.launched"
+                  (click)="
+                    changeActiveStatus(rowIndex, project, project.launched)
+                  "
+                >
+                  Deactivate
+                </button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td class="text-center" colspan="7">No data available!</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

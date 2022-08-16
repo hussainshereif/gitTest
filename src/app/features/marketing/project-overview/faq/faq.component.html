@@ -1,0 +1,107 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <div class="">
+      <div class="row allign_center">
+        <div class="col_6">
+          <h3 class="title mb_1 text_md">Faq</h3>
+          <p class="text_xs dark_text_2">List of Faq</p>
+        </div>
+        <div class="col_6">
+          <div class="d_flex justify_end">
+            <button class="btn btn_primary pop_btn" (click)="addnewFAQ()">
+              Add a Question
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col_12">
+    <div class="faq_wrap" *ngFor="let fq of fAQList; let i = index">
+      <div
+        [ngClass]="{ faq_item: true, active: faqActive === i ? true : false }"
+      >
+        <div class="faq_head">
+          <div class="title">
+            <h6><span class="ques">Q)</span>{{ fq.question }}</h6>
+          </div>
+          <div class="icon btn p_0" (click)="faqClicked(i)">
+            <img
+              src="../../../../../assets/images_new/icons/accordin-collapse.svg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="faq_body">
+          <div class="top">
+            <p><span class="ans">A)</span>{{ fq.answer }}</p>
+          </div>
+          <div class="Bottom">
+            <div class="row allign_center">
+              <div class="col_12">
+                <div class="d_flex justify_end">
+                  <button
+                    class="btn btn_danger me_2 pop_btn"
+                    (click)="deleteFAQ(fq.id)"
+                  >
+                    Delete
+                  </button>
+                  <button
+                    class="btn btn_warning pop_btn"
+                    (click)="onEditFaq(fq.id, i)"
+                  >
+                    Edit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--     <div class="faq_item">
+        <div class="faq_head">
+          <div class="title">
+            <h6>
+              <span class="ques">Q)</span>Lorem ipsum dolor sit amet, consetetur
+              sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+              et dolore magna aliquyam erat, sed diam voluptua?
+            </h6>
+          </div>
+          <div class="icon btn p_0">
+            <img
+              src="../../../../../assets/images_new/icons/accordin-collapse.svg"
+              alt=""
+            />
+          </div>
+        </div>
+        <div class="faq_body">
+          <div class="top">
+            <p>
+              <span class="ans">A)</span>Lorem ipsum dolor sit amet, consetetur
+              sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore
+              et dolore magna aliquyam erat, sed diam voluptua. At vero eos et
+              accusam et justo duo dolores et ea rebum. Stet clita kasd
+              gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+            </p>
+          </div>
+          <div class="Bottom">
+            <div class="row allign_center">
+              <div class="col_12">
+                <div class="d_flex justify_end">
+                  <a
+                    class="btn btn_danger me_2 pop_btn"
+                    data-modal=".del_msg_faq"
+                    >Delete</a
+                  >
+                  <a class="btn btn_warning pop_btn" data-modal=".edit_faq"
+                    >Edit</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>

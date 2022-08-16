@@ -1,0 +1,45 @@
+options:
+  docker: true
+  size: 2x
+definitions:
+  services:
+    docker:
+      memory: 4096
+image: timbru31/node-chrome:alpine
+pipelines:
+  steps:
+    - step: &buildandupload
+        name: build and upload to dockerhub
+        size: 8x
+        caches:
+          - node
+        runs-on: self.hosted
+        script:
+          - apt-get update && apt-get install gconf-service libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libcairo2  libcups2 libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 libxcomposite1 libxcursor1 libxdamage1 libxss1 libxtst6 libappindicator1 libnss3 libasound2 libatk1.0-0 libc6 ca-certificates fonts-liberation lsb-release xdg-utils wget -y
+          - npm cache clean --force
+          - npm install
+          - node -v
+          - npm rebuild node-sass
+          - npm install -g @angular/cli
+          - npm install -D
+          - apk add gettext
+          - envsubst < Dockerfile > Dockerfiledeploy
+          - docker login -u $DOCKER_HUB_USER -p $DOCKER_HUB_PASSWORD
+          - docker build -f Dockerfiledeploy . -t loyalie/test_admin-dev:${BITBUCKET_BUILD_NUMBER} 
+          - docker push loyalie/test_admin-dev:${BITBUCKET_BUILD_NUMBER}
+          
+  custom:
+    prod-build:
+    - variables:          #list variable names under here
+          - name: clientname
+            default: reloy:uat  
+            allowed-values:         # optionally restrict variable values
+             - reloy:uat
+             - srijan:uat
+             - spre:uat
+             - brigade:uat
+             - lnt:uat
+             - rohan:uat
+             - century:uat
+             - mahindra:uat
+    - step: *buildandupload

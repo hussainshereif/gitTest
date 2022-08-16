@@ -1,0 +1,170 @@
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="form-group col-md-12">
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-8 col-md-8 col-lg-8" style="margin-bottom: 20px">
+        <div align="left" class="search_btn_div">
+          <span>
+            <input type="text" class="search-style" placeholder="Search by Lead Name.." #sortByLeadName
+              name="sortByLeadName" />
+            <i class="fa fa-search" style="color: #bbbdbf; right: 20px; position: relative" (click)="
+                getInvoiceList(0, 10, '', 'leadName', sortByLeadName.value)
+              "></i>
+          </span>
+          <span class="margin_left">
+            <input type="text" class="search-style" placeholder="Search by CP Name.." #sortByCPName
+              name="sortByCPName" />
+            <!-- <button type="submit"> -->
+            <i class="fa fa-search" style="color: #bbbdbf; right: 20px; position: relative"
+              (click)="getInvoiceList(0, 10, '', 'cpName', sortByCPName.value)"></i>
+            <!-- </button> -->
+          </span>
+          <span class="margin_left">
+            <input type="text" class="search-style" placeholder="Search by Invoice Number" #sortByInvoNumber
+              name="sortByInvoNumber" />
+            <!-- <button type="submit"> -->
+            <i class="fa fa-search" style="color: #bbbdbf; right: 20px; position: relative" (click)="
+                getInvoiceList(
+                  0,
+                  10,
+                  '',
+                  'invoiceNumber',
+                  sortByInvoNumber.value
+                )
+              "></i>
+            <!-- </button> -->
+          </span>
+          <!-- <span class="margin_left">
+              <input type="text" style="padding-right: 40px;" placeholder="Search by Status" #sortByStatus name="sortByStatus">
+              <button type="submit"><i class="fa fa-search" (click)="getInvoiceList(0,10,'','status',sortByStatus.value)"></i></button>
+            </span> -->
+          &nbsp;&nbsp;
+          <span>
+            <label class="search-label margin_left">Filter By</label>
+            <select #statusSort class="mar_left dropDown-style"
+              (change)="getInvoiceList(0, 10, '', 'status', statusSort.value)">
+              <option value="" disabled selected hidden>All</option>
+              <option value="PENDING" title="Pending">Pending</option>
+              <option value="APPROVED">Approved</option>
+              <option value="REJECTED">Rejected</option>
+            </select>
+          </span>
+          <div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-4 col-md-4 col-lg-4">
+        <div class="row">
+          <div class="col-12 col-md-12 col-lg-12">
+
+            <div class="import_list pull-right" style="display: inline">
+              <input style="display: none" type="file" #fileInput name="fileInput" (change)="uploadExcel($event)" />
+              <a (click)="fileInput.click()"> Import List</a>
+            </div>
+            &nbsp;&nbsp;
+            <a href="{{ invoiceExcel }}">
+              <img class="samplexlsx" src="assets\images\sampleExcel.png" />
+            </a>
+            <span class="log-btn">
+              <a (click)="viewLog()" style="padding: 4px 8px !important; margin-right: 10px; margin-top: 4px;">View
+                Log</a>
+            </span>&nbsp;&nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-8 col-md-8 col-lg-8 excel_status"></div>
+          <div class="col-4 col-md-4 col-lg-4 excel_status">
+            {{ uploadStatus }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div align="right" class="search_btn_div">
+        <a href="https://brigadeapp.s3.ap-south-1.amazonaws.com/Document/CP.xlsx">
+          <img class="samplexlsx" src="assets\images\sampleExcel.png">
+        </a>
+        <div class="import_list pull-right" style="display: inline;">
+          <input style="display:none" type="file" #fileInput name="fileInput" (change)="uploadExcel($event)" />
+          <a (click)="fileInput.click()">
+            Import List</a>
+        </div>
+      </div> -->
+    <div class="row">
+      <div class="form-group col-md-12">
+        <table class="table table-striped table-hover table-responsive w-100 table_leads_123">
+          <!-- <table class="table table-striped table-hover table-responsive"> -->
+          <thead>
+            <tr>
+              <th width="10%;">CP ID</th>
+              <th width="15%;">CP Name</th>
+              <!-- <th width="15%;"> Email ID</th> -->
+              <th width="10%;">Lead Name</th>
+              <th width="15%;">Project Name</th>
+
+              <!-- <th width="15%;"> Flat No.</th> -->
+
+              <th width="10%;">Invoice Number</th>
+              <th width="10%;">Amount Raised</th>
+              <!-- <th width="10%;">Brokerage Amount</th> -->
+              <th width="10%;">Invoice Raised On</th>
+              <th width="10%;">Invoice Comment</th>
+              <th width="10%;">Status Comment</th>
+              <th width="10%;">Invoice File</th>
+              <th width="10%;">Current Status</th>
+              <th width="10%;">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="InvoiceList.length > 0">
+            <tr *ngFor="let cp of InvoiceList; let i = index">
+              <td>{{ cp.id }}</td>
+              <td>{{ cp.cpName }}</td>
+              <!-- <td>{{cp.email}}</td> -->
+              <td>{{ cp.leadName }}</td>
+              <td>{{ cp.projectName }}</td>
+
+              <!-- <td>{{cp.flatNum}}</td> -->
+
+              <td>{{ cp.invoiceNumber }}</td>
+              <td>{{ cp.amount }}</td>
+              <!-- <td>{{cp.brokerageAmount}}</td> -->
+              <td>{{ cp.submittedDate | date: "dd/MM/yyyy" }}</td>
+              <td>{{ cp.requestComment }}</td>
+              <td>{{ cp.statusComment }}</td>
+              <td>
+                <a href="{{ cp.docUrl }}" target="_blank"><img src="{{ cp.docUrl }}" class="" height="50"
+                    width="50" /></a>
+              </td>
+              <td width="10%;" class="sl_gld_plt text-center">
+                {{cp.status}}
+              </td>
+              <td>
+                <select [(ngModel)]="cp.status" (change)="activationChange(cp.id, $event)">
+                  <option *ngFor="let invoiceStatus of invoiceStatusList">
+                    {{invoiceStatus}}
+                  </option>
+
+                </select>
+                <!-- <span> <button class="btn btn-secondary btn-sm  mr-2" (click)="openViewMore(cp)">View More
+                    </button></span> -->
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="InvoiceList.length == 0">
+            <tr>
+              <td colspan="12" class="no_data_text">No data available!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="sizeofTable > recordsPerPage">
+    <ngb-pagination [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage"
+      aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+  </div>
+</main>

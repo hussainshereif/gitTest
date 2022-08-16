@@ -1,0 +1,37 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">
+      {{ filename }}
+    </h6>
+    <p class="modal_title text_xs">Collateral Document</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onClose()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <div class="row">
+      <div class="col_12" *ngIf="urlType == 'IMAGE'">
+        <img src="{{ previewImage }}" class="w-100" alt="" />
+      </div>
+      <div class="col_12" *ngIf="urlType == 'PDF'">
+        <iframe
+          height="500px"
+          width="100%"
+          class="img-responsive"
+          [src]="previewImage"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+  <!-- modal_body -->
+</div>

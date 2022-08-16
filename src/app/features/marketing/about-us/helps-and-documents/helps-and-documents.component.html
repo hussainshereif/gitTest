@@ -1,0 +1,217 @@
+<div style="height: 400px">
+  <div class="row" style="width: 100%">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="pro_form1">
+        <div class="collateral_btn_div1 mt-2">
+          <h6 class="heading-style mt-6">Help Details</h6>
+          <button
+            class="button-Link float-right"
+            *ngIf="showEdit"
+            (click)="onEdit(false)"
+          >
+            Edit
+          </button>
+          <button
+            class="button-Link float-right"
+            *ngIf="!showEdit"
+            (click)="onEdit(true)"
+          >
+            Save
+          </button>
+        </div>
+        <div class="">
+          <div class="collateral_btn_div2">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                <label class="mb-2 mt-2">HelpLine Number</label>
+                <label *ngIf="phoneNumber && showEdit" class="label-data">{{
+                  this.phoneNumber
+                }}</label>
+                <input
+                  *ngIf="
+                    (!phoneNumber && showEdit) ||
+                    (!phoneNumber && !showEdit) ||
+                    (phoneNumber && !showEdit)
+                  "
+                  type="tel"
+                  [(ngModel)]="phoneNumber"
+                  class="inpt form-control"
+                  [readonly]="showEdit"
+                  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                />
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                <label class="mb-2 mt-2">Support Mail</label>
+                <label *ngIf="email && showEdit" class="label-data">{{
+                  this.email
+                }}</label>
+                <input
+                  *ngIf="
+                    (!email && showEdit) ||
+                    (!email && !showEdit) ||
+                    (email && !showEdit)
+                  "
+                  type="email"
+                  [(ngModel)]="email"
+                  [readonly]="showEdit"
+                  class="inpt form-control"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <hr />
+        </div>
+        <div class="collateral_btn_div1">
+          <h6 class="heading-style">Documents & Legal Details</h6>
+          <button
+            class="button-Link float-right"
+            *ngIf="showEditDoc"
+            (click)="onEditDoc(false)"
+          >
+            Edit
+          </button>
+          <button
+            class="button-Link float-right"
+            *ngIf="!showEditDoc"
+            (click)="onEditDoc(true)"
+          >
+            Save
+          </button>
+        </div>
+        <div class="">
+          <div class="collateral_btn_div2">
+            <div class="row">
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                <label class="mb-2 mt-2">Agreement Document</label>
+                <div class="row" *ngIf="agreementDocument && showEditDoc">
+                  <img
+                    id="view"
+                    src="../../assets/images/file.svg"
+                    alt=""
+                    class="image-icon"
+                  />
+                  <label class="label-data label-pos">{{
+                    this.agreementDocument
+                  }}</label>
+                </div>
+                <input
+                  *ngIf="
+                    (!agreementDocument && showEditDoc) ||
+                    (!agreementDocument && !showEditDoc) ||
+                    (agreementDocument && !showEditDoc)
+                  "
+                  type="file"
+                  name="files[]"
+                  multiple
+                  [attr.disabled]="showEditDoc ? '' : null"
+                  class="form-control file-height form-control-sm"
+                  id="customFile"
+                  placeholder="Upload File"
+                  (change)="addFile($event, 'agreementDocument')"
+                />
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                <label class="mb-2 mt-2">FAQ Document</label>
+                <div class="row" *ngIf="faqDocument && showEditDoc">
+                  <img
+                    id="view"
+                    src="../../assets/images/file.svg"
+                    alt=""
+                    class="image-icon"
+                  />
+                  <label class="label-data label-pos">{{
+                    this.faqDocument
+                  }}</label>
+                </div>
+                <input
+                  *ngIf="
+                    (!faqDocument && showEditDoc) ||
+                    (!faqDocument && !showEditDoc) ||
+                    (faqDocument && !showEditDoc)
+                  "
+                  type="file"
+                  name="files[]"
+                  multiple
+                  [attr.disabled]="showEditDoc ? '' : null"
+                  class="form-control file-height form-control-sm"
+                  id="customFile"
+                  placeholder="Upload File"
+                  (change)="addFile($event, 'faqDocument')"
+                />
+              </div>
+
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10">
+                <label class="mb-2 mt-2">Privacy Policy</label>
+                <div class="row" *ngIf="privacyPolicy && showEditDoc">
+                  <img
+                    id="view"
+                    src="../../assets/images/file.svg"
+                    alt=""
+                    class="image-icon"
+                  />
+                  <label class="label-data label-pos">{{
+                    this.privacyPolicy
+                  }}</label>
+                </div>
+                <input
+                  *ngIf="
+                    (!privacyPolicy && showEditDoc) ||
+                    (!privacyPolicy && !showEditDoc) ||
+                    (privacyPolicy && !showEditDoc)
+                  "
+                  type="file"
+                  name="files[]"
+                  multiple
+                  [attr.disabled]="showEditDoc ? '' : null"
+                  class="form-control file-height form-control-sm"
+                  id="customFile"
+                  placeholder="Upload File"
+                  (change)="addFile($event, 'privacyPolicy')"
+                />
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div
+                class="col-lg-4 col-md-4 col-sm-4 col-xs-10"
+                style="left: 15px"
+              >
+                <label class="mb-2 mt-2">Terms of Service</label>
+                <div class="row" *ngIf="termsOfService && showEditDoc">
+                  <img
+                    id="view"
+                    src="../../assets/images/file.svg"
+                    alt=""
+                    class="image-icon"
+                  />
+                  <label class="label-data label-pos">{{
+                    this.termsOfService
+                  }}</label>
+                </div>
+                <input
+                  *ngIf="
+                    (!termsOfService && showEditDoc) ||
+                    (!termsOfService && !showEditDoc) ||
+                    (termsOfService && !showEditDoc)
+                  "
+                  type="file"
+                  name="files[]"
+                  multiple
+                  [attr.disabled]="showEditDoc ? '' : null"
+                  class="form-control file-height form-control-sm"
+                  id="customFile"
+                  placeholder="Upload File"
+                  (change)="addFile($event, 'termsOfService')"
+                />
+              </div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10"></div>
+              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-10"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

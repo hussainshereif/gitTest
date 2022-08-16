@@ -1,0 +1,83 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">{{ headingText }}</h6>
+    <p class="modal_title text_xs" *ngIf="data.type != 2">{{ subText }}</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onCancel()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <form [formGroup]="addSMForm" autocomplete="off">
+      <div class="row mb_3">
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">Name</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              placeholder="Enter Name"
+              formControlName="name"
+              id="name"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addSMForm.get(['name'])"
+              [field]="'name'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">Email</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              placeholder="Enter Email"
+              formControlName="email"
+              id="email"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addSMForm.get(['email'])"
+              [field]="'email'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">MobileNumber</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              placeholder="Enter Mobile Number"
+              formControlName="mobile"
+              id="mobile"
+            />
+          </div>
+
+          <app-validation-error
+            [submit]="submitted"
+            [control]="addSMForm.get(['mobile'])"
+            [field]="'mobile'"
+          ></app-validation-error>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <a class="btn btn_secondary close" (click)="onCancel()">Cancel</a>
+        <button class="btn btn_primary" (click)="onSubmit()">Add</button>
+      </div>
+    </form>
+  </div>
+  <!-- modal_body -->
+</div>
+<!-- modal content -->

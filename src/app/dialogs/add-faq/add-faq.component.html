@@ -1,0 +1,64 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Add Question</h6>
+    <p class="modal_title text_xs">Add a Frequently Asked Question</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="close()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <form [formGroup]="addFAQForm" (ngSubmit)="onSubmit()" autocomplete="off">
+      <div class="row">
+        <div class="col_12">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Question</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="question"
+              placeholder="Enter Question"
+            />
+            <app-validation-error
+              [control]="addFAQForm.get(['question'])"
+              [submit]="submitted"
+              [field]="'Question'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Answer</label>
+            <textarea
+              class="tet_field"
+              id="Address"
+              autocomplete="off"
+              formControlName="answer"
+              placeholder="Enter Answer"
+            ></textarea>
+            <app-validation-error
+              [control]="addFAQForm.get(['answer'])"
+              [submit]="submitted"
+              [field]="'Answer'"
+            ></app-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <button class="btn btn_secondary close" (click)="close()">
+          Cancel
+        </button>
+        <button class="btn btn_primary pop_btn" type="submit">Add</button>
+      </div>
+    </form>
+  </div>
+  <!-- modal_body -->
+</div>
+<!-- modal content -->

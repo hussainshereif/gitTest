@@ -1,0 +1,362 @@
+.btn {
+  border-radius: 0;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.p-component {
+  font-family: var(--font-primary) !important;
+  font-size: 16px !important;
+}
+
+.p-dropdown,
+.p-multiselect,
+.p-autocomplete {
+  display: flex !important;
+  background: transparent !important;
+  border: none !important;
+  transition: none !important;
+  border-radius: unset !important;
+  box-shadow: none !important;
+}
+.p-dropdown .p-dropdown-trigger,
+.p-multiselect .p-multiselect-trigger-icon {
+  display: none !important;
+}
+.p-dropdown-label,
+.p-multiselect-label,
+.p-inputtext,
+.p-inputnumber {
+  /* font-family:  var(--font-primary)!important; */
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  line-height: 18px !important;
+  color: var(--dark_color_3) !important;
+  background: transparent !important;
+  padding: unset !important;
+  border: none !important;
+  transition: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  width: 100% !important;
+}
+
+.input_wrap {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  border: none;
+  padding: 0px;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.input_label {
+  position: absolute;
+  left: 10px;
+  color: var(--dark_color_2);
+  font-size: 13px;
+  line-height: 13px;
+  top: 12px;
+  font-weight: 500;
+}
+.input_label_chk {
+  color: var(--dark_color_2);
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 500;
+}
+.p-calendar {
+  width: 100%;
+}
+.p-inputwrapper,
+.p-inputtext.p-inputtextarea {
+  width: 100%;
+  border: var(--light_color_2) 1px solid;
+  padding: 35px 10px 10px 10px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: var(--dark_color_3);
+  transition: all 0.4s ease;
+  -webkit-transition: all 0.4s ease;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.inpt_field {
+  border: var(--light_color_2) 1px solid !important;
+  padding: 35px 10px 10px 10px !important;
+  width: 100%;
+}
+.dropdown_arrow .p-inputwrapper {
+  background: url(../../assets/images_new/icons/select.svg) right / 52px
+    no-repeat !important;
+}
+.calendar_icon .p-inputwrapper {
+  /*   background: url(../../assets/images_new/icons/date.svg) right / 52px no-repeat; */
+}
+::placeholder {
+  color: var(--light_color_3) !important;
+}
+.tet_field {
+  resize: none;
+  height: 100px;
+  font-family: inherit;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  line-height: 22px;
+  overflow: auto;
+  border: var(--light_color_2) 1px solid !important;
+  padding: 35px 10px 10px 10px !important;
+}
+.input_check,
+.input_radio {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.input_radio_inline {
+  display: inline-block;
+}
+.input_check label,
+.input_radio label {
+  margin-bottom: 0 !important;
+  padding-left: 10px;
+}
+.p-checkbox .p-checkbox-box {
+  border: 2px solid var(--light_color_2);
+  border-radius: 0;
+}
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus,
+.p-radiobutton .p-radiobutton-box.p-focus {
+  outline: 0 none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem var(--light_color_2);
+  border-color: var(--primary);
+}
+.p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover,
+.p-radiobutton .p-radiobutton-box:not(.p-disabled):not(.p-highlight):hover {
+  border-color: var(--primary);
+}
+.p-radiobutton .p-radiobutton-box.p-highlight:not(.p-disabled):hover {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+.p-radiobutton .p-radiobutton-box.p-highlight {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+
+.p-datatable .p-datatable-header {
+  background: var(--light_color_1);
+  color: #343a40;
+  border: 1px solid #dee2e6;
+  border-width: 1px 0 1px 0;
+  padding: 1rem 1rem;
+  font-weight: 700;
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  text-align: left;
+  padding: 1rem 1rem;
+  border: 1px solid #dee2e6;
+  border-width: 0 0 1px 0;
+  background: var(--light_color_1);
+  transition: box-shadow 0.2s;
+  vertical-align: bottom;
+  border-top: 1px solid var(--light_color_2);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--light_color_3);
+  text-transform: uppercase;
+}
+.p-datatable .p-sortable-column .p-sortable-column-icon {
+  font-size: 12px;
+  line-height: 12px;
+  color: var(--light_color_3);
+  margin-top: -2px;
+  margin-left: 5px;
+}
+
+.p-datatable-tbody {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--table-striped-color);
+}
+.p-datatable .p-datatable-tbody > tr > td {
+  text-align: left;
+  border: 1px solid transparent;
+  border-width: 0 0 1px 0;
+  padding: 16px 20px;
+}
+
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(odd) {
+  background: #f6f8fb;
+}
+.p-datatable.p-datatable-striped .p-datatable-tbody > tr:nth-child(even) {
+  background: var(--light_color_1);
+}
+
+.p-datatable .p-datatable-thead > tr > th {
+  text-align: left;
+  padding: 16px 20px;
+  border: 1px solid var(--light_color_1);
+  background: var(--light_color_1);
+}
+/* .p-paginator {
+    justify-content: space-around!important;
+} */
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background: #eff6ff;
+  border-color: #eff6ff;
+  color: #1d4ed8;
+}
+
+.p-datepicker {
+  border-radius: 0;
+  min-width: 298px !important;
+  width: 298px !important;
+}
+.p-datepicker:not(.p-datepicker-inline) {
+  border: 1px solid var(--light_color_4) !important;
+  box-shadow: 0px 16px 18px rgb(135 135 182 / 16%) !important;
+}
+.p-datepicker .p-datepicker-header .p-datepicker-prev,
+.p-datepicker .p-datepicker-header .p-datepicker-next {
+  border-radius: 0;
+}
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-year:enabled:hover,
+.p-datepicker
+  .p-datepicker-header
+  .p-datepicker-title
+  .p-datepicker-month:enabled:hover {
+  color: var(--primary);
+}
+.p-datepicker .p-datepicker-header .p-datepicker-prev:enabled:hover,
+.p-datepicker .p-datepicker-header .p-datepicker-next:enabled:hover {
+  color: var(--primary);
+  background: var(--light_color_2);
+}
+.p-datepicker table {
+  font-size: 14px;
+  color: var(--dark_color_1);
+}
+.p-datepicker .p-datepicker-header {
+  padding: 0;
+}
+.p-datepicker table th {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--light_color_3);
+}
+.p-datepicker table td > span {
+  width: 40px;
+  height: 34px;
+  border-radius: unset;
+  transition: box-shadow 0.2s;
+  border: 1px solid transparent;
+}
+.p-datepicker table td {
+  padding: 0;
+}
+
+.p-datepicker:not(.p-disabled)
+  table
+  td
+  span:not(.p-highlight):not(.p-disabled):hover {
+  background: var(--light_color_2);
+  font-weight: 700;
+}
+.p-datepicker table td.p-datepicker-today > span {
+  border: 1px solid var(--light_color_3);
+  background: var(--light_color_2);
+  color: var(--primary);
+  font-weight: 700;
+}
+.p-paginator .p-paginator-pages .p-paginator-page {
+  border-radius: 0;
+}
+.p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  color: var(--light_color_1);
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.tbl_search .search_groups {
+  height: 40px;
+  width: 200px;
+  padding: 10px 15px 10px 44px !important;
+  border: none;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+}
+
+.tbl_filter {
+  background-color: transparent;
+  border: none;
+}
+
+.p-sidebar {
+  width: 370px !important;
+}
+.p-sidebar .p-sidebar-header + .p-sidebar-content {
+  height: 100%;
+  overflow: auto;
+}
+.p-sidebar .p-sidebar-content {
+  padding: 30px 30px 30px 30px !important;
+}
+
+.p-sidebar-close .p-sidebar-close-icon {
+  font-size: 2em !important;
+  color: var(--primary);
+}
+.p-sidebar .p-sidebar-header .p-sidebar-close:enabled:hover,
+.p-sidebar .p-sidebar-header .p-sidebar-icon:enabled:hover {
+  background-color: transparent !important;
+}
+.p-sidebar
+  .p-sidebar-header
+  .p-sidebar-close:enabled:hover
+  .p-sidebar-close-icon {
+  opacity: 0.8;
+}
+.p-sidebar .p-sidebar-header {
+  padding: 30px !important;
+  position: absolute;
+  right: 0;
+  z-index: 1100;
+}
+
+.p-sidebar {
+  color: var(--dark_color_1) !important;
+}
+
+.btn:hover {
+  color: #fff !important;
+}
+
+.multiselect-dropdown .dropdown-btn .dropdown-multiselect__caret {
+  position: inherit !important;
+  height: 25px !important;
+}
+
+.multiselect-dropdown .dropdown-btn .selected-item-container .selected-item {
+  max-width: 100% !important;
+}

@@ -1,0 +1,163 @@
+<div class="row">
+  <div class="col-12 col-md-12 col-lg-12">
+    <div>
+      <i class="fas fa-times close_icon" (click)="onCancel()"></i>
+    </div>
+    <div>
+      <h1 class="heading">Add Sub-Admin</h1>
+    </div>
+    <form [formGroup]="addSubAdminForm" autocomplete="off">
+      <div>
+        <div class="form_left">
+          <label for="name">Name<span class="error">*</span></label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter Name"
+            formControlName="name"
+            id="name"
+            required
+          />
+          <app-validation-error
+            [submit]="submitted"
+            [control]="addSubAdminForm.get(['name'])"
+            [field]="'Name'"
+          ></app-validation-error>
+        </div>
+        <div class="form_right">
+          <label for="email">Email<span class="error">*</span></label>
+          <input
+            type="email"
+            class="form-control"
+            placeholder="Enter Email"
+            formControlName="email"
+            id="email"
+            required
+          />
+          <app-validation-error
+            [submit]="submitted"
+            [control]="addSubAdminForm.get(['email'])"
+            [field]="'Email'"
+          ></app-validation-error>
+        </div>
+      </div>
+      <div>
+        <div class="form_left input-group">
+          <div>
+            <label for="mobile"
+              >Mobile Number<span class="error">*</span></label
+            >
+          </div>
+          <div class="dialCode_div">
+            <select
+              name=""
+              id=""
+              class="form-control"
+              formControlName="dialCode"
+            >
+              <option
+                *ngFor="let country of countries"
+                value="{{ country.dial_code }}"
+              >
+                {{ country.dial_code }}
+              </option>
+            </select>
+          </div>
+          <div class="mobile_num_div">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Enter Mobile Number"
+              formControlName="mobile"
+              id="mobile"
+              required
+            />
+          </div>
+          <app-validation-error
+            [submit]="submitted"
+            [control]="addSubAdminForm.get(['mobile'])"
+            [field]="'Mobile Number'"
+          ></app-validation-error>
+        </div>
+        <div class="form_right">
+          <label for="userRole"
+            >Select User Role<span class="error">*</span></label
+          >
+          <!-- <input type="text" class="form-control" placeholder="Enter Email" > -->
+          <select
+            name=""
+            id=""
+            class="form-control"
+            formControlName="userRole"
+            id="userRole"
+            required
+          >
+            <option value="" selected default>Select Role</option>
+            <option *ngFor="let userRole of userRoles">{{ userRole }}</option>
+          </select>
+          <app-validation-error
+            [submit]="submitted"
+            [control]="addSubAdminForm.get(['userRole'])"
+            [field]="'User Role'"
+          ></app-validation-error>
+        </div>
+      </div>
+      <div>
+        <div class="form_left">
+          <label for="mobile">Password<span class="error">*</span></label>
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter Password"
+            formControlName="password"
+            id="password"
+            required
+          />
+          <app-validation-error
+            [submit]="submitted"
+            [control]="addSubAdminForm.get(['password'])"
+            [field]="'Password'"
+          ></app-validation-error>
+
+          <!-- <div *ngIf="submitted && f.password.errors.pattern"> New Password should be in specified format </div> -->
+          <!-- <div *ngIf="isPasswordInvalid" class="error">
+                        Password and confirm password does not match
+                    </div> -->
+        </div>
+        <div class="form_right">
+          <label for="email"
+            >Confirm Password<span class="error">*</span></label
+          >
+          <input
+            type="password"
+            class="form-control"
+            placeholder="Enter Confirm Password"
+            formControlName="confirmPassword"
+            id="confirmPassword"
+            (blur)="onConfirm()"
+            required
+          />
+          <app-validation-error
+            [submit]="submitted"
+            [control]="addSubAdminForm.get(['confirmPassword'])"
+            [field]="'Confirm Password'"
+          ></app-validation-error>
+          <!-- <div *ngIf="submitted && f.confirmPassword.errors.pattern"> New Password should be in specified format </div> -->
+          <div *ngIf="isConfirmPasswordInvalid" class="error">
+            Password and confirm password does not match
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="form_left">
+          <button class="btn cancel_btn" (click)="onCancel()">Cancel</button>
+        </div>
+        <div class="form_right">
+          <button class="btn sub_admin_btn" (click)="onSubmit()">
+            Add Sub-Admin
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

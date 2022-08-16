@@ -1,0 +1,96 @@
+.rect-data {
+    background-color: white;
+    margin-right: 10px ;
+    margin-bottom: 10px ;
+    /* border: 1px solid; */
+    padding-top: 16px;
+    padding-bottom: 10px;
+    cursor: pointer;
+}
+
+.back-btn a{
+    border-radius: 4px;
+    background-color: #034ea2;
+    font-size: 10px;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.1px;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    /* float: right; */
+    padding: 15px 22px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  }
+
+
+.upload-xl a{ 
+    border-radius: 4px;
+    background-color: #f7941e;
+    font-size: 14px;
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.1px;
+    color: #ffffff; 
+    text-transform:uppercase;
+    float: right;
+    width:120px;
+    height:45px;
+    margin-right: 10px;
+    padding: 15px 10px;
+    position:relative; transition:all 500ms ease; cursor: pointer;
+} 
+    .upload-xl a:hover{ transition:all 500ms ease; opacity:.7; color:#fff; }     
+    .upload-xl a::before{    
+        position: absolute;
+        content: '';
+        width: 20px;
+        height: 20px;
+        right: 18px;
+        top: 13px;
+        -webkit-transform: rotate(-180deg);
+        -moz-transform: rotate(-180deg);
+        -ms-transform: rotate(-180deg);
+        -o-transform: rotate(-180deg);
+        transform: rotate(-180deg); 
+    }    
+    @media(min-width:320px) and (max-width:767px) {
+        .upload-xl{float:left; margin-top: 15px; width:100%; }
+    }
+
+    .add_groups a {
+        border-radius: 4px;
+        background-color: #f7941e;
+        font-size: 14px;
+        font-weight: 900;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.1px;
+        color: #ffffff !important;
+        text-transform: uppercase;
+        float: right;
+        padding: 15px 22px;
+        position: relative;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+    .processing_status_div{
+        width:100%;
+        display: block;
+    }
+    .processing_status{
+        width: 33%;
+        float: right;
+        color: red;
+        font-size: 16px;
+    }
+    .userCount{
+        margin-bottom: 0px;
+    }

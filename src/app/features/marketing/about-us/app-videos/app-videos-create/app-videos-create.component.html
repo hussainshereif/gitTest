@@ -1,0 +1,146 @@
+<div>
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="pro_form1">
+        <form
+          [formGroup]="addForm"
+          (ngSubmit)="addDetails()"
+          autocomplete="off"
+        >
+          <div class="collateral_btn_div1">
+            <h4>Add New</h4>
+          </div>
+          <div class="container">
+            <div class="collateral_btn_div2">
+              <div class="row">
+                <div class="col-12">
+                  <div class="form-group">
+                    <label class="mb-2 mt-2">Title</label>
+                    <input
+                      type="text"
+                      formControlName="title"
+                      class="inpt form-control"
+                      required
+                    />
+                    <div
+                      *ngIf="
+                        addForm.value.submitted === 1 &&
+                        addForm.controls.title.errors
+                      "
+                      class="error_message"
+                    >
+                      <div *ngIf="addForm.controls.title.errors.required">
+                        Title is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="mb-2 mt-2">Description</label>
+                    <textarea
+                      type="text"
+                      class="inpt form-control"
+                      formControlName="description"
+                    >
+                    </textarea>
+                    <div
+                      *ngIf="
+                        addForm.value.submitted === 1 &&
+                        addForm.controls.description.errors
+                      "
+                      class="error_message"
+                    >
+                      <div *ngIf="addForm.controls.description.errors.required">
+                        Description is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="mb-2 mt-2">Thumbnail Image</label>
+                    <input
+                      type="file"
+                      name="files[]"
+                      class="form-control file-height form-control-sm"
+                      id="customFile"
+                      placeholder="Upload File"
+                      accept="image/*"
+                      formControlName="thumbnailImage"
+                      (change)="addFile($event, 'thumbnailImage')"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="mb-2 mt-1">Content Type</label>
+                    <label
+                      *ngFor="let type of contentTypeList; let i = index"
+                      class="mb-3 w-auto d-flex align-items-center mr-4"
+                    >
+                      <input
+                        type="radio"
+                        formControlName="contentType"
+                        class="chk w-auto mr-2"
+                        (click)="onContentTypeChange(type.Text)"
+                        [value]="type.Value"
+                      />
+                      <span class="label-text">{{ type.Text }}</span>
+                    </label>
+                    <div
+                      *ngIf="
+                        addForm.value.submitted === 1 &&
+                        addForm.controls.contentType.errors
+                      "
+                      class="error_message"
+                    >
+                      <div *ngIf="addForm.controls.contentType.errors.required">
+                        Content Type is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="form-group"
+                    *ngIf="addForm.value.contentType !== 'WEBSITE'"
+                  >
+                    <label class="mb-2 mt-2">Upload File</label>
+                    <input
+                      type="file"
+                      name="files[]"
+                      class="form-control file-height form-control-sm"
+                      id="customFile"
+                      placeholder="Upload File"
+                      formControlName="content"
+                      (change)="addFile($event, 'content')"
+                    />
+                  </div>
+
+                  <div
+                    class="form-group"
+                    *ngIf="addForm.value.contentType === 'WEBSITE'"
+                  >
+                    <label class="mb-2 mt-2">URL</label>
+                    <input
+                      type="text"
+                      formControlName="link"
+                      class="inpt form-control file-height"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="btn_div">
+            <button
+              type="button"
+              class="btn btn-secondary float-left"
+              (click)="onClose()"
+            >
+              Back
+            </button>
+            <button type="submit" class="btn btn-primary float-right">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

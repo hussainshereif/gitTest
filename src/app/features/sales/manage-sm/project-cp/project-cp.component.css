@@ -1,0 +1,26 @@
+.back_btn{
+    margin-bottom: 20px;
+    display: inline-block;
+}
+.cardImage{
+    width: 100px;
+    height: 100px;
+}
+.card_image{
+    display: inline;
+    float: left;
+    margin-bottom: 10px;
+}
+.parent_card_content{
+    display: inline;
+    float: left;
+    width: 500px;
+    margin-left: 20px
+}
+.c_by{
+    color: #8b8b8b;
+    font-weight: 500;
+}
+.hd{
+    font-weight: 500;
+}

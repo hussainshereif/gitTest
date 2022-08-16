@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+        <div>
+            <i class="fas fa-times close_icon" (click)="onCancel()"></i>
+        </div>
+        <div>
+            <h1 class="heading">Edit Sub-Admin</h1>
+        </div>
+        <form [formGroup]="editSubAdminForm" autocomplete="off">
+            <div>
+                <div class="form_left">
+                    <label for="name">Name<span class="error">*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter Name" formControlName="name" id="name" required>
+                    <div *ngIf="submitted && f.name.invalid" class="error">
+                        Minimum 2 character required
+                    </div>
+                </div>
+                <div class="form_right">
+                    <label for="email">Email<span class="error">*</span></label>
+                    <input type="email" class="form-control" placeholder="Enter Email" formControlName="email" id="email" required>
+                    <div *ngIf="submitted && f.email.invalid" class="error">
+                        Email required
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form_left input-group">
+                    <div><label for="mobile">Mobile Number<span class="error">*</span></label></div>
+                    <div class="dialCode_div">
+                        <select name="" id="" class="form-control" formControlName="dialCode">
+                            <option *ngFor="let country of countries" value="{{country.dial_code}}">{{country.dial_code}}</option>
+                        </select>
+                    </div>
+                    <div class="mobile_num_div">
+                        <input type="number" class="form-control" placeholder="Enter Mobile Number" formControlName="mobile" id="mobile" required>
+                    </div>
+                    <div *ngIf="submitted && f.mobile.invalid" class="error mobile_error">
+                        Mobile Number required
+                    </div>
+                </div>
+                <div class="form_right">
+                    <label for="userRole">Select User Role<span class="error">*</span></label>
+                    <!-- <input type="text" class="form-control" placeholder="Enter Email" > -->
+                    <select name="userRole" class="form-control" formControlName="userRole" id="userRole" required>
+                        <option value="" selected >Select Role</option>
+                        <option *ngFor="let userRole of userRoles" value="{{userRole}}">{{userRole}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.userRole.invalid" class="error">
+                        User role required
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="form_left">
+                    <span class="reset_span" (click)="resetPassword()">Reset Password</span>
+                </div>
+                
+            </div>
+            <div>
+                <div class="form_left">
+                    <button class="btn cancel_btn" (click)="onCancel()">Cancel</button>
+                </div>
+                <div class="form_right">
+                    <button class="btn sub_admin_btn" (click)="onSubmit()">Save</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

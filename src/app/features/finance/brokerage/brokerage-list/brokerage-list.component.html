@@ -1,0 +1,58 @@
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <!-- <h1>Brokerage Details</h1> -->
+        <!-- <div class="pull-right" style="color:red;float:right">{{uploadStatus}}</div> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <table class="table table-striped table-hover table-responsive w-100">
+          <thead>
+            <tr>
+              <th width="10%">CP ID</th>
+              <th width="15%">CP Name</th>
+              <th width="10%">CP Mobile Number</th>
+              <th width="15%">CP Email ID</th>
+              <!-- <th width="5%">Base Brokerage</th> -->
+              <!-- <th width="5%">Ladder Brokerage</th> -->
+              <!-- <th width="5%">Loyalty Brokerage</th> -->
+              <th width="10%">Total Brokerage</th>
+              <!-- <th width="10%">Total With GST</th> -->
+              <th width="5%">Action</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="brokerageList.length > 0">
+            <tr *ngFor="let cp of brokerageList; let i = index">
+              <td>{{ cp.id }}</td>
+              <td>{{ cp.name }}</td>
+              <td>{{ cp.mobileNumber }}</td>
+              <td>{{ cp.email }}</td>
+              <!-- <td>{{cp.totalBaseBrokerage}}</td> -->
+              <!-- <td>{{cp.totalLadderBrokerage}}</td> -->
+              <!-- <td>{{cp.totalLoyaltyBrokerage}}</td> -->
+              <td>{{ cp.totalBrokerage }}</td>
+              <!-- <td>{{cp.gstOnBrokerage}}</td> -->
+              <td>
+                <button class="btn btn-secondary btn-sm mr-2" (click)="detailedBrokerage(cp.id)">
+                  View More
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="brokerageList.length == 0">
+            <tr>
+              <td colspan="10" class="text-center">No data available!</td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- <p>* Current GST : {{curr_gst}} %</p> -->
+      </div>
+    </div>
+  </div>
+  <div *ngIf="sizeofTable > recordsPerPage">
+    <ngb-pagination [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage"
+      aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+  </div>
+</main>

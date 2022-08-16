@@ -1,0 +1,21 @@
+<div>
+  <div class="row">
+
+          <div class="col-sm-12">
+                  <h4>{{data.title}}</h4>
+          </div>
+
+  </div>
+  <hr>
+
+  <p>{{data.message}}</p>
+
+
+  <div class="">
+          <div class="text-right">
+                  <button *ngIf="data.negativelabel!=null" (click)="no()" class="btn btn-secondary mr-2 px-4 btn-sm">{{data.negativelabel}}</button>
+                  <button *ngIf="data.positivelabel!=null" (click)="yes()" class="btn btn-danger  px-4 btn-sm">{{data.positivelabel}}</button>
+          </div>
+  </div>
+
+</div>

@@ -1,0 +1,60 @@
+<main class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <h1>Rewards Overview
+                </h1>
+                <!-- <div class="pull-right" style="color:red;float:right">{{uploadStatus}}</div> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <table class="table table-striped table-hover table-responsive w-100">
+                  <thead>
+                    <tr>
+                      <th width="15%"> CP ID</th>
+                      <th width="15%"> CP Name</th>
+                      <th width="10%">CP Mobile Number</th>
+                      <th width="20%">CP Email ID</th>
+                      <th width="5%">Quarter Deals</th>
+                      <th width="5%">Quarter Walkins</th>
+                      <!-- <th width="20%">Activation Status</th> -->
+                      <th width="10%">HappiEdge Badges</th>
+                      <th width="10%">Deals from date</th>
+                      <th width="5%">Total Deals</th>
+                      <th width="5%">Total Walkins</th>
+                      <!-- <th width="10%">Earing Rate</th> --><!--No Earning rate as of now from backend, -->
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="RewardsList.length>0">
+                    <tr *ngFor="let cp of RewardsList;let i=index" (click)="auditTrial(cp.cpId)">
+                      <td style="color: #145aa8;cursor: pointer;">{{cp.cpSfdcid}}</td>
+                      <td>{{cp.cpFirstName}}&nbsp;&nbsp;{{cp.cpLastName}}</td>
+                      <td>{{cp.cpPhone}}</td>
+                      <td>{{cp.cpEmailId}}</td>
+                      <td>{{cp.quartDeal}}</td>
+                      <td>{{cp.quartWalkins}}</td>
+                      <td>{{cp.edelFlower}}</td>
+                      <td>{{cp.totalDealDate}}</td>
+                      <!-- <td>{{cp.wdLeadId}}</td> --><!--No Earning rate as of now from backend, -->
+                      
+                      <td>{{cp.totalDeal}}</td>
+                      <td>{{cp.totalWalkins}}</td>
+                    </tr>          
+                  </tbody>
+                  <tbody *ngIf="RewardsList.length==0">
+                    <tr>
+                      <td colspan="10" class="text-center">No data available!</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+  
+<div *ngIf="sizeofTable>recordsPerPage"> 
+    <ngb-pagination  [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage" aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+  </div>  
+    
+    </main>

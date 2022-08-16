@@ -1,0 +1,36 @@
+.assign_btn {
+  color: white;
+  background-color: #f7941e;
+  float: right;
+  font-size: 19px;
+}
+
+.cancel_btn {
+  float: left;
+  font-size: 19px;
+  background-color: #00000040;
+  color: #fff;
+}
+
+.heading {
+  color: #034ea2;
+}
+
+.search_icon {
+  color: #9ca3af;
+  position: absolute;
+  top: 12px;
+  right: 28px;
+}
+
+.sm_tbody {
+  height: 300px;
+  overflow-y: scroll;
+  margin: 25px;
+  border: 1px solid #00000040;
+}
+
+.tr_boder {
+  border: 0.5 solid #eeeeee;
+  padding: 5px;
+}

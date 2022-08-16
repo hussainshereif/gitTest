@@ -1,0 +1,57 @@
+<div class="row videolist">
+  <div class="col-md-12 col-xs-12">
+    <div class="pro_form1">
+      
+      <!-- <h4>{{message}}</h4> -->
+      <h4 *ngIf="excelType!='lead'">File upload failed!!</h4>
+      <h4 *ngIf="excelType=='lead'">File uploaded successfully!!</h4>
+      
+      <div *ngIf="FailedSfdc.length>0" class="mt-1">
+      <h4 *ngIf="excelType!='lead'">Failed SFDC</h4>
+      <h4 *ngIf="excelType=='lead'">Failed Customer Code</h4>
+
+        <div *ngFor="let sfdc of FailedSfdc;let i=index" class="row col-md-12 col-xs-12 mb-2">
+         <span class=" align-items-center">
+            <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i>   
+          <span>{{sfdc}}</span> 
+          </span>
+      </div>
+
+      <!-- <p class="mt-1" *ngIf="excelType!='lead'"><b>Note:</b>&nbsp;Cannot upload same SFDC</p>
+      <p class="mt-1" *ngIf="excelType=='lead'"><b>Note:</b>&nbsp;Cannot upload same Customer Code</p> -->
+      
+    </div>
+     
+      <div *ngIf="FailedPhoneNo.length>0" class="mt-1">
+      <h4>Failed PhoneNumbers</h4>
+      <div *ngFor="let phone of FailedPhoneNo;let j=index" class="row col-md-12 col-xs-12 mb-2">
+          <span class="align-items-center">
+              <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i>   
+          <span> {{phone}}</span>
+          </span>
+      </div> 
+      <p class="mt-1"><b>Note:</b>&nbsp;Cannot upload Phone Number</p>
+    </div>
+
+    <div *ngIf="IncorrectFormat.length>0" class="mt-1">
+        <h4 class="format_head">Failed Format</h4>
+        <div *ngFor="let format of IncorrectFormat;let h=index" class="row col-md-12 col-xs-12 mb-2">
+            <span class="align-items-center">
+                <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i>   
+          <span> {{format}}</span> 
+            </span>
+        </div> 
+      </div>
+      <div *ngIf="failedvalidation.length>0" class="mt-1">
+        <h4>Failed Validations</h4>
+        <div *ngFor="let format of failedvalidation;let h=index" class="row col-md-12 col-xs-12 mb-2">
+            <span class="align-items-center">
+                <i class="zmdi zmdi-circle text-primary f-10 mr-1"></i>   
+          <span> {{format}}</span> 
+            </span>
+        </div> 
+      </div>
+      
+    </div>
+  </div>
+</div>

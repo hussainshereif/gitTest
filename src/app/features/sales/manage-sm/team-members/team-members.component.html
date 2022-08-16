@@ -1,0 +1,46 @@
+<div class="row mb_3 allign_center">
+  <div class="col_6">
+    <h3 class="title mb_1 text_md">Team members</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="teamMemberList"
+      [rows]="10"
+      [lazy]="true"
+      [paginator]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      responsiveLayout="scroll"
+      [totalRecords]="totalRecords"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#ID</th>
+          <th>Team Member Name</th>
+          <th>Mobile Number</th>
+          <th>Email</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-team let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ team.id }}</td>
+          <td>{{ team.name }}</td>
+          <td>{{ team.mobileNumber }}</td>
+          <td>{{ team.email }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-center" colspan="4">No data available!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

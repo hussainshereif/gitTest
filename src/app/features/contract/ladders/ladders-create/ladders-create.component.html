@@ -1,0 +1,276 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <div class="">
+      <div class="row_n allign_center">
+        <div class="col_2">
+          <div class="wizard_outer">
+            <a href="#" class="step active">
+              <div class="item">1</div>
+              <div class="discription">
+                Basic <br />
+                Details
+              </div>
+            </a>
+            <div class="step">
+              <div class="item">2</div>
+              <div class="discription">
+                Slabs & <br />
+                Rewards
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-toaster></app-toaster>
+<form [formGroup]="addForm" (ngSubmit)="addDetails()" autocomplete="off">
+  <div class="row_n">
+    <div class="col_lg_4">
+      <div class="input_wrap">
+        <label class="input_label required">Name</label>
+        <input
+          type="text"
+          formControlName="name"
+          class="inpt_field"
+          name=""
+          placeholder="Enter Ladder Name"
+        />
+        <app-validation-error
+          [submit]="submitted"
+          [control]="addForm.get(['name'])"
+          [field]="'Name'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4">
+      <div class="input_wrap dropdown_arrow">
+        <label class="input_label required">Type</label>
+        <p-dropdown
+          [options]="ladderTypes"
+          formControlName="type"
+          [disabled]="isEdit ? 'disabled' : null"
+        ></p-dropdown>
+        <app-validation-error
+          [submit]="submitted"
+          [control]="addForm.get(['type'])"
+          [field]="'Type'"
+        ></app-validation-error>
+      </div>
+    </div>
+  </div>
+  <div class="row_n">
+    <div class="col_lg_4">
+      <div class="input_wrap calendar_icon">
+        <label class="input_label required">Start Date</label>
+        <p-calendar
+          formControlName="startDate"
+          placeholder="DD/MM/YYYY"
+          dateFormat="dd/mm/yy"
+          [disabled]="isEdit ? 'disabled' : null"
+        ></p-calendar>
+        <app-validation-error
+          [submit]="submitted"
+          [control]="addForm.get(['startDate'])"
+          [field]="'Start Date'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4">
+      <div class="input_wrap calendar_icon">
+        <label class="input_label required">End Date</label>
+        <p-calendar
+          formControlName="endDate"
+          placeholder="DD/MM/YYYY"
+          dateFormat="dd/mm/yy"
+          [disabled]="isEdit ? 'disabled' : null"
+        ></p-calendar>
+        <app-validation-error
+          [submit]="submitted"
+          [control]="addForm.get(['endDate'])"
+          [field]="'End Date '"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_4">
+      <div class="input_wrap calendar_icon">
+        <label class="input_label required">Cut Off Date</label>
+        <p-calendar
+          formControlName="cutOffDate"
+          placeholder="DD/MM/YYYY"
+          dateFormat="dd/mm/yy"
+          [disabled]="isEdit ? 'disabled' : null"
+        ></p-calendar>
+        <app-validation-error
+          [submit]="submitted"
+          [control]="addForm.get(['cutOffDate'])"
+          [field]="'Cut Off Date'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_12 mb_2">
+      <div class="input_wrap">
+        <label class="input_label required">Description</label>
+        <textarea
+          class="tet_field"
+          id="Address"
+          formControlName="description"
+          autocomplete="off"
+          placeholder="Enter Description"
+          [disabled]="isEdit ? 'disabled' : null"
+        ></textarea>
+        <app-validation-error
+          [submit]="submitted"
+          [control]="addForm.get(['description'])"
+          [field]="'Description'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <div class="col_lg_12 mb_4">
+      <div class="selected_grup">
+        <h6 class="title">User Types</h6>
+        <div class="selected_wrap">
+          <div
+            *ngIf="addForm.value.userType"
+            class="grup_item"
+            [ngClass]="{
+              success: addForm.value.userType == 'CHANNEL_PARTNER',
+              warning:
+                addForm.value.userType == 'CUSTOMER' ||
+                addForm.value.userType == 'EMPLOYEE',
+              danger: addForm.value.userType == 'INCENTIVE'
+            }"
+          >
+            <div class="caption">
+              <h5 class="name">{{ addForm.value.userType }}</h5>
+            </div>
+            <button class="btn" type="button">
+              <img src="../../assets/images_new/icons/remove.svg" alt="" />
+            </button>
+          </div>
+          <button
+            [disabled]="isEdit ? 'disabled' : null"
+            class="btn btn_primary btn_add pop_btn"
+            type="button"
+            (click)="addUserType()"
+          >
+            <img src="../../assets/images_new/icons/add.svg" alt="" />
+          </button>
+        </div>
+        <app-validation-error
+          [submit]="submitted"
+          [control]="addForm.get(['userType'])"
+          [field]="'User Types'"
+        ></app-validation-error>
+      </div>
+    </div>
+    <!-- <div class="col_12">
+      <div class="input_wrap mb_4">
+        <div class="input_check">
+          <p-checkbox
+            formControlName="retrospective"
+            [binary]="true"
+            inputId="inlineCheckbox1"
+          ></p-checkbox>
+          <label for="inlineCheckbox1"> Retrospective Ladder </label>
+        </div>
+      </div>
+    </div> -->
+  </div>
+  <div class="row_n">
+    <div class="col_12 mb_4">
+      <div class="brdr_btm_l2 brdr_top_l2">
+        <div class="row_n">
+          <div class="col_6 py_4 brdr_rgt_l2">
+            <div class="mb_3">
+              <h6 class="text_sm fw_600">Projects</h6>
+              <small>Add the projects wants to link with the ladders</small>
+            </div>
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label required">Projects</label>
+              <p-multiSelect
+                [options]="projectList"
+                (onChange)="onProjectSelect($event)"
+                formControlName="projectIds"
+                optionLabel="projectName"
+                optionValue="id"
+                [disabled]="isEdit ? 'disabled' : null"
+              ></p-multiSelect>
+              <app-validation-error
+                [submit]="submitted"
+                [control]="addForm.get(['projectIds'])"
+                [field]="'Projects'"
+              ></app-validation-error>
+            </div>
+            <div class="d_flex mb_4">
+              <img
+                class="me_2"
+                src="../../assets/images_new/icons/info.svg"
+                alt=""
+              />
+              <span
+                ><small
+                  >Not choosing will consider as all projects.</small
+                ></span
+              >
+            </div>
+            <div class="selected_grup">
+              <h6 class="title">Selected Projects</h6>
+              <div class="selected_wrap">
+                <div class="grup_item" *ngFor="let proj of selectedProjects">
+                  <div class="caption">
+                    <h5 class="name">{{ proj.projectName }}</h5>
+                    <h6 class="place">#{{ proj.id }}</h6>
+                  </div>
+                  <button class="btn" type="button">
+                    <img
+                      src="../../assets/images_new/icons/remove.svg"
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col_6 py_4">
+            <div class="mb_3">
+              <h6 class="text_sm fw_600">Groups</h6>
+              <small>Add the Groups wants to link with the ladders</small>
+            </div>
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label required">Groups</label>
+              <p-dropdown
+                [options]="cpGroupList"
+                formControlName="groupId"
+                optionLabel="name"
+                optionValue="id"
+                [disabled]="isEdit ? 'disabled' : null"
+              ></p-dropdown>
+              <app-validation-error
+                [submit]="submitted"
+                [control]="addForm.get(['groupId'])"
+                [field]="'Group'"
+              ></app-validation-error>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row_n allign_center mb_4">
+    <div class="col_4">
+      <div class="selected_grup">
+        <h6 class="title">Action</h6>
+      </div>
+    </div>
+    <div class="col_8">
+      <div class="d_flex justify_end">
+        <button type="button" (click)="onBack()" class="btn btn_secondary me_2">
+          Cancel
+        </button>
+        <button type="submit" class="btn btn_primary">Create</button>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,13 @@
+.imgSize {
+  height: 100px;
+  width: 100px;
+}
+.input-custom {
+  position: relative;
+  border: none;
+  color: #000;
+  width: 100%;
+  margin-left: 10px;
+  z-index: 999;
+  background: none;
+}

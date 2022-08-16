@@ -1,0 +1,83 @@
+<div class="groups">
+  <div class="row" style="margin-left: 0px;" *ngIf="showIndex == 0">
+    <div class="form-group col-md-12">
+      <div class="add_groups" (click)="addGroups(0)">
+        <a>Create Group</a>
+      </div>
+    </div>
+    <div class="col-md-12 col-xs-12">
+      <div class="pro_form1">
+        <div class="row">
+          <!-- <div class="col-md-3 col-xs-3 rect-data">
+            <p>Default Group</p>
+            <p>User Count : 1</p>
+          </div> -->
+          <div *ngFor="let gp of groups;" class="col-md-3 col-xs-3 rect-data"
+            (click)="getGroupDetails(gp.groupId,gp.groupName,gp.groupUserCount)">
+            <p>{{gp.groupName}}</p>
+            <p>User Count : {{gp.groupUserCount}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="showIndex == 1">
+    <div class="col-md-8 col-xs-12">
+      <div class="pro_form1">
+        <h1 style="display: inline; margin-right: 10px;">{{groupName}}</h1>
+        <a (click)="addGroups(groupIds,groupName)"><i class="zmdi zmdi-edit"></i></a>
+        <span class="back-btn">
+          <a (click)="backTo()" style="padding: 6px 8px !important;">Back</a>
+        </span>
+        <span class="upload-xl pull-right">
+          <a href="https://s3-ap-southeast-1.amazonaws.com/mldlbucket1/about/8180216.xls">
+            Sample Excel
+          </a>
+        </span>
+        <span class="upload-xl pull-right">
+          <input style="display:none" type="file" #fileInput name="fileInput" (change)="uploadExcel($event)" />
+          <a (click)="fileInput.click()">Upload Excel</a>
+        </span>
+        <!-- *ngIf="isProcessingVisible" -->
+        <p class="userCount" style="margin-top: 10px;">User Count : {{userCount}}</p>
+        <div *ngIf="isProcessingVisible" class="processing_status_div"><span class="processing_status">Processing...</span></div>
+        <table class="table table-striped table-hover table-responsive w-100 table_download">
+          <thead>
+            <tr>
+              <th width="22%">CP SFDC</th>
+              <th width="32%">CP Name</th>
+              <th width="32%">Phone Number</th>
+              <th width="8%" class="text-center">Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="groupCPList.length>0">
+            <tr *ngFor="let list of groupCPList;">
+              <td>
+                {{list.cpSfdcid}}
+              </td>
+              <td>
+                {{list.cpFirstName}}
+              </td>
+              <td>
+                {{list.cpPhone}}
+              </td>
+              <td align="center">
+                <p class="mb-0 mt-1 text-center">
+                  <a (click)="deleteDetails(list.mapId,groupIds,groupName,userCount)">
+                    <i class="zmdi zmdi-delete mx-1"></i>
+                  </a>
+                </p>
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="groupCPList.length==0">
+            <tr>
+              <td colspan="8" class="text-center">No data available!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

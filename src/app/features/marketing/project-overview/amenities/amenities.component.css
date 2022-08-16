@@ -1,0 +1,19 @@
+.form_div{
+    width: 70%;
+    margin-bottom: 50px;
+}
+.add_btn{
+    background-color: #f7941e;
+    color: #fff;
+    font-weight: 600;
+}
+.table_div{
+    width: 70%;
+}
+.form_error{
+    color: #ff5767;
+}
+.max_char{
+    font-size: 14px;
+    font-weight: 400;
+}

@@ -1,0 +1,98 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Create New</h6>
+    <p class="modal_title text_xs">Create New CP Group</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onClose()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <form [formGroup]="addForm" (ngSubmit)="addDetails()" autocomplete="off">
+      <div class="row">
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">Name</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="name"
+              placeholder="Enter Group Name"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['name'])"
+              [field]="'Name'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label required">Priority</label>
+            <p-dropdown
+              [options]="priority"
+              formControlName="priority"
+            ></p-dropdown>
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['priority'])"
+              [field]="'Priority'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12 mb_4">
+          <h6 class="text_sm fw_600">Add Members</h6>
+          <small>You can add members now or later</small>
+        </div>
+        <div class="col_12 mb_2">
+          <div class="input_wrap">
+            <input
+              type="file"
+              id="real-file"
+              formControlName="file"
+              #imgupload
+              hidden="hidden"
+              (change)="uploadFile($event)"
+              class="inpt_field"
+            />
+            <button
+              type="button"
+              id="custom-button"
+              (click)="imgupload.click()"
+            >
+              <img src="../../assets/images_new/icons/file-upload.svg" alt="" />
+            </button>
+            <div class="file_txt" style="display: flex; flex-direction: column">
+              <span class="subtext">Upload File[xlsx, xls]</span>
+              <span class="info" *ngIf="!cpFileName" id="custom-text"
+                >No file chosen, yet.</span
+              >
+              <span class="info" *ngIf="cpFileName" id="custom-text">{{
+                cpFileName
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <button
+          type="button"
+          class="btn btn_secondary close"
+          (click)="onClose()"
+        >
+          Cancel
+        </button>
+        <button type="submit" class="btn btn_primary">Add</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- modal_body -->
+</div>

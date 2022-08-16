@@ -1,0 +1,7 @@
+.form-check {
+    display: flex;
+    align-items: center;
+}
+.form-check .chk {
+    right: 48% !important;
+}

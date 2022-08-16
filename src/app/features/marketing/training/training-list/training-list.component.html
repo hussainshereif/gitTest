@@ -1,0 +1,163 @@
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="form-group col-md-12">
+        <h1>
+          <!-- Training -->
+          <div class="add_projects pull-right">
+            <a (click)="addModules()"> Add Module</a>
+          </div>
+        </h1>
+      </div>
+    </div>
+
+    <!--listing-->
+
+    <div class="">
+      <div class="row">
+        <div class="col-md-12 mt-5">
+          <div class="pro_form1">
+            <h4 class="d-flex w-100">Modules List</h4>
+            <table class="table table-striped table-hover table-responsive">
+              <thead>
+                <tr>
+                  <th width="20%">Module Name</th>
+                  <th width="25%">Description</th>
+                  <th width="25%">Image Thumbnail</th>
+                  <th width="30%">Actions</th>
+                  <th width="15%">Activate Module</th>
+                </tr>
+              </thead>
+              <tbody *ngIf="moduleList.length > 0">
+                <tr *ngFor="let module of moduleList; let i = index">
+                  <td>
+                    <span [hidden]="showIndex == i"> {{ module.name }} </span>
+                    <span [hidden]="showIndex != i">
+                      <input name="moduleEx" maxlength="50" #moduleEx="ngModel" [(ngModel)]="module.name"
+                        [ngModelOptions]="{ standalone: true }" pattern="[a-zA-Z0-9. ]*" required />
+                      <small *ngIf="
+                          module.showUpdateEModule &&
+                          !moduleEx.valid &&
+                          moduleEx.errors
+                        " class="error_message mt-3 float-left w-100" style="margin-top: -10px">
+                        <div [hidden]="!moduleEx.errors.required">
+                          Module name is required
+                        </div>
+                      </small>
+                      <div [hidden]="moduleEx.valid">
+                        Allowed characters: a-z, A-Z, 0-9.
+                      </div>
+                    </span>
+                  </td>
+                  <td>
+                    <span [hidden]="showIndex == i">
+                      {{ module.description }}
+                    </span>
+                    <span [hidden]="showIndex != i">
+                      <textarea name="descEx" #descEx="ngModel" [(ngModel)]="module.description" maxlength="50"
+                        [ngModelOptions]="{ standalone: true }" style="height: 60px" pattern="[a-zA-Z0-9. ]*"
+                        required></textarea>
+                      <small *ngIf="
+                          module.showUpdateEModule &&
+                          !descEx.valid &&
+                          descEx.errors
+                        " class="error_message mt-3 float-left w-100" style="margin-top: -10px">
+                        <div [hidden]="!descEx.errors.required">
+                          Description is required
+                        </div>
+                      </small>
+                      <div [hidden]="descEx.valid">
+                        Allowed characters: a-z, A-Z, 0-9.
+                      </div>
+                    </span>
+                  </td>
+                  <td>
+                    <span [hidden]="showIndex == i">
+                      <img src="{{ module.thumbnailUrl }}" class="" height="50" width="50" />
+                    </span>
+                    <div class="input-group mb-3">
+                      <div [hidden]="showIndex != i" class="custom-file">
+                        <input class="input-custom" pattern="(.*)(.jpe?g|png)$" readonly
+                          [(ngModel)]="module.thumbnailUrl" [ngModelOptions]="{ standalone: true }" #mThumbEx="ngModel"
+                          required />
+                        <input type="file" class="custom-file-input" id="inputGroupFile02"
+                          (change)="updateModuleThumb($event, i)" />
+                        <label class="custom-file-label" for="inputGroupFile02"></label>
+                      </div>
+                      <small *ngIf="
+                          module.showUpdateEModule &&
+                          !mThumbEx.valid &&
+                          mThumbEx.errors
+                        " class="error_message float-left w-100">
+                        <div [hidden]="!mThumbEx.errors.required">
+                          Thumbnail is required
+                        </div>
+                      </small>
+                      <small *ngIf="module.showUpdateEModule" class="error_message float-left w-100">
+                        <div [hidden]="
+                            (bgValidation.valid && bgValidation.insize) ||
+                            (!bgValidation.valid && !bgValidation.insize)
+                          ">
+                          Invalid image!
+                        </div>
+                        <div [hidden]="bgValidation.insize">
+                          Image size cannot exceed 10 MB
+                        </div>
+                      </small>
+                    </div>
+                  </td>
+                  <td>
+                    <button class="btn btn-info btn-sm mr-2" (click)="addVideoTrainingList(module.id)">
+                      Add
+                    </button>
+                    <button class="btn btn-secondary btn-sm mr-2" (click)="viewVideoTrainingList(module.id)">
+                      View
+                    </button>
+                    <a [hidden]="showIndex == i" (click)="editModules(i)"
+                      class="btn btn-success btn-sm text-white mr-2">Edit
+                    </a>
+                    <a [hidden]="showIndex == i" (click)="deleteModules(module, i)"
+                      class="btn btn-warning btn-sm text-white mr-2">Delete
+                    </a>
+                    <a [hidden]="showIndex != i" (click)="cancelEdit(i)"
+                      class="btn btn-danger btn-sm text-white mr-2">Close</a>
+                    <a [hidden]="showIndex != i" (click)="updateModuleDetails(module, i)"
+                      class="btn btn-primary btn-sm text-white">Save
+                    </a>
+                  </td>
+                  <td>
+                    <!-- <label class="switch mb-0">
+                    <input type="checkbox" [(ngModel)]="module.isActive" [checked]="module.isActive" (change)="changeActiveStatus(i,module)">
+                    <span class="slider round"></span>
+                  </label> -->
+                    <span *ngIf="!module.active">
+                      <button class="btn btn-secondary btn-sm mr-2" (click)="changeActiveStatus(i, module, true)">
+                        Launch Module
+                      </button>
+                    </span>
+                    <span *ngIf="module.active">
+                      <button class="btn btn-secondary btn-sm mr-2" (click)="changeActiveStatus(i, module, false)">
+                        De-activate Module
+                      </button>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+
+              <tbody *ngIf="moduleList.length == 0">
+                <tr>
+                  <td colspan="5" class="text-center">No data available!</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="sizeofTable > recordsPerPage">
+      <ngb-pagination [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage"
+        aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+    </div>
+  </div>
+</main>

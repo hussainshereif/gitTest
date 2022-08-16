@@ -1,0 +1,29 @@
+.border-right {
+  border-right: 1px solid black;
+}
+
+.badge {
+  border-radius: 50%;
+  display: table-cell;
+  height: 50px;
+  text-align: center;
+  vertical-align: middle;
+  width: 50px;
+}
+
+.error-hgt {
+  height: 352px;
+}
+
+.file-height {
+  height: 56%;
+}
+
+.header-list {
+  display: inline-block;
+  margin-left: 11px;
+}
+
+.nrml-hgt {
+  height: 352px;
+}

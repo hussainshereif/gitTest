@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col_12 mb_4">
+    <div class="">
+      <div class="row allign_center">
+        <div class="col_6">
+          <h3 class="title">Tower</h3>
+        </div>
+        <div class="col_6">
+          <div class="d_flex justify_end">
+            <div class="tbl_search">
+              <div class="icon"></div>
+              <input
+                class="search_groups"
+                type="text"
+                placeholder="Search Projects"
+              />
+            </div>
+            <div class="tbl_filter">
+              <div class="icon">
+                <img
+                  src="../../../../../assets/images_new/icons/filter.svg"
+                  alt=""
+                />
+              </div>
+            </div>
+            <button class="btn btn_primary pop_btn" (click)="addTowers()">
+              Add Tower
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col_12 mb_3">
+    <table class="table table_striped">
+      <thead class="uppercase">
+        <tr>
+          <th scope="col">#ID</th>
+          <th scope="col">Title</th>
+          <th scope="col">phase</th>
+          <th scope="col">rera number</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#TW005</td>
+          <td>Tower 5</td>
+          <td>Phase 1</td>
+          <td>Rera Number</td>
+          <td>
+            <a class="link_warning me_3 pop_btn" data-modal=".edit_tower"
+              >Edit</a
+            ><a
+              class="danger_text me_3 link_danger pop_btn"
+              data-modal=".del_confirm"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col_6 mb_5">
+    <p class="text_xs l_height_26">
+      Showing <span class="text_sm fw_700">1</span> to
+      <span class="text_sm fw_700">10</span> of
+      <span class="text_sm fw_700">36</span>
+    </p>
+  </div>
+  <div class="col_6 mb_5">
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify_end">
+        <li class="page_item disabled">
+          <a
+            class="page_link light_bg_1"
+            href="#"
+            tabindex="-1"
+            aria-disabled="true"
+            ><img src="../../../../../assets/images_new/icons/prev.svg" alt=""
+          /></a>
+        </li>
+        <li class="page_item"><a class="page_link" href="#">01</a></li>
+        <li class="page_item active"><a class="page_link" href="#">02</a></li>
+        <li class="page_item disabled">
+          <div class="page_link light_bg_1">
+            <img
+              src="../../../../../assets/images_new/icons/pagination-dots.svg"
+              alt=""
+            />
+          </div>
+        </li>
+        <li class="page_item"><a class="page_link" href="#">06</a></li>
+        <li class="page_item">
+          <a class="page_link light_bg_1" href="#"
+            ><img src="../../../../../assets/images_new/icons/next.svg" alt=""
+          /></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
