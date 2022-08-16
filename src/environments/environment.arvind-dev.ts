@@ -14,7 +14,7 @@ export const environment = {
   LOGIN_BG: "#FFFFFF",
   BUTTON_COLOR: "#000000",
   conectreClient: true,
-  showManageCustomers: true,
+  showManageCustomers: false,
   enableMRP: false,
   enableAboutUS: true,
   enableCustomCollateral: false,
