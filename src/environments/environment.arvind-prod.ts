@@ -20,7 +20,7 @@ export const environment = {
   enableAboutUS: true,
   enableBrokerageCalculator: false,
   showManageCPs: false,
-  enableSMConfig: false,
+  enableSMConfig: true,
   PROJECT_NAME: "arvind",
   loginMainText: "Manage Your Channel Partners",
   loginSubText: "Leads | Brokerage | Notifications",
