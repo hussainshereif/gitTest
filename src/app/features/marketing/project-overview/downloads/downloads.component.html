@@ -1,0 +1,95 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <div class="">
+      <div class="row allign_center">
+        <div class="col_6">
+          <h3 class="title mb_1 text_md">Collateral List</h3>
+        </div>
+        <div class="col_6">
+          <div class="d_flex justify_end">
+            <button class="btn btn_primary pop_btn" (click)="addCollateral()">
+              Create New Collateral
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="downloadList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      [globalFilterFields]="['id', 'caption']"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">#ID <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="name">
+            Name<p-sortIcon field="name"></p-sortIcon>
+          </th>
+          <th pSortableColumn="type">
+            Type<p-sortIcon field="type"></p-sortIcon>
+          </th>
+          <th pSortableColumn="customizable">
+            Customised<p-sortIcon field="customizable"></p-sortIcon>
+          </th>
+          <th>Actions</th>
+          <th>Status</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-collateral>
+        <tr>
+          <td>
+            <span class="dark_text_2">#{{ collateral.id }}</span>
+          </td>
+          <td>{{ collateral.name }}</td>
+          <td>{{ collateral.type }}</td>
+          <td>{{ collateral.customizable }}</td>
+          <td (click)="$event.stopPropagation()">
+            <a
+              class="link_primary me_3 pop_btn"
+              (click)="openView(collateral)"
+              href="javascript:void(0)"
+              data-modal=".view_image"
+              >View</a
+            >
+            <a
+              class="link_warning me_3 pop_btn"
+              (click)="editCollateral(collateral.id)"
+              href="javascript:void(0)"
+              >Edit</a
+            >
+            <a
+              class="danger_text me_3 link_danger pop_btn"
+              (click)="deleteBrochure(collateral.id)"
+              href="javascript:void(0)"
+              data-modal=".del_confirm_gal"
+              >Delete</a
+            >
+          </td>
+          <td>
+            <span *ngIf="!collateral.published">
+              <button
+                class="btn btn_primary btn_sm"
+                (click)="changeActiveStatus(true, collateral.id)"
+              >
+                Publish
+              </button>
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

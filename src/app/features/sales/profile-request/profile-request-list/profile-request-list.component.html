@@ -1,0 +1,70 @@
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="form-group col-md-5">
+        <!-- <h1 style="display: inline">Manage Profile Update Requests</h1> -->
+        <span class="log-btn">
+          <!-- <a (click)="viewLog()" style="padding: 4px 8px !important; margin-right: 10px; margin-top: 4px;">View Log</a> -->
+        </span>
+      </div>
+      <div class="form-group col-md-7">
+        <!-- <span class="action-btn" (click)="activationOrDecline(3)">
+            <a style="padding: 6px 8px !important; margin-right: 10px;">Decline</a>
+          </span>
+          <span class="action-btn action-new" (click)="activationOrDecline(1)">
+            <a style="padding: 6px 8px !important; margin-right: 10px;">Approve</a>
+          </span> -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-12">
+        <table class="table table-striped table-hover table-responsive">
+          <thead [ngClass]="CPList.length == 0 ? 'set_width' : ''">
+            <tr>
+              <!-- <th width="1%;"> </th> -->
+              <th width="10%;">CP ID</th>
+              <th width="10%;">Name</th>
+              <th width="10%;">Comapny Name</th>
+              <th width="10%;">Request Type</th>
+              <th width="15%;">Requested Data</th>
+              <th width="10%;">Actions</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="CPList.length > 0">
+            <tr *ngFor="let cp of CPList; let i = index">
+              <!-- <td width="1%;">
+                  <div>
+                    <input type="checkbox" name="check" class="chk" (click)='addPrId(cp.prId)'>
+                  </div>
+                </td> -->
+              <td width="10%;">{{ cp.cpCrmId }}</td>
+              <td width="10%;">{{ cp.cpName }}</td>
+              <td width="10%;">{{ cp.cpCompanyName }}</td>
+              <td width="10%;">{{ cp.field }}</td>
+              <td width="15%;">{{ cp.requestedData }}</td>
+              <td width="10%;">
+                <select [(ngModel)]="cp.status" [ngModelOptions]="{ standalone: true }"
+                  (change)="activationStatusChange(cp.id, $event)">
+                  <option value="PENDING">PENDING</option>
+                  <option value="APPROVED">APPROVED</option>
+                  <option value="REJECTED">REJECTED</option>
+                </select>
+              </td>
+            </tr>
+          </tbody>
+          <tbody [ngClass]="CPList.length == 0 ? 'set_width' : ''" *ngIf="CPList.length == 0">
+            <tr>
+              <td colspan="8" class="text-center">No data available!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="sizeofTable > recordsPerPage">
+    <!-- <ngb-pagination  [collectionSize]="sizeofTable" [(page)]="offset" [pageSize]="recordsPerPage" aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination> -->
+    <ngb-pagination [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage"
+      aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+  </div>
+</main>

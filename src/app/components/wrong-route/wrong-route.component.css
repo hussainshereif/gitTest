@@ -1,0 +1,11 @@
+.text404{
+    text-align: center;
+    margin: 150px 0px 0px 0px;
+    color: darkgray;
+    font-size: 100px;
+}
+.pagenotfound{
+    text-align: center;
+    color: darkgray;
+    font-size: 30px;
+}

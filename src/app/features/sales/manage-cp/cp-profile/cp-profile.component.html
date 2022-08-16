@@ -1,0 +1,543 @@
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="form-group col-md-12"></div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-2">
+        <img
+          src="{{ cpdetails.imageUrl }}"
+          onerror="this.src='../../assets/images/user-icon.jpg'"
+          alt="cpImage"
+          width="100%"
+        />
+      </div>
+      <div class="form-group col-md-6">
+        <p><b>CRM ID : </b>{{ cpdetails.cpMaster.crmId }}</p>
+        <!-- <p><b>Name : </b>{{cpdetails.cpFirstName}} {{cpdetails.cpLastName}}</p> -->
+        <div class="profile_details">
+          <a [hidden]="showIndex == 1" (click)="editCpProfile(1)"
+            ><i class="zmdi zmdi-edit"></i
+          ></a>
+          <b> Name : </b
+          ><span [hidden]="showIndex == 1"> {{ cpdetails.name }} </span>
+          <span [hidden]="showIndex != 1">
+            <input
+              name="firstName"
+              maxlength="50"
+              #firstName="ngModel"
+              class="margin_left"
+              [(ngModel)]="cpdetails.name"
+              [ngModelOptions]="{ standalone: true }"
+              required
+            />
+            <small
+              *ngIf="
+                cpdetails.showUpdateEModule &&
+                !firstName.valid &&
+                firstName.errors
+              "
+              class="error_message mt-3 float-left w-100"
+              style="margin-top: -10px"
+            >
+              <div [hidden]="!firstName.errors.required">Name is required</div>
+            </small>
+          </span>
+          <a [hidden]="showIndex != 1" (click)="cancelEdit(1)"
+            ><i class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i
+          ></a>
+          <a [hidden]="showIndex != 1" (click)="updateProfileData(cpdetails, 1)"
+            ><i class="zmdi zmdi-save zmdi-hc-lg margin_left"></i>
+          </a>
+        </div>
+
+        <div class="profile_details">
+          <!-- <a [hidden]='showIndex==2' (click)="editCpProfile(2)"><i class="zmdi zmdi-edit"></i></a> -->
+          <b> Phone no. : </b
+          ><span [hidden]="showIndex == 2"> {{ cpdetails.mobileNumber }} </span>
+          <span [hidden]="showIndex != 2">
+            <input
+              type="number"
+              name="phoneno"
+              maxlength="50"
+              #phoneno="ngModel"
+              class="margin_left"
+              [(ngModel)]="cpdetails.cpPhone"
+              [ngModelOptions]="{ standalone: true }"
+              required
+            />
+            <small
+              *ngIf="
+                cpdetails.showUpdateEModule && !phoneno.valid && phoneno.errors
+              "
+              class="error_message mt-3 float-left w-100"
+              style="margin-top: -10px"
+            >
+              <div [hidden]="!phoneno.errors.required">
+                Phone no. is required
+              </div>
+            </small>
+          </span>
+          <a [hidden]="showIndex != 2" (click)="cancelEdit(2)"
+            ><i class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i
+          ></a>
+          <a [hidden]="showIndex != 2" (click)="updateProfileData(cpdetails, 2)"
+            ><i class="zmdi zmdi-save zmdi-hc-lg margin_left"></i>
+          </a>
+        </div>
+
+        <div class="profile_details">
+          <!-- <a [hidden]='showIndex==3' (click)="editCpProfile(3)"><i class="zmdi zmdi-edit"></i></a> -->
+          <b> Email : </b
+          ><span [hidden]="showIndex == 3"> {{ cpdetails.email }} </span>
+          <span [hidden]="showIndex != 3">
+            <input
+              name="emailid"
+              maxlength="50"
+              #emailid="ngModel"
+              class="margin_left"
+              [(ngModel)]="cpdetails.cpEmailId"
+              [ngModelOptions]="{ standalone: true }"
+              required
+            />
+            <small
+              *ngIf="
+                cpdetails.showUpdateEModule && !emailid.valid && emailid.errors
+              "
+              class="error_message mt-3 float-left w-100"
+              style="margin-top: -10px"
+            >
+              <div [hidden]="!emailid.errors.required">Email is required</div>
+            </small>
+          </span>
+          <a [hidden]="showIndex != 3" (click)="cancelEdit(3)"
+            ><i class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i
+          ></a>
+          <a [hidden]="showIndex != 3" (click)="updateProfileData(cpdetails, 3)"
+            ><i class="zmdi zmdi-save zmdi-hc-lg margin_left"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="form-group col-md-4">
+        <!-- <p *ngIf="cpdetails.active==false"><b>CP Status : </b>Not registered</p>
+        <p *ngIf="cpdetails.active==true"><b>CP Status : </b>Active</p>
+        <p *ngIf="cpdetails.cpStatus==2"><b>CP Status : </b>Registered but pending</p>
+        <p *ngIf="cpdetails.cpStatus==3"><b>CP Status : </b>Inactive</p> -->
+        <p><b>CP Status : </b>{{ cpdetails.cpMaster.status }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="project_nav">
+          <ul>
+            <li [ngClass]="{ active: tabId == 1 }">
+              <a (click)="tabActivation(1)">Profile</a>
+            </li>
+            <li [ngClass]="{ active: tabId == 5 && cpId > 0 }">
+              <a (click)="tabActivation(5)">Documents</a>
+            </li>
+            <li [ngClass]="{ active: tabId == 2 && cpId > 0 }">
+              <a (click)="tabActivation(2)">Team Member</a>
+            </li>
+            <li [ngClass]="{ active: tabId == 3 && cpId > 0 }">
+              <a (click)="tabActivation(3)">Deals</a>
+            </li>
+            <li [ngClass]="{ active: tabId == 4 && cpId > 0 }">
+              <a (click)="tabActivation(4)">App Usage</a>
+            </li>
+          </ul>
+        </div>
+        <!-- project_nav -->
+      </div>
+    </div>
+    <!-- profile -->
+    <div class="about_project" *ngIf="tabId == 1">
+      <div class="row">
+        <div class="col-md-6 col-xs-12">
+          <!-- <div class="profile_details">
+            <a [hidden]='showIndex==4' (click)="editCpProfile(4)"><i class="zmdi zmdi-edit"></i></a>
+            Company Category : <span [hidden]='showIndex==4'> {{cpdetails.cpCompanyCategory}} </span>
+            <span [hidden]='showIndex!=4'>
+              <input name="companyCategory" maxlength="50" #companyCategory="ngModel" class="margin_left"
+                [(ngModel)]="cpdetails.cpCompanyCategory" [ngModelOptions]="{standalone: true}" required>
+              <small *ngIf="cpdetails.showUpdateEModule&&!companyCategory.valid && companyCategory.errors"
+                class="error_message mt-3 float-left w-100" style="margin-top: -10px;">
+                <div [hidden]="!companyCategory.errors.required"> Company Category is required</div>
+              </small>
+            </span>
+            <a [hidden]='showIndex!=4' (click)="cancelEdit(4)"><i
+                class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i></a>
+            <a [hidden]='showIndex!=4' (click)="updateProfileData(cpdetails,4)"><i
+                class="zmdi zmdi-save zmdi-hc-lg margin_left"></i> </a>
+          </div> -->
+          <!-- <div class="profile_details">
+            <a [hidden]='showIndex==5' (click)="editCpProfile(5)"><i class="zmdi zmdi-edit"></i></a>
+            Broker Type : <span [hidden]='showIndex==5'> {{cpdetails.cpBrokerType}} </span>
+            <span [hidden]='showIndex!=5'>
+              <input name="brokerType" maxlength="50" #brokerType="ngModel" class="margin_left"
+                [(ngModel)]="cpdetails.cpBrokerType" [ngModelOptions]="{standalone: true}" required>
+              <small *ngIf="cpdetails.showUpdateEModule&&!brokerType.valid && brokerType.errors"
+                class="error_message mt-3 float-left w-100" style="margin-top: -10px;">
+                <div [hidden]="!brokerType.errors.required"> Broker Type is required</div>
+              </small>
+            </span>
+            <a [hidden]='showIndex!=5' (click)="cancelEdit(5)"><i
+                class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i></a>
+            <a [hidden]='showIndex!=5' (click)="updateProfileData(cpdetails,5)"><i
+                class="zmdi zmdi-save zmdi-hc-lg margin_left"></i> </a>
+          </div> -->
+
+          <!-- <div class="profile_details">
+            <a [hidden]='showIndex==6' (click)="editCpProfile(6)"><i class="zmdi zmdi-edit"></i></a>
+            Pan Card : <span [hidden]='showIndex==6'> {{cpdetails.cpPANNo}} </span>
+            <span [hidden]='showIndex!=6'>
+              <input name="pan_no" maxlength="50" #pan_no="ngModel" class="margin_left" [(ngModel)]="cpdetails.cpPANNo"
+                [ngModelOptions]="{standalone: true}" required>
+              <small *ngIf="cpdetails.showUpdateEModule&&!pan_no.valid && pan_no.errors"
+                class="error_message mt-3 float-left w-100" style="margin-top: -10px;">
+                <div [hidden]="!pan_no.errors.required"> Pan Card is required</div>
+              </small>
+            </span>
+            <a [hidden]='showIndex!=6' (click)="cancelEdit(6)"><i
+                class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i></a>
+            <a [hidden]='showIndex!=6' (click)="updateProfileData(cpdetails,6)"><i
+                class="zmdi zmdi-save zmdi-hc-lg margin_left"></i> </a>
+          </div> -->
+
+          <div class="profile_details">
+            <a [hidden]="showIndex == 7" *ngIf="isSMMobleNumberValid" (click)="editCpProfile(7)"
+              ><i class="zmdi zmdi-edit"></i
+            ></a>
+            <!-- SM Name : <span [hidden]='showIndex==7'> {{cpdetails.cpAccountOwner}} </span> -->
+            SM Name :
+            <span
+              [hidden]="showIndex == 7"
+              *ngIf="cpdetails.cpMaster.salesPersonName"
+            >
+              {{ cpdetails.cpMaster.salesPersonName }}
+            </span>
+            <span [hidden]="showIndex != 7">
+              <input
+                name="accountOwner"
+                maxlength="50"
+                #accountOwner="ngModel"
+                class="margin_left"
+                [(ngModel)]="cpdetails.cpMaster.salesPersonName"
+                [ngModelOptions]="{ standalone: true }"
+                required
+              />
+              <small
+                *ngIf="
+                  cpdetails.showUpdateEModule &&
+                  !accountOwner.valid &&
+                  accountOwner.errors
+                "
+                class="error_message mt-3 float-left w-100"
+                style="margin-top: -10px"
+              >
+                <div [hidden]="!accountOwner.errors.required">
+                  SM Name is required
+                </div>
+              </small>
+            </span>
+            <a [hidden]="showIndex != 7" (click)="cancelEdit(7)"
+              ><i class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i
+            ></a>
+            <a
+              [hidden]="showIndex != 7"
+              (click)="updateProfileData(cpdetails, 7)"
+              ><i class="zmdi zmdi-save zmdi-hc-lg margin_left"></i>
+            </a>
+          </div>
+
+          <div class="profile_details">
+            <a [hidden]="showIndex == 8" (click)="editCpProfile(8)"
+              ><i class="zmdi zmdi-edit"></i
+            ></a>
+            <!-- SM Phone Number : <span [hidden]='showIndex==8'> {{cpdetails.cpAccountOwnerContact}} </span> -->
+            SM Phone Number :
+            <span
+              [hidden]="showIndex == 8"
+              *ngIf="cpdetails.cpMaster.salesPersonMobileNumber"
+            >
+              {{ cpdetails.cpMaster.salesPersonMobileNumber }}
+            </span>
+            <span [hidden]="showIndex != 8">
+              <input
+                type="number"
+                name="phone_no"
+                maxlength="50"
+                #phone_no="ngModel"
+                class="margin_left"
+                [(ngModel)]="cpdetails.cpMaster.salesPersonMobileNumber"
+                [ngModelOptions]="{ standalone: true }"
+                required
+              />
+              <small
+                *ngIf="
+                  cpdetails.showUpdateEModule &&
+                  !phone_no.valid &&
+                  phone_no.errors
+                "
+                class="error_message mt-3 float-left w-100"
+                style="margin-top: -10px"
+              >
+                <div [hidden]="!phone_no.errors.required">
+                  SM Phone Number is required
+                </div>
+              </small>
+            </span>
+            <a [hidden]="showIndex != 8" (click)="cancelEdit(8)"
+              ><i class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i
+            ></a>
+            <a
+              [hidden]="showIndex != 8"
+              (click)="updateProfileData(cpdetails, 8)"
+              ><i class="zmdi zmdi-save zmdi-hc-lg margin_left"></i>
+            </a>
+          </div>
+          <div class="profile_details">
+            <a [hidden]="showIndex == 11" *ngIf="isSMMobleNumberValid" (click)="editCpProfile(11)"
+              ><i class="zmdi zmdi-edit"></i
+            ></a>
+            Micro Market :
+            <span [hidden]="showIndex == 11"> {{ microMarket }} </span>
+            <span [hidden]="showIndex != 11">
+              <input
+                name="companyCategory"
+                maxlength="50"
+                #microMarket1="ngModel"
+                class="margin_left"
+                [(ngModel)]="microMarket"
+                [ngModelOptions]="{ standalone: true }"
+                required
+              />
+              <small
+                *ngIf="
+                  cpdetails.showUpdateEModule &&
+                  !microMarket1.valid &&
+                  microMarket1.errors
+                "
+                class="error_message mt-3 float-left w-100"
+                style="margin-top: -10px"
+              >
+                <div [hidden]="!microMarket1.errors.required">
+                  MicroMarket is required
+                </div>
+              </small>
+            </span>
+            <a [hidden]="showIndex != 11" (click)="cancelEdit(11)"
+              ><i class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i
+            ></a>
+            <a
+              [hidden]="showIndex != 11"
+              (click)="updateProfileData(cpdetails, 11)"
+              ><i class="zmdi zmdi-save zmdi-hc-lg margin_left"></i>
+            </a>
+          </div>
+
+          <div class="profile_details">
+            <a [hidden]="showIndex == 9" *ngIf="isSMMobleNumberValid" (click)="editCpProfile(9)"
+              ><i class="zmdi zmdi-edit"></i
+            ></a>
+            Agreement Start Date :
+            <span [hidden]="showIndex == 9">
+              {{ StartDate }}
+            </span>
+            <span [hidden]="showIndex != 9">
+              <input
+                class="form-control date-pic"
+                [placement]="'top'"
+                placeholder="yyyy-mm-dd"
+                name="agreementStartDate"
+                [(ngModel)]="cpdetails.cpMaster.agreementStartDate"
+                ngbDatepicker
+                #agreementStartDate="ngModel"
+                #d="ngbDatepicker"
+                (ngModelChange)="datechange(cpdetails)"
+                required
+              />
+              <!-- <div class="input-group-append"> -->
+              <button
+                class="btn btn-outline-secondary"
+                (click)="d.toggle()"
+                type="button"
+              >
+                <img
+                  src="../../assets/images/date.svg"
+                  style="width: 1.2rem; height: 1rem; cursor: pointer"
+                />
+              </button>
+              <!-- </div> -->
+              <small
+                *ngIf="
+                  cpdetails.showUpdateEModule &&
+                  !agreementStartDate.valid &&
+                  agreementStartDate.errors
+                "
+                class="error_message mt-3 float-left w-100"
+                style="margin-top: -10px"
+              >
+                <div [hidden]="!agreementStartDate.errors.required">
+                  Agreement Start Date is required
+                </div>
+              </small>
+            </span>
+            <a [hidden]="showIndex != 9" (click)="cancelEdit(9) || d.toggle()"
+              ><i class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i
+            ></a>
+            <a
+              [hidden]="showIndex != 9"
+              (click)="updateProfileData(cpdetails, 9)"
+              ><i class="zmdi zmdi-save zmdi-hc-lg margin_left"></i>
+            </a>
+          </div>
+
+          <div class="profile_details">
+            <a [hidden]="showIndex == 10" *ngIf="isSMMobleNumberValid" (click)="editCpProfile(10)"
+              ><i class="zmdi zmdi-edit"></i
+            ></a>
+            Agreement End Date :
+            <span [hidden]="showIndex == 10"> {{ agreementEndDate }}</span>
+            <span [hidden]="showIndex != 10">
+              <input
+                class="form-control date-pic"
+                [placement]="'top'"
+                placeholder="yyyy-mm-dd"
+                name="agreementEndDate"
+                [(ngModel)]="cpdetails.cpMaster.agreementEndDate"
+                ngbDatepicker
+                #agreementStartDate="ngModel"
+                #d1="ngbDatepicker"
+                (ngModelChange)="datechange1(cpdetails)"
+                required
+              />
+              <button
+                class="btn btn-outline-secondary"
+                (click)="d1.toggle()"
+                type="button"
+              >
+                <img
+                  src="../../assets/images/date.svg"
+                  style="width: 1.2rem; height: 1rem; cursor: pointer"
+                />
+              </button>
+              <small
+                *ngIf="
+                  cpdetails.showUpdateEModule &&
+                  !agreementEndDate.valid &&
+                  agreementEndDate.errors
+                "
+                class="error_message mt-3 float-left w-100"
+                style="margin-top: -10px"
+              >
+                <div [hidden]="!agreementEndDate.errors.required">
+                  Agreement End Date is required
+                </div>
+              </small>
+            </span>
+            <a
+              [hidden]="showIndex != 10"
+              (click)="cancelEdit(10) || d1.toggle()"
+              ><i class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i
+            ></a>
+            <a
+              [hidden]="showIndex != 10"
+              (click)="updateProfileData(cpdetails, 10)"
+              ><i class="zmdi zmdi-save zmdi-hc-lg margin_left"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+          <!-- <div class="profile_details">
+            <a [hidden]='showIndex==13' (click)="editCpProfile(13)"><i class="zmdi zmdi-edit"></i></a>
+            RERA Registration Date : <span [hidden]='showIndex==13'>
+              {{cpdetails.cpReraRegistrationDate1 | date:'yyyy-MM-dd'}} </span>
+            <span [hidden]='showIndex!=13'>
+              <input class="form-control date-pic" placeholder="yyyy-mm-dd" name="reraRegistrationDate"
+                [(ngModel)]="cpdetails.cpReraRegistrationDate" ngbDatepicker #agreementStartDate="ngModel"
+                #d2="ngbDatepicker" (ngModelChange)="datechange2(cpdetails)" required>
+              <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                <img src="assets/images/date.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;" />
+              </button>
+            </span>
+            <a [hidden]='showIndex!=13' (click)="cancelEdit(13) || d2.toggle()"><i
+                class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i></a>
+            <a [hidden]='showIndex!=13' (click)="updateProfileData(cpdetails,13)"><i
+                class="zmdi zmdi-save zmdi-hc-lg margin_left"></i> </a>
+          </div> -->
+
+          <!-- <div *ngIf="reraDetails?.length>0">
+            <div *ngFor="let rera of reraDetails;let i=index">
+              <a [hidden]='showIndex==i+14' (click)="editCpProfile(i+14)"><i class="zmdi zmdi-edit"></i></a>
+              RERA NO : <span [hidden]='showIndex==i+14'> {{rera.reraNumber}} </span>
+              <span [hidden]='showIndex!=i+14'>
+                <input name="reraNumber" maxlength="50" #reraNumber="ngModel" class="margin_left"
+                  [(ngModel)]="rera.reraNumber" [ngModelOptions]="{standalone: true}" required>
+                <small *ngIf="rera.showUpdateEModule&&!reraNumber.valid && reraNumber.errors"
+                  class="error_message mt-3 float-left w-100" style="margin-top: -10px;">
+                  <div [hidden]="!reraNumber.errors.required"> RERA no. is required</div>
+                </small>
+              </span>
+              <a [hidden]='showIndex!=i+14' (click)="cancelEdit(i+14)"><i
+                  class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i></a>
+              <a [hidden]='showIndex!=i+14' (click)="updateProfileData(rera,14)"><i
+                  class="zmdi zmdi-save zmdi-hc-lg margin_left"></i> </a>
+              <p style="margin-bottom: 0px;" [hidden]='showIndex==i+14'>RERA State : {{rera.state}} </p>
+              <p [hidden]='showIndex!=i+14' style="margin-left: 69px;">
+                <input name="reraState" maxlength="50" #reraState="ngModel" class="margin_left"
+                  style="margin-top: 10px;" [(ngModel)]="rera.reraState" [ngModelOptions]="{standalone: true}" required>
+                <small *ngIf="rera.showUpdateEModule&&!reraState.valid && reraState.errors"
+                  class="error_message mt-3 float-left w-100" style="margin-top: -10px;">
+                  <div [hidden]="!reraState.errors.required"> RERA state is required</div>
+                </small>
+              </p>
+              <div class="profile_details" >
+                <a [hidden]='showIndex==13' (click)="editCpProfile(13)"><i class="zmdi zmdi-edit"></i></a>
+                <span [hidden]='showIndex==i+14'>
+                  RERA Registration Date : {{rera.registrationDate}} </span>
+                <span class="profile_date" [hidden]='showIndex!=i+14'>
+                  <input class="date-pic" placeholder="yyyy-mm-dd" name="reraRegistrationDate"
+                    [(ngModel)]="cpdetails.cpReraRegistrationDate" ngbDatepicker #agreementStartDate="ngModel"
+                    #d2="ngbDatepicker" (ngModelChange)="datechange2(cpdetails)" required>
+                  <button class="btn btn-outline-secondary calender_btn" (click)="d2.toggle()" type="button">
+                    <img src="assets/images/date.svg" style="width: 1rem; height: .7rem; cursor: pointer;" />
+                  </button>
+                </span>
+                <a [hidden]='showIndex!=i+14' (click)="cancelEdit(13) || d2.toggle()"><i
+                    class="zmdi zmdi-close-circle zmdi-hc-lg margin_left"></i></a>
+                <a [hidden]='showIndex!=i+14' (click)="updateProfileData(cpdetails,13)"><i
+                    class="zmdi zmdi-save zmdi-hc-lg margin_left"></i> </a>
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <!-- profile -->
+
+    <!-- team member -->
+    <app-team-member
+      *ngIf="tabId == 2 && cpId > 0"
+      [cpId]="cpId"
+    ></app-team-member>
+    <!-- team member -->
+    <!-- Documents -->
+    <app-documents *ngIf="tabId == 5 && cpId > 0" [cpId]="cpId"></app-documents>
+    <!-- documents -->
+
+    <!-- deals -->
+    <app-deals
+      *ngIf="tabId == 3 && cpId > 0"
+      [cpId]="cpId"
+      [cpSfdcId]="cpdetails.cpSfdcid"
+    ></app-deals>
+    <!-- deals -->
+
+    <!-- app usage -->
+    <app-app-usage *ngIf="tabId == 4 && cpId > 0" [cpId]="cpId"></app-app-usage>
+    <!-- app usage -->
+  </div>
+</main>

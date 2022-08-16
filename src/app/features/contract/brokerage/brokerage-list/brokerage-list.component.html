@@ -1,0 +1,101 @@
+<div class="broke_search">
+  <form action="">
+    <div class="broke_search_wrap">
+      <div class="field_wrap">
+        <div class="row_n">
+          <div class="col_lg_4">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label required">CP</label>
+              <p-dropdown
+                [options]="cpList"
+                [(ngModel)]="cpName"
+                optionLabel="name"
+                optionValue="id"
+              ></p-dropdown>
+            </div>
+          </div>
+          <div class="col_lg_4">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label required">Project</label>
+              <p-dropdown
+                [options]="projectList"
+                [(ngModel)]="projectId"
+                optionLabel="projectName"
+                optionValue="id"
+              ></p-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="button_wrap">
+        <button class="btn btn_primary" (click)="onSearch()">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="broke_avg">
+  <div class="left">
+    <div class="row_n">
+      <div class="col_lg_4">
+        <div class="avgs">
+          <h3 class="title mb_2 text_2xl">{{ bookings | number }}</h3>
+          <p class="sub_title text_xs dark_text_2">Bookings</p>
+        </div>
+      </div>
+      <div class="col_lg_4">
+        <div class="avgs">
+          <h3 class="title mb_2 text_2xl">{{ totalBrokerage | number }}</h3>
+          <p class="sub_title text_xs dark_text_2">Total Brokerage</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row_n">
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="brokerageList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      [globalFilterFields]="[
+        'bookingId',
+        'bookingName',
+        'parentUserName',
+        'brokerage',
+        'totalPaid'
+      ]"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#ID</th>
+          <th>CP Name</th>
+          <th>LEAD Name</th>
+          <th>Brokerage</th>
+          <th>Total Paid</th>
+          <th>Adjustments</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-brokerage>
+        <tr (click)="showDetails(brokerage.id)">
+          <td>{{ brokerage.bookingId }}</td>
+          <td>{{ brokerage.parentUserName }}</td>
+          <td>{{ brokerage.bookingName }}</td>
+          <td>{{ brokerage.brokerage | number }}</td>
+          <td>{{ brokerage.totalPaid | number }}</td>
+          <td>{{ brokerage.totalAdjustments | number }}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

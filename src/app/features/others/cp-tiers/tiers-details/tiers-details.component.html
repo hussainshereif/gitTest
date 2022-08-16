@@ -1,0 +1,62 @@
+<main class="page-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-1">
+        <div class="arrow_icon_div"><i class="fas fa-arrow-circle-left"  [routerLink]="['/cp-tiers']"></i></div>
+      </div>
+      <div class="col-md-8">
+        <!-- <div ><h4>Tier : {{loyalty}}</h4></div> -->
+        <div><h4>{{label}}</h4></div>
+        <div ><h4>User Count : {{user}}</h4></div>
+      </div>
+      <div class="form-group col-md-3" style="float: left;">
+        <h1>
+          <div class="import_list pull-right">
+            <input style="display:none" type="file" #fileInput name="fileInput" (change)="uploadExcel($event)" />
+            <a (click)="fileInput.click()">
+              Import List</a>
+          </div>
+          <!-- <a  href="https://s3-ap-southeast-1.amazonaws.com/edleweisswingman/cpexcelTest/Sample.xlsx"> -->
+          <!-- <a href="https://loyalie.s3-ap-southeast-1.amazonaws.com/FileUploadMldl/LeadExcelMLDLSample.xlsx"> -->
+          <a href="https://s3-ap-southeast-1.amazonaws.com/mldlbucket1/about/11231825.xlsx">
+            <img class="samplexlsx" src="assets\images\sampleExcel.png">
+          </a>
+        </h1>
+        <div class="pull-right" style="color:red;float:right">{{uploadStatus}}</div>
+      </div>
+      <div *ngIf="isProcessingVisible" class="processing_status_div"><span class="processing_status">Processing...</span></div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-md-12">
+        <table class="table table-striped table-hover table-responsive w-100 table_leads_123">
+          <thead>
+            <tr>
+              <th width="10%">CP SFDC</th>
+              <th width="10%">CP Name</th>
+              <th width="10%">Phone Number</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="cpTierList.length>0">
+            
+            <tr *ngFor="let cp of cpTierList;let i=index">
+              
+              <td>{{cp.cpSfdcid}}</td>
+              <td>{{cp.cpFirstName}}</td>
+              <td>{{cp.cpPhone}}</td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="cpTierList.length==0">
+            <tr>
+              <td colspan="11" class="text-center">No data available!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="sizeofTable>recordsPerPage">
+    <ngb-pagination [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage"
+      aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+  </div>
+</main>

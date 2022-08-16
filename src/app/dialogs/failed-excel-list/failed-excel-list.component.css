@@ -1,0 +1,12 @@
+bullet-style{
+    display: inline-block!important;
+}
+
+.videolist{
+    height: 360px;
+    overflow-y: scroll;
+}
+.format_head{
+    float: left !important;
+    text-align: left !important;
+}

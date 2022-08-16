@@ -1,0 +1,16 @@
+<div>
+  <div>
+    <form>
+      <div>
+        <ejs-richtexteditor id="content" #formRTE [(ngModel)]="content" name="content" (created)="rteCreated()" [fontFamily]='fontFamily' [toolbarSettings]='tools' [quickToolbarSettings]='quickTools'>
+          <ng-template #valueTemplate id="temp">
+          </ng-template>
+          </ejs-richtexteditor>
+      </div>
+      <div class="popup_btn_div">
+        <button class="btn btn-danger" (click)="onClose()">Close</button>&nbsp;&nbsp;
+        <button class="btn btn-primary" (click)="onSubmit()">Save</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <div class="">
+      <div class="row allign_center">
+        <div class="col_6">
+          <h3 class="title mb_1 text_md">Amenities</h3>
+          <p class="text_xs dark_text_2">List of Amenities</p>
+        </div>
+        <div class="col_6">
+          <div class="d_flex justify_end">
+            <button class="btn btn_primary pop_btn" (click)="addAmenities()">
+              Add Amenity
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="amenitiesList"
+      [rows]="10"
+      [lazy]="true"
+      [paginator]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      responsiveLayout="scroll"
+      [totalRecords]="totalRecords"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-amenities let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ amenities.id }}</td>
+          <td>{{ amenities.title }}</td>
+          <td>{{ amenities.description }}</td>
+          <td>
+            <a
+              class="link_warning me_3 pop_btn"
+              href=""
+              (click)="editAmenities(amenities.id, rowIndex, event)"
+              >Edit</a
+            ><a
+              class="danger_text me_3 link_danger pop_btn"
+              href=""
+              (click)="deleteAmenities(amenities.id, event)"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-center" colspan="4">No data available!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

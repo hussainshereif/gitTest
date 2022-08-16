@@ -1,0 +1,80 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <div class="">
+      <div class="row allign_center">
+        <div class="col_6">
+          <h3 class="title mb_1 text_md">MRP</h3>
+          <p class="text_xs dark_text_2">MRP Detais</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col_6">
+    <div class="row">
+      <form [formGroup]="mrpForm" autocomplete="off" (ngSubmit)="onSubmit()">
+        <div class="col_12">
+          <div class="input_wrap mb_3">
+            <label class="input_label r_lbl required">Enable MRP</label>
+            <div>
+              <div class="form_check form_check_inline">
+                <input
+                  class="form_check_input"
+                  type="checkbox"
+                  name="mrpFlag"
+                  id="inlineRadio1"
+                  value="option1"
+                  formControlName="mrpFlag"
+                  (change)="onChangeMrpFlag($event)"
+                />
+                <label class="form_check_label" for="inlineRadio1">Yes</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">MRP URL</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              placeholder="Enter MRP URL"
+              formControlName="mrpUrl"
+            />
+            <app-validation-error
+              [control]="mrpForm.get(['mrpUrl'])"
+              [submit]="submitted"
+              [field]="'MRP'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">MRP Description</label>
+            <textarea
+              class="tet_field"
+              id="Address"
+              autocomplete="off"
+              formControlName="mrpDescription"
+              placeholder="Enter MRP Description"
+            ></textarea>
+
+            <app-validation-error
+              [control]="mrpForm.get(['mrpDescription'])"
+              [submit]="submitted"
+              [field]="'Description'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="d_flex justify_end">
+            <button href="#" class="btn btn_primary pop_btn" type="submit">
+              Save Details
+            </button>
+          </div>
+        </div>
+      </form>
+      <!-- Form end -->
+    </div>
+  </div>
+</div>

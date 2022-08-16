@@ -1,0 +1,133 @@
+<div>
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="pro_form1">
+        <div class="collateral_btn_div1">
+          <h4>Customize {{ type }}</h4>
+        </div>
+        <div class="container">
+          <div class="collateral_btn_div2">
+            <button class="btn btn-primary btn-sm" (click)="onPreview()">
+              Update Preview
+            </button>
+            <button class="btn btn-primary btn-sm ml-2" (click)="onClickPdf()">
+              Open preview in new tab
+            </button>
+          </div>
+          <div class="row" style="height: 350px">
+            <div class="col-8">
+              <label class="mb-2 mt-2">Preview</label>
+              <iframe width="100%" height="300" [src]="viewURL"></iframe>
+
+              <!-- <img
+                *ngIf="this.data.docType == 'IMAGE'"
+                id="view"
+                src="{{ viewURL }}"
+                alt=""
+                style="width: 100%; height: '300'"
+              /> -->
+
+              <!-- <label class="mb-2 mt-2 label-link" (click)="onClickPdf()"
+                >Click to view Preview</label
+              > -->
+            </div>
+            <div class="col scrollStyle">
+              <label class="mb-2 mt-2">Select Template</label>
+              <div class="row">
+                <div class="col-4 ml-2 mb-2" *ngFor="let icon of templates">
+                  <img
+                    [ngClass]="{ active: this.templateId === icon.id }"
+                    (click)="onChangeTemplate(icon)"
+                    src="{{ icon.templateIcon }}"
+                    class=""
+                    height="50"
+                    width="50"
+                  />
+                </div>
+              </div>
+              <label class="mb-2 mt-2" *ngIf="this.data.docType == 'PDF'"
+                >Background</label
+              >
+              <div class="mid_div" *ngIf="this.data.docType == 'PDF'">
+                <label class="mb-3 w-auto align-items-center mr-4">
+                  <input
+                    type="radio"
+                    class="chk w-auto mr-2"
+                    id="Image"
+                    value="Image"
+                    [(ngModel)]="collateralPdfBgm"
+                    (click)="onCollateralType('Image')"
+                  />
+                  <span class="label-text">Image</span>
+                </label>
+                <label class="mb-3 w-auto align-items-center mr-4">
+                  <input
+                    type="radio"
+                    id="Background"
+                    class="chk w-auto mr-2"
+                    value="Background"
+                    [(ngModel)]="collateralPdfBgm"
+                    (click)="onCollateralType('Background')"
+                  />
+                  <span class="label-text">Background</span>
+                </label>
+              </div>
+              <div
+                *ngIf="
+                  this.data.docType == 'PDF' && collateralPdfBgm == 'Image'
+                "
+              >
+                <input
+                  type="file"
+                  name="files[]"
+                  multiple
+                  class="file"
+                  id="customFile"
+                  placeholder="Upload File"
+                  (change)="uploadBackgroundImage($event)"
+                />
+                <div *ngIf="isFileDuplicateName" class="fileDuplicateName">
+                  {{ fileName }}
+                </div>
+              </div>
+              <div
+                class="btn-group btn-group-toggle"
+                *ngIf="
+                  this.data.docType == 'PDF' && collateralPdfBgm == 'Background'
+                "
+              >
+                <color-sketch (onChange)="onbgmChange($event)"></color-sketch>
+              </div>
+
+              <label class="mb-2 mt-2">Font Size(in pixels)</label>
+              <input
+                type="number"
+                [(ngModel)]="fontSize"
+                class="inpt form-control"
+                min="0"
+              />
+              <label class="mb-2 mt-2"
+                >Text Box Width(as percentage of full width )</label
+              >
+              <input
+                type="number"
+                [(ngModel)]="textWidth"
+                class="inpt form-control"
+                min="0"
+                max="100"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="btn_div">
+          <button class="btn btn-secondary float-left" (click)="onClose()">
+            Back
+          </button>
+          <button class="btn btn-primary float-right" (click)="onSubmit()">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

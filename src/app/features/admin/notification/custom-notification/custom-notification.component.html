@@ -1,0 +1,51 @@
+<div class="row mb-2">
+  <app-custom-notification-create
+    [data]="this.selectedData"
+    (newItemEvent)="hideDetails($event)"
+  ></app-custom-notification-create>
+</div>
+<div class="mt-2" *ngIf="!edit">
+  <div class="row">
+    <div class="col-12 col-md-12 col-lg-12">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th width="10%;">ID</th>
+            <th width="20%;">TITLE</th>
+            <th width="25%;">CONTENT</th>
+            <th width="15%;">DEVICE TYPE</th>
+            <th width="15%;">TYPE OF NOTIFICATION</th>
+            <th width="15%;">CP STATUS</th>
+            <th width="15%;">AREA</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="notificationList.length == 0">
+          <tr>
+            <td class="text-center" colspan="7">No data available</td>
+          </tr>
+        </tbody>
+        <tbody *ngIf="notificationList.length != 0">
+          <tr *ngFor="let notification of notificationList">
+            <td>{{ notification.id }}</td>
+            <td>{{ notification.title }}</td>
+            <td>{{ notification.message }}</td>
+            <td>{{ notification.deviceType }}</td>
+            <td>{{ notification.notificationType }}</td>
+            <td>{{ notification.cpStatus }}</td>
+            <td>{{ notification.state }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="pageSize > 10">
+    <ngb-pagination
+      [collectionSize]="pageSize"
+      [(page)]="offset"
+      [maxSize]="3"
+      [pageSize]="10"
+      aria-label="Default pagination"
+      (pageChange)="paginatedSearch(offset)"
+    ></ngb-pagination>
+  </div>
+</div>

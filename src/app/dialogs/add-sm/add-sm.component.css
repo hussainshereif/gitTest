@@ -1,0 +1,32 @@
+.close_icon{
+    float: right;
+    font-size: 32px;
+}
+.form_left{
+    display: inline;
+    width: 50%;
+    float: left;
+}
+.form_right{
+    display: inline;
+    width: 50%;
+    float: right;
+}
+.add_sm_btn{
+    color: #ffffff;
+    background-color: #f7941e;
+    float: right;
+}
+.error{
+    color: red;
+}
+.input_div{
+    margin-bottom: 10px;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}

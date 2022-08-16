@@ -1,0 +1,59 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">User Type</h6>
+    <p class="modal_title text_xs">Add New User Type</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        (click)="onClose()"
+        class="btn_close btn btn_close_white close"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <div class="row">
+      <div class="col_12">
+        <div class="input_wrap dropdown_arrow">
+          <label class="input_label required">User Type</label>
+          <p-dropdown
+            [options]="userTypes"
+            [(ngModel)]="userTyp"
+            (onChange)="onChange($event)"
+          ></p-dropdown>
+        </div>
+      </div>
+      <div class="selected_grup mb_3">
+        <div class="selected_wrap mb_1">
+          <div
+            *ngIf="selectedValue"
+            class="grup_item success"
+            [ngClass]="{
+              success: selectedValue == 'CHANNEL_PARTNER',
+              warning:
+                selectedValue == 'CUSTOMER' || selectedValue == 'EMPLOYEE',
+              danger: selectedValue == 'INCENTIVE'
+            }"
+          >
+            <div class="caption">
+              <h5 class="name">{{ selectedValue }}</h5>
+            </div>
+            <button class="btn">
+              <img src="../../assets/images_new/icons/remove.svg" alt="" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d_flex justify_space_between">
+      <button class="btn btn_secondary close" (click)="onClose()">
+        Cancel
+      </button>
+      <button class="btn btn_primary" (click)="onSave()">Add User</button>
+    </div>
+  </div>
+  <!-- modal_body -->
+</div>
+<!-- modal content -->

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="69" height="68.508" viewBox="0 0 69 68.508">
+  <g id="Group_1072" data-name="Group 1072" transform="translate(-1221 -142.225)">
+    <g id="Group_1070" data-name="Group 1070" transform="translate(1221 143.953)">
+      <path id="Path_333" data-name="Path 333" d="M-19798.537-10294.719v-20.292l31.033-18.037,31.922,18.037v25.72h-12.342v-17.628l-19.58-11.4-19.2,10.741v17.637h11.262" transform="translate(19803.002 10333.048)" fill="none" stroke="#fff" stroke-width="3"/>
+      <g id="Ellipse_25" data-name="Ellipse 25" transform="translate(0 35.779)" fill="none" stroke="#fff" stroke-width="3">
+        <circle cx="4.5" cy="4.5" r="4.5" stroke="none"/>
+        <circle cx="4.5" cy="4.5" r="3" fill="none"/>
+      </g>
+      <g id="Rectangle_838" data-name="Rectangle 838" transform="translate(39 35.779)" fill="none" stroke="#aab3ef" stroke-width="3">
+        <rect width="9" height="9" stroke="none"/>
+        <rect x="1.5" y="1.5" width="6" height="6" fill="none"/>
+      </g>
+      <path id="Path_334" data-name="Path 334" d="M-19765.094-10302.736v-6.575h-15.217v14.136" transform="translate(19808.262 10339.898)" fill="none" stroke="#aab3ef" stroke-width="3"/>
+    </g>
+    <text id="RELOY" transform="translate(1222 206.732)" fill="#aab3ef" font-size="16" font-family="Inter-Bold, Inter" font-weight="700" letter-spacing="0.24em"><tspan x="0" y="0">RE</tspan><tspan y="0" fill="#fff">LOY</tspan></text>
+  </g>
+</svg>

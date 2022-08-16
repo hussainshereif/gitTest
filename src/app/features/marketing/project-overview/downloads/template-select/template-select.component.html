@@ -1,0 +1,443 @@
+<div class="modal_content" [hidden]="!showTemplate">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Select Template</h6>
+    <p class="modal_title text_xs">Select a Template</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onClose()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <div class="row_n mb_4">
+      <div class="col_6 col_xl_4" *ngFor="let item of templates">
+        <div
+          class="template_item w_100"
+          [class.active]="selectedTemplate === item.id"
+          (click)="selectedTemplate = item.id"
+        >
+          <img style="width: inherit" src="{{ item.templateIcon }}" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="d_flex justify_space_between">
+      <button class="btn btn_secondary close" (click)="onClose()">Back</button>
+      <button class="btn btn_primary pop_btn" (click)="onSelectTemplate(true)">
+        Create
+      </button>
+    </div>
+  </div>
+  <!-- modal_body -->
+</div>
+
+<div class="modal_content" *ngIf="!showTemplate">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Customize Image</h6>
+    <!-- <p class="modal_title text_xs">Customize Image</p> -->
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onClose()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+
+  <div class="modal_body">
+    <form
+      [formGroup]="templateForm"
+      (ngSubmit)="saveCustomCollateral()"
+      autocomplete="off"
+    >
+      <div class="row_n mb_4">
+        <div class="col_12">
+          <div class="cust_wrap">
+            <div class="preview">
+              <h6 class="fw_600 text_sm mb_2">Preview</h6>
+              <div class="preview_wrap">
+                <iframe
+                  width="100%"
+                  height="450"
+                  *ngIf="this.data.docType == 'PDF'"
+                  [src]="viewURL"
+                ></iframe>
+
+                <div class="figure" *ngIf="this.data.docType == 'IMAGE'">
+                  <img #imageDrag class="w_100" src="{{ viewURL }}" alt="" />
+
+                  <!-- <img
+                    #pdfDrag
+                    class="w_100"
+                    *ngIf="this.data.docType == 'PDF'"
+                    src="../../../../../../assets/images_new/blank-page.png"
+                    alt=""
+                  /> -->
+                  <div
+                    #templateDrag
+                    class="template_item example-box"
+                    (cdkDragEnded)="dragEnded($event)"
+                    cdkDragBoundary=".figure"
+                    *ngIf="this.data.docType == 'IMAGE'"
+                    cdkDrag
+                  >
+                    <div *ngFor="let item of templates">
+                      <div *ngIf="selectedTemplate === item.id">
+                        <img
+                          style="width: 100%; height: 50%"
+                          src="{{ item.templateIcon }}"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+
+                    <div
+                      class="example-handle"
+                      cdkDragHandle
+                      style="
+                        height: 100%;
+                        width: 100%;
+                        left: 0;
+                        top: 0;
+                        position: absolute;
+                      "
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="btn btn_warning"
+                type="button"
+                (click)="updatePreview()"
+              >
+                Update Preview
+              </button>
+            </div>
+            <div class="panel">
+              <h6 class="fw_600 text_sm mb_2">Customize</h6>
+              <div class="panel_wrap">
+                <div>
+                  <div class="row_n">
+                    <!-- <div class="col_12">
+                      <div class="input_wrap">
+                        <label class="input_label r_lbl required"
+                          >Template set as</label
+                        >
+                        <div class="toggle_btn_wrap">
+                          <input
+                            type="radio"
+                            class="toggle_btn"
+                            name="Template"
+                            value="NewPage"
+                            (change)="onTemplateChange($event.target.value)"
+                            id="NewPage"
+                            checked
+                          />
+                          <label for="NewPage">New Page</label>
+                          <input
+                            type="radio"
+                            class="toggle_btn"
+                            name="Template"
+                            value="Overlay"
+                            (change)="onTemplateChange($event.target.value)"
+                            id="Overlay"
+                          />
+                          <label for="Overlay">Overlay</label>
+                        </div>
+                      </div>
+                    </div> -->
+                    <div
+                      class="col_12"
+                      *ngIf="
+                        templateType == 'NewPage' && this.data.docType == 'PDF'
+                      "
+                    >
+                      <div class="input_wrap">
+                        <label class="input_label r_lbl required"
+                          >New Page Background</label
+                        >
+                        <div class="toggle_btn_wrap">
+                          <input
+                            type="radio"
+                            class="toggle_btn"
+                            name="Overlay"
+                            value="Image"
+                            (change)="onOverlayChange($event.target.value)"
+                            id="image"
+                            checked
+                          />
+                          <label for="image">Image</label>
+                          <input
+                            type="radio"
+                            class="toggle_btn"
+                            name="Overlay"
+                            value="Color"
+                            (change)="onOverlayChange($event.target.value)"
+                            id="colors"
+                          />
+                          <label for="colors">Color</label>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col_12"
+                      *ngIf="
+                        overlayType == 'Image' &&
+                        templateType == 'NewPage' &&
+                        this.data.docType == 'PDF'
+                      "
+                    >
+                      <div class="input_wrap mb_2">
+                        <div class="d_flex">
+                          <input
+                            type="file"
+                            id="real-file"
+                            #imgupload
+                            hidden="hidden"
+                            formControlName="file"
+                            [accept]="uploadType"
+                            (change)="uploadFile($event)"
+                            class="inpt_field"
+                          />
+                          <button
+                            type="button"
+                            id="custom-button"
+                            (click)="imgupload.click()"
+                          >
+                            <img
+                              src="../../../../../../assets/images_new/icons/file-upload.svg"
+                              alt=""
+                            />
+                          </button>
+                          <div
+                            class="file_txt"
+                            style="display: flex; flex-direction: column"
+                          >
+                            <span class="subtext">Upload Icon</span>
+                            <span
+                              class="info"
+                              *ngIf="!fileName"
+                              id="custom-text"
+                              >No file chosen, yet.</span
+                            >
+                            <span
+                              class="info"
+                              *ngIf="fileName"
+                              id="custom-text"
+                              >{{ fileName }}</span
+                            >
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="col_12"
+                      *ngIf="
+                        overlayType == 'Color' &&
+                        templateType == 'NewPage' &&
+                        this.data.docType == 'PDF'
+                      "
+                    >
+                      <div class="input_wrap">
+                        <label class="input_label r_lbl required"
+                          >Page Backgroud Color</label
+                        >
+                        <div class="w_100 mt_1 d_block">
+                          <div class="form_control_color">
+                            <input
+                              type="color"
+                              formControlName="pageBackgroundColor"
+                              value="#ffffff"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col_12" *ngIf="this.data.docType == 'PDF'">
+                      <div class="dash_hr mb_3"></div>
+                    </div>
+                    <div class="col_12">
+                      <div class="input_wrap">
+                        <label class="input_label r_lbl required"
+                          >Box Text Color</label
+                        >
+                        <div class="w_100 mt_1 d_block">
+                          <div class="form_control_color">
+                            <input
+                              class=""
+                              type="color"
+                              id=""
+                              formControlName="fontColor"
+                              value="#ffffff"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col_12">
+                      <div class="input_wrap">
+                        <label class="input_label r_lbl required"
+                          >Box Background Color</label
+                        >
+                        <div class="w_100 mt_1 d_block">
+                          <div class="form_control_color">
+                            <input
+                              class=""
+                              type="color"
+                              id=""
+                              formControlName="boxBackgroundColor"
+                              value="#071731"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col_12">
+                      <div class="input_wrap mb_3">
+                        <label class="input_label">Transperancy</label>
+                        <p-dropdown
+                          [options]="transparent"
+                          formControlName="transparent"
+                          optionLabel="text"
+                          optionValue="value"
+                        >
+                        </p-dropdown>
+                      </div>
+                    </div>
+                    <div class="col_12">
+                      <div class="input_wrap">
+                        <label class="input_label r_lbl required"
+                          >Box Border Color</label
+                        >
+                        <div class="w_100 mt_1 d_block">
+                          <div class="form_control_color">
+                            <input
+                              class=""
+                              type="color"
+                              id=""
+                              formControlName="boxBorderColor"
+                              value="#ffffff"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col_12">
+                      <div class="input_wrap mb_3">
+                        <label class="input_label">Font Family</label>
+                        <p-dropdown
+                          [options]="fontFamily"
+                          formControlName="fontFamily"
+                        >
+                        </p-dropdown>
+                      </div>
+                    </div>
+                    <div class="col_12">
+                      <div class="input_wrap mb_3">
+                        <label class="input_label"
+                          >Primary Font Size(In Pixels)</label
+                        >
+                        <p-inputNumber
+                          placeholder="Enter Font Size"
+                          formControlName="primaryFontSize"
+                        ></p-inputNumber>
+                      </div>
+                    </div>
+                    <div class="col_12">
+                      <div class="input_wrap mb_3">
+                        <label class="input_label"
+                          >Secondary Font Size(In Pixels)</label
+                        >
+                        <p-inputNumber
+                          placeholder="Enter Font Size"
+                          formControlName="secondaryFontSize"
+                        ></p-inputNumber>
+                      </div>
+                    </div>
+                    <div class="col_12" *ngIf="this.data.docType == 'PDF'">
+                      <div class="input_wrap mb_3">
+                        <label class="input_label">Box X(in percentage)</label>
+                        <p-inputNumber
+                          placeholder="Enter X"
+                          formControlName="boxX"
+                          [min]="0"
+                          [max]="100"
+                          suffix="%"
+                        ></p-inputNumber>
+                      </div>
+                    </div>
+                    <div class="col_12" *ngIf="this.data.docType == 'PDF'">
+                      <div class="input_wrap mb_3">
+                        <label class="input_label">Box Y(in percentage)</label>
+                        <p-inputNumber
+                          placeholder="Enter Y"
+                          formControlName="boxY"
+                          [min]="0"
+                          [max]="100"
+                          suffix="%"
+                        ></p-inputNumber>
+                      </div>
+                    </div>
+                    <div class="col_12" *ngIf="this.data.docType == 'PDF'">
+                      <div class="input_wrap mb_3">
+                        <label class="input_label"
+                          >Box Height(in percentage)</label
+                        >
+                        <p-inputNumber
+                          placeholder="Enter box Height"
+                          formControlName="boxHeight"
+                          [min]="0"
+                          [max]="100"
+                          suffix="%"
+                        ></p-inputNumber>
+                      </div>
+                    </div>
+                    <div class="col_12" *ngIf="this.data.docType == 'PDF'">
+                      <div class="input_wrap mb_3">
+                        <label class="input_label"
+                          >Box Width(in percentage)</label
+                        >
+                        <p-inputNumber
+                          placeholder="Enter box Width"
+                          formControlName="boxWidth"
+                          [min]="0"
+                          [max]="100"
+                          suffix="%"
+                        ></p-inputNumber>
+                      </div>
+                    </div>
+                    <!-- <div class="col_12">
+                      <div class="d_flex justify_end">
+                        <button class="btn btn_primary_g" type="button">
+                          Refresh
+                        </button>
+                      </div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <button
+          class="btn btn_secondary close"
+          type="button"
+          (click)="onSelectTemplate(false)"
+        >
+          Back
+        </button>
+        <button type="submit" class="btn btn_primary pop_btn">Create</button>
+      </div>
+    </form>
+  </div>
+  <!-- modal_body -->
+</div>

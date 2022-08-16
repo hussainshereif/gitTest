@@ -1,0 +1,40 @@
+<form [formGroup]="addLadderDetailsForm" autocomplete="off" (ngSubmit)="onSubmit()">
+ 	<div class="d-flex justify-content-between align-items-center mb-3">
+ 		<h5>Add Ladder Details</h5>
+ 		<i class="zmdi zmdi-close col-md-1 pull-right" (click)="close()"></i>
+	</div>
+	<div class="form-group">
+	  	<input type="number" class="inpt form-control" placeholder="Start Range" formControlName="startRange" [ngClass]="{ 'is-invalid': submitted && f.startRange.errors }" >
+		<div *ngIf="submitted && f.startRange.errors" class="invalid-feedback">
+		    <div *ngIf="f.startRange.errors.required"></div>
+		    <div *ngIf="f.startRange.errors.max"> Start Range must between 0 and 100</div>
+    		<div *ngIf="f.startRange.errors.min"> Start Range must between 0 and 100</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<input type="number" class="inpt form-control" placeholder="End Range" formControlName="endRange" [ngClass]="{ 'is-invalid': submitted && f.endRange.errors }" >
+		<div *ngIf="submitted && f.endRange.errors" class="invalid-feedback">
+		    <div *ngIf="f.endRange.errors.required"></div>
+		    <div *ngIf="f.endRange.errors.max"> End Range must between 0 and 100</div>
+    		<div *ngIf="f.endRange.errors.min"> End Range must between 0 and 100</div>
+			<div  *ngIf="f.endRange.errors.pattern">
+				Allowed characters: a-z, A-Z, 0-9.
+			  </div>
+		</div>
+	</div>
+	<div class="form-group">
+		<input type="number" class="inpt form-control" placeholder="Ladder Value" formControlName="ladValue" [ngClass]="{ 'is-invalid': submitted && f.ladValue.errors }" >
+		<div *ngIf="submitted && f.ladValue.errors" class="invalid-feedback">
+		    <div *ngIf="f.ladValue.errors.required"></div>
+		    <div *ngIf="f.ladValue.errors.max"> Ladder value must between 0 and 100</div>
+    		<div *ngIf="f.ladValue.errors.min"> Ladder value must between 0 and 100</div>
+			<div  *ngIf="f.ladValue.errors.pattern">
+				Allowed characters: a-z, A-Z, 0-9.
+			  </div>
+		</div>
+	</div>
+
+  	<div class="pro_form1">
+   		<input type="submit" name="submit" class="btn btn-info btn-sm mr-2 sub2 mt-4 col-md-3 pull-right" value="Save Details">
+	</div>
+</form>

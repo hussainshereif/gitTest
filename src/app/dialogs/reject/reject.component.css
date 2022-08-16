@@ -1,0 +1,15 @@
+.btn_div{
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 600;
+}
+.mar_top{
+    margin: 10px 0px;
+}
+.hd_phr{
+    margin-bottom: 15px;
+}
+.error{
+    color:#dc3545;
+    margin-top: 5px;
+}

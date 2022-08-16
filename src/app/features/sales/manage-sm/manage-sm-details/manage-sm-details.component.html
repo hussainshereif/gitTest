@@ -1,0 +1,115 @@
+<div class="wrap">
+  <div class="content_div">
+    <div class="main_heading">
+      <div class="row">
+        <div class="col_12 mb_4">
+          <div class="">
+            <div class="row allign_center">
+              <div class="col_6">
+                <h3 class="title mb_1 text_md">
+                  {{ paramData.Name }}
+                </h3>
+                <p
+                  class="text_xs dark_text_2"
+                  *ngIf="paramData.crmId != 'null'"
+                >
+                  {{ paramData.crmId }}
+                </p>
+              </div>
+              <div class="col_6">
+                <div class="d_flex justify_end">
+                  <button class="btn btn_danger pop_btn" (click)="onDeleteSM()">
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col_12 mb_3">
+          <div class="tabs_wrapper">
+            <ul class="tabs">
+              <li [ngClass]="{ active: tabId == 1 }">
+                <a (click)="tabActivation(1)">Personal Details</a>
+              </li>
+              <li [ngClass]="{ active: tabId == 2 }">
+                <a (click)="tabActivation(2)">Projects</a>
+              </li>
+              <li [ngClass]="{ active: tabId == 3 }">
+                <a (click)="tabActivation(3)">Team Members</a>
+              </li>
+            </ul>
+            <!-- tabs -->
+            <div class="tabs_container">
+              <div
+                [ngClass]="tabId == 1 ? 'tab_content active' : 'tab_content'"
+                *ngIf="tabId == 1"
+              >
+                <div class="row">
+                  <div class="col_12">
+                    <h3 class="title mb_1 text_md mb_3">Personal Details</h3>
+                    <p class="text_xs dark_text_2 text_muted">BASIC DETAILS</p>
+                  </div>
+                  <div class="col_4">
+                    <div class="input_wrap">
+                      <label class="input_label required">Name</label>
+                      <input
+                        type="text"
+                        class="inpt_field"
+                        name=""
+                        placeholder="Enter Name"
+                        value="{{ smDetails?.name }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="col_4">
+                    <div class="input_wrap">
+                      <label class="input_label required">Email</label>
+                      <input
+                        type="text"
+                        class="inpt_field"
+                        name=""
+                        placeholder="Enter Email"
+                        value="{{ smDetails?.email }}"
+                      />
+                    </div>
+                  </div>
+                  <div class="col_4">
+                    <div class="input_wrap">
+                      <label class="input_label required">Mobile Number</label>
+                      <input
+                        type="text"
+                        class="inpt_field"
+                        name=""
+                        placeholder="Enter Mobile Number"
+                        value="{{ smDetails?.mobileNumber }}"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                [ngClass]="tabId == 2 ? 'tab_content active' : 'tab_content'"
+                *ngIf="tabId == 2"
+              >
+                <app-projects *ngIf="tabId == 2" [id]="smId"></app-projects>
+              </div>
+              <!-- end -->
+              <div
+                [ngClass]="tabId == 3 ? 'tab_content active' : 'tab_content'"
+                *ngIf="tabId == 3"
+              >
+                <app-team-members
+                  *ngIf="tabId == 3"
+                  [id]="smId"
+                ></app-team-members>
+              </div>
+              <!-- end -->
+            </div>
+            <!-- tab content -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

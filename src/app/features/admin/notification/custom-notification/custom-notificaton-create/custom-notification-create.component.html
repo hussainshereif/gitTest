@@ -1,0 +1,236 @@
+<div class="">
+  <div class="col-12 col-md-12 col-lg-12">
+    <div class="pro_form1">
+      <form [formGroup]="addForm" (ngSubmit)="addDetails()" autocomplete="off">
+        <div class="collateral_btn_div1"></div>
+        <div class="container">
+          <div class="collateral_btn_div2">
+            <div class="row">
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">Title</label>
+                      <input
+                        type="text"
+                        formControlName="title"
+                        class="inpt form-control"
+                        required
+                      />
+                      <app-validation-error
+                        [submit]="addForm.value.submitted"
+                        [control]="addForm.get(['title'])"
+                        [field]="'title'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">Content</label>
+                      <textarea
+                        style="height: 160px"
+                        class="inpt form-control"
+                        type="text"
+                        formControlName="message"
+                      >
+                      </textarea>
+                      <app-validation-error
+                        [submit]="addForm.value.submitted"
+                        [control]="addForm.get(['message'])"
+                        [field]="'Message'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label class="mb-2 mt-1">Device Type</label>
+                      <label
+                        class="mb-3 w-auto d-flex align-items-center mr-2"
+                        *ngFor="let type of deviceList; let i = index"
+                      >
+                        <input
+                          type="radio"
+                          class="chk w-auto mr-2"
+                          formControlName="deviceType"
+                          [value]="type.Value"
+                          [attr.disabled]="
+                            addForm.value.notificationType === 'EMAIL'
+                              ? false
+                              : null
+                          "
+                        />
+                        <span class="label-text">{{ type.Text }}</span>
+                      </label>
+                      <app-validation-error
+                        [submit]="addForm.value.submitted"
+                        [control]="addForm.get(['deviceType'])"
+                        [field]="'Device Type'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label class="mb-2 mt-1">Type of Notification</label>
+                      <label
+                        class="mb-3 w-auto d-flex align-items-center mr-2"
+                        *ngFor="let type of typeList; let i = index"
+                      >
+                        <input
+                          type="radio"
+                          class="chk w-auto mr-2"
+                          formControlName="notificationType"
+                          (change)="onTypeChange(type.Value)"
+                          [value]="type.Value"
+                        />
+                        <span class="label-text">{{ type.Text }}</span>
+                      </label>
+                      <app-validation-error
+                        [submit]="addForm.value.submitted"
+                        [control]="addForm.get(['notificationType'])"
+                        [field]="'Notification Type'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">User Type</label>
+                      <select
+                        #UserTypeID
+                        class="inpt select_height"
+                        formControlName="userType"
+                        (change)="onChangeUserType(UserTypeID.value)"
+                      >
+                        <option
+                          *ngFor="let user of userTypes"
+                          value="{{ user }}"
+                        >
+                          {{ user }}
+                        </option>
+                      </select>
+                      <app-validation-error
+                        [submit]="addForm.value.submitted"
+                        [control]="addForm.get(['userType'])"
+                        [field]="'User Type'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                  <div class="col-3" *ngIf="showDropdown">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">User Status</label>
+                      <select
+                        class="inpt form-control select_height"
+                        formControlName="cpStatus"
+                      >
+                        <option
+                          *ngFor="let status of cpStatusList"
+                          value="{{ status }}"
+                        >
+                          {{ status }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div
+                      class="form-group"
+                      *ngIf="!showDropdown && showProject"
+                    >
+                      <label class="mb-2 mt-2">Projects</label>
+
+                      <ng-multiselect-dropdown
+                        [settings]="dropdownSettings"
+                        [data]="projectList"
+                        formControlName="projectIds"
+                        [(ngModel)]="selectedProject"
+                      >
+                      </ng-multiselect-dropdown>
+                    </div>
+                  </div>
+                </div>
+                <div class="row" *ngIf="showDropdown">
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">State</label>
+                      <select
+                        name=""
+                        #stateId
+                        class="inpt select_height"
+                        formControlName="state"
+                        (change)="onChangeState(stateId.value)"
+                      >
+                        <option
+                          *ngFor="let state of states"
+                          value="{{ state.StateName }}"
+                        >
+                          {{ state.StateName }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">Cities</label>
+                      <select
+                        name=""
+                        id=""
+                        class="inpt select_height"
+                        formControlName="city"
+                      >
+                        <option
+                          *ngFor="let city of cityList"
+                          value="{{ city }}"
+                        >
+                          {{ city }}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">Sub Region</label>
+                      <input
+                        type="text"
+                        class="inpt form-control"
+                        formControlName="subRegion"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">Micro Markets</label>
+                      <input
+                        type="text"
+                        class="inpt form-control"
+                        formControlName="microMarket"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div><hr /></div>
+        <div class="btn_div">
+          <!-- <button
+            type="button"
+            class="btn btn-secondary float-left"
+            (click)="onClose()"
+          >
+            Back
+          </button> -->
+          <button type="submit" class="btn btn-primary float-right">
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

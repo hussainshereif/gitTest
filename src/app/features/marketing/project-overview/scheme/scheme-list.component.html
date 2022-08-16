@@ -1,0 +1,77 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <div class="">
+      <div class="row allign_center">
+        <div class="col_6">
+          <h3 class="title mb_1 text_md">Scheme</h3>
+          <p class="text_xs dark_text_2">List of Scheme</p>
+        </div>
+        <div class="col_6">
+          <div class="d_flex justify_end">
+            <button class="btn btn_primary pop_btn" (click)="createSchemes()">
+              Add Scheme
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="schemeList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      [globalFilterFields]="['id', 'caption']"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id">#ID <p-sortIcon field="id"></p-sortIcon></th>
+          <th pSortableColumn="caption">
+            Title<p-sortIcon field="caption"></p-sortIcon>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-scheme>
+        <tr>
+          <td>
+            <span class="dark_text_2">#{{ scheme.id }}</span>
+          </td>
+          <td>{{ scheme.caption }}</td>
+          <td (click)="$event.stopPropagation()">
+            <a
+              class="link_primary me_3 pop_btn"
+              (click)="preview(scheme)"
+              href="javascript:void(0)"
+              data-modal=".view_image"
+              >View</a
+            >
+            <a
+              class="link_warning me_3 pop_btn"
+              (click)="editSchemes(scheme)"
+              href="javascript:void(0)"
+              >Edit</a
+            >
+            <a
+              class="danger_text me_3 link_danger pop_btn"
+              (click)="deleteSchemes(scheme.id)"
+              href="javascript:void(0)"
+              data-modal=".del_confirm_gal"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

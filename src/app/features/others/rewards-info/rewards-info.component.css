@@ -1,0 +1,79 @@
+.Group-12 {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.Sales-Support {
+  width: 335px;
+  font-family: GothamNarrow;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.83;
+  letter-spacing: 0.1px;
+  color: #034ea2;
+}
+.Sourcing-Support-i {
+  width: 310px;
+  height: 21px;
+  font-family: GothamNarrow;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.57;
+  letter-spacing: 0.1px;
+  color: #231f20;
+}
+.Triangle {
+  width: 2px;
+  height: 4px;
+  object-fit: contain;
+  border: solid 1px #231f20;
+}
+.ulList li {
+  margin-bottom: 10px;
+  padding-left: 15px;
+  background: url("src/assets/images/triangle.png") center left no-repeat;
+}
+
+.Silver {
+  width: 47px;
+  height: 18px;
+  font-family: GothamNarrow;
+  font-size: 18px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  color: #231f20;
+}
+
+.button-bg-copy-5 {
+  width: 177px;
+  height: 35px;
+  object-fit: contain;
+  opacity: 0.9;
+  background-color: #f2f2f2;
+}
+
+.Number-of-deals-in-a {
+  width: 151px;
+  height: 12px;
+  font-family: GothamNarrow;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  text-align: center;
+  color: #231f20;
+}
+
+.tab-inner-content {
+  font-family: "Gotham Narrow Book";
+}

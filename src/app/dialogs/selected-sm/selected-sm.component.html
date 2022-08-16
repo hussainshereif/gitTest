@@ -1,0 +1,96 @@
+<div class="Assign_SM">
+  <div class="modal_content">
+    <div class="modal_header mb_4">
+      <h6 class="modal_title text_xl">Select SM</h6>
+      <p class="modal_sub_title text_xs">
+        Select the SM that you want to assign
+      </p>
+      <!-- modal title -->
+      <div class="close_wrap">
+        <span
+          title="Close"
+          (click)="onCancel()"
+          class="btn_close btn btn_close_white close"
+        ></span>
+      </div>
+      <!-- close -->
+    </div>
+    <!-- modal header -->
+    <div class="modal_body">
+      <div class="cs_r">
+        <div class="row mb_1">
+          <div class="col_6 px_2">
+            <div class="input_wrap">
+              <label class="input_label required">Search SM</label>
+
+              <input
+                class="inpt_field"
+                type="text"
+                placeholder="Search Here"
+                #searchVal
+                name="searchVal"
+                (input)="getSM(0, 'NAME', searchVal.value)"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+          <div class="col_6 px_2">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label">Projects</label>
+              <p-dropdown
+                [options]="projectList"
+                autoDisplayFirst="false"
+                placeholder="Select Project"
+                [(ngModel)]="selectedProject"
+                optionLabel="projectName"
+                optionValue="id"
+                (onChange)="getSM(0, 'PROJECT', $event.value)"
+              ></p-dropdown>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="otr" *ngIf="smList.length > 0">
+        <div *ngFor="let sm of smList; let &quot;i-index&quot;">
+          <a
+            class="sm_wrap"
+            [ngClass]="smID == sm.id ? 'sm_wrap active' : 'sm_wrap'"
+            (click)="onSelectSM(sm.id)"
+          >
+            <div class="start">
+              <div class="sm_id">
+                {{ sm.id }}
+              </div>
+              <div class="sm_name">
+                {{ sm.name }}
+              </div>
+            </div>
+            <div class="middle">
+              <div class="sm_email">
+                {{ sm.email }}
+              </div>
+            </div>
+            <div class="end">
+              <div class="sm_phone">
+                {{ sm.mobileNumber }}
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <!--     <div class="error_msg" *ngIf="isError">{{errorMessage}}</div> -->
+      <div class="d_flex justify_space_between mt_3">
+        <a class="btn btn_secondary close" (click)="onCancel()">Cancel</a>
+        <button
+          class="btn btn_primary pop_f_btn"
+          [disabled]="smNotSelected"
+          (click)="onAssign()"
+        >
+          Assign
+        </button>
+      </div>
+    </div>
+    <!-- modal_body -->
+  </div>
+  <!-- modal content -->
+</div>

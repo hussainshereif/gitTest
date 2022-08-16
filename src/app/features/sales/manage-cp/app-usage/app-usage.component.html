@@ -1,0 +1,68 @@
+<div class="row">
+  <div class="form-group col-md-4">
+    <p><b>Training Progress</b></p>
+    <p *ngIf="trainingData.length==0">No data available</p>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let training of trainingData; let i=index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ training.name}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-panel-description class="status-tbl">
+          Overall Progress: {{training.trainingProgress}}
+        </mat-panel-description>
+        <table border="1" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Video Title</th>
+              <th>Progress</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="training.usageList?.length>0">
+            <tr *ngFor="let usage of training.usageList;">
+              <td>{{usage.name}}</td>
+              <td>{{usage.value!=0 ? 'Completed' : 'Not Completed'}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="form-group col-md-2"></div>
+  <div class="form-group col-md-4">
+    <p><b>Project Views</b></p>
+    <p *ngIf="projectData.length==0">No data available</p>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let project of projectData; let j=index">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ project.projectName}}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <mat-panel-description class="status-tbl">
+          <!-- Total Time Spend: {{timeSpent[j]}} -->
+          Total Time Spend: {{project.timeSpent | appUsageDate}}
+        </mat-panel-description>
+        <table border="1" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Document Name</th>
+              <th>No. of Downloads</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="project.documentsUsage?.length>0">
+            <tr *ngFor="let docusage of project.documentsUsage;">
+              <td>{{docusage.brochureName}}</td>
+              <td>{{docusage.downloadCount}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</div>

@@ -1,0 +1,487 @@
+<div class="main_wrap">
+  <aside class="sidemenu">
+    <div class="wrap">
+      <div class="left_head">
+        <a routerLink="manage-CPList" routerLinkActive="active">
+          <div class="logo">
+            <img src="{{ sidebar_logo }}" alt="" />
+          </div>
+        </a>
+      </div>
+      <div class="menu_wrap">
+        <div class="user_info">
+          <div class="figure">
+            <img
+              class="w_100"
+              src="{{ imageUrl }}"
+              onerror="this.src='assets/images/user-icon.jpg'"
+              alt=""
+            />
+          </div>
+          <div class="caption">
+            <h2 class="title">
+              {{ userName }}
+            </h2>
+            <h6 class="subtitle">
+              {{ userRole }}
+            </h6>
+          </div>
+        </div>
+        <nav class="navigation">
+          <div class="nav_group">
+            <a
+              routerLink="dashboard"
+              routerLinkActive="active"
+              class="nav_item"
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Dashboard.svg" alt="" />
+              </div>
+              <div class="item_title">Dashboard</div>
+            </a>
+          </div>
+
+          <div class="nav_group">
+            <h6
+              class="nav_head"
+              *ngIf="
+                showCP &&
+                (projectName == 'lnt' ||
+                  projectName == 'brigade' ||
+                  projectName == 'spre' ||
+                  projectName == 'happiedge' ||
+                  projectName == 'rohan')
+              "
+            >
+              Sales
+            </h6>
+            <a
+              routerLink="manage-CPList"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                showCP &&
+                (projectName == 'lnt' ||
+                  projectName == 'brigade' ||
+                  projectName == 'spre' ||
+                  projectName == 'happiedge' ||
+                  projectName == 'rohan')
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Manage-CP.svg" alt="" />
+              </div>
+              <div class="item_title">Manage CP</div>
+            </a>
+            <a
+              routerLink="manage-leads"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                showCP &&
+                (projectName == 'lnt' ||
+                  projectName == 'brigade' ||
+                  projectName == 'spre' ||
+                  projectName == 'happiedge' ||
+                  projectName == 'rohan')
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Manage-Leads.svg" alt="" />
+              </div>
+              <div class="item_title">Manage Leads</div>
+            </a>
+            <a
+              routerLink="profile-requests"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                showCP &&
+                (projectName == 'lnt' ||
+                  projectName == 'brigade' ||
+                  projectName == 'spre' ||
+                  projectName == 'happiedge' ||
+                  projectName == 'rohan')
+              "
+            >
+              <div class="icon">
+                <img
+                  src="assets/images_new/icons/Manage-Profile-Rq..svg"
+                  alt=""
+                />
+              </div>
+              <div class="item_title">Manage Profile Rq.</div>
+            </a>
+            <a
+              routerLink="manage-sm"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                showCP &&
+                enableSMConfig &&
+                (projectName == 'lnt' ||
+                  projectName == 'brigade' ||
+                  projectName == 'spre' ||
+                  projectName == 'happiedge' ||
+                  projectName == 'rohan')
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Manage SM.svg" alt="" />
+              </div>
+              <div class="item_title">Manage SM</div>
+            </a>
+            <a
+              routerLink="cp-sm-mapping"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                showCP &&
+                enableSMConfig &&
+                (projectName == 'lnt' ||
+                  projectName == 'brigade' ||
+                  projectName == 'spre' ||
+                  projectName == 'happiedge' ||
+                  projectName == 'rohan')
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Cp-SM-Mapping.svg" alt="" />
+              </div>
+              <div class="item_title">CP SM Mapping</div>
+            </a>
+          </div>
+          <div class="nav_group">
+            <h6 class="nav_head" *ngIf="showCustomer">CRM</h6>
+            <a
+              routerLink="manage-customers"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="showCustomer"
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Manage-CP.svg" alt="" />
+              </div>
+              <div class="item_title">Manage Customers</div>
+            </a>
+            <a
+              routerLink="manage-referrals"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="showCustomer"
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Manage-Leads.svg" alt="" />
+              </div>
+              <div class="item_title">Manage Referrals</div>
+            </a>
+            <a
+              routerLink="customer-profile-requests"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="showCustomer"
+            >
+              <div class="icon">
+                <img
+                  src="assets/images_new/icons/Manage-Profile-Rq..svg"
+                  alt=""
+                />
+              </div>
+              <div class="item_title">Manage Profile Rq.</div>
+            </a>
+          </div>
+          <div
+            class="nav_group"
+            *ngIf="
+              projectName == 'lnt' ||
+              projectName == 'brigade' ||
+              projectName == 'embassy' ||
+              projectName == 'spre' ||
+              projectName == 'happiedge' ||
+              projectName == 'srijan' ||
+              projectName == 'century' ||
+              projectName == 'godrej' ||
+              projectName == 'rohan' ||
+              projectName == 'arvind'
+            "
+          >
+            <h6 class="nav_head">Marketing</h6>
+            <a
+              routerLink="project-overview"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'embassy' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'srijan' ||
+                projectName == 'century' ||
+                projectName == 'godrej' ||
+                projectName == 'rohan' ||
+                projectName == 'arvind'
+              "
+            >
+              <div class="icon">
+                <img
+                  src="assets/images_new/icons/Project-Overview.svg"
+                  alt=""
+                />
+              </div>
+              <div class="item_title">Project Overview</div>
+            </a>
+            <a
+              routerLink="training"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan'
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Training.svg" alt="" />
+              </div>
+              <div class="item_title">Training</div>
+            </a>
+            <a
+              routerLink="about-us"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                enableAboutUS &&
+                (projectName == 'lnt' ||
+                  projectName == 'brigade' ||
+                  projectName == 'embassy' ||
+                  projectName == 'spre' ||
+                  projectName == 'happiedge' ||
+                  projectName == 'rohan' ||
+                  projectName == 'srijan' ||
+                  projectName == 'century' ||
+                  projectName == 'arvind')
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/About-Us.svg" alt="" />
+              </div>
+              <div class="item_title">About Us</div>
+            </a>
+            <a
+              routerLink="banner"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan'
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Banner.svg" alt="" />
+              </div>
+              <div class="item_title">Banner</div>
+            </a>
+          </div>
+
+          <div class="nav_group">
+            <h6
+              class="nav_head"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan'
+              "
+            >
+              Finance
+            </h6>
+            <a
+              *ngIf="(!showCustomer && showBrokerage) || title == 'Reloy'"
+              class="nav_item"
+              routerLink="brokerage"
+              routerLinkActive="active"
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Brokerage.svg" alt="" />
+              </div>
+              <div class="item_title">Brokerage</div>
+            </a>
+            <a
+              routerLink="invoice"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan'
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Invoice.svg" alt="" />
+              </div>
+              <div class="item_title">Invoice</div>
+            </a>
+            <a
+              routerLink="invoice-template"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan'
+              "
+            >
+              <div class="icon">
+                <img
+                  src="assets/images_new/icons/Invoice_template.svg"
+                  alt=""
+                />
+              </div>
+              <div class="item_title">Invoice Template</div>
+            </a>
+          </div>
+          <div
+            class="nav_group"
+            *ngIf="(!showCustomer && showBrokerage) || title == 'Reloy'"
+          >
+            <h6 class="nav_head">Ladders</h6>
+            <a class="nav_item" routerLink="ladders" routerLinkActive="active">
+              <div class="icon">
+                <img src="assets/images_new/icons/Ladders.svg" alt="" />
+              </div>
+              <div class="item_title">Ladders</div>
+            </a>
+            <a class="nav_item" routerLink="cp-group" routerLinkActive="active">
+              <div class="icon">
+                <img src="assets/images_new/icons/CP-Groups.svg" alt="" />
+              </div>
+              <div class="item_title">CP Groups</div>
+            </a>
+          </div>
+          <div class="nav_group">
+            <h6
+              class="nav_head"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'embassy' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan' ||
+                projectName == 'srijan' ||
+                projectName == 'godrej' ||
+                projectName == 'century' ||
+                projectName == 'arvind'
+              "
+            >
+              Admin
+            </h6>
+            <a
+              routerLink="notifications"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'embassy' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan' ||
+                projectName == 'srijan' ||
+                projectName == 'godrej' ||
+                projectName == 'century' ||
+                projectName == 'arvind'
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Profile.svg" alt="" />
+              </div>
+              <div class="item_title">Send Notifications</div>
+            </a>
+            <a
+              routerLink="sub-admin"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'embassy' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan' ||
+                projectName == 'srijan' ||
+                projectName == 'godrej' ||
+                projectName == 'century' ||
+                projectName == 'arvind'
+              "
+            >
+              <div class="icon">
+                <img
+                  src="assets/images_new/icons/Manage-Sub-Admins.svg"
+                  alt=""
+                />
+              </div>
+              <div class="item_title">Manage Sub-Admins</div>
+            </a>
+            <a
+              routerLink="failed-transfer"
+              routerLinkActive="active"
+              class="nav_item"
+              *ngIf="
+                projectName == 'lnt' ||
+                projectName == 'brigade' ||
+                projectName == 'embassy' ||
+                projectName == 'spre' ||
+                projectName == 'happiedge' ||
+                projectName == 'rohan' ||
+                projectName == 'srijan' ||
+                projectName == 'century' ||
+                projectName == 'arvind'
+              "
+            >
+              <div class="icon">
+                <img src="assets/images_new/icons/Profile.svg" alt="" />
+              </div>
+              <div class="item_title">Failed Transfer Logs</div>
+            </a>
+          </div>
+          <div class="nav_group">
+            <h6 class="nav_head">SETTINGS</h6>
+            <!-- <a class="nav_item" routerLink="profile" routerLinkActive="active">
+              <div class="icon"><img src="assets/images_new/icons/Profile.svg" alt=""></div>
+              <div class="item_title">
+                Profile
+              </div>
+            </a> -->
+            <a (click)="changePassword()" class="nav_item">
+              <div class="icon">
+                <img src="assets/images_new/icons/Change-Password.svg" alt="" />
+              </div>
+              <div class="item_title">Change Password</div>
+            </a>
+            <a (click)="logout()" class="nav_item">
+              <div class="icon">
+                <img src="assets/images_new/icons/Logout.svg" alt="" />
+              </div>
+              <div class="item_title">Logout</div>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </aside>
+  <main class="main_content">
+    <app-navbar></app-navbar>
+  </main>
+</div>

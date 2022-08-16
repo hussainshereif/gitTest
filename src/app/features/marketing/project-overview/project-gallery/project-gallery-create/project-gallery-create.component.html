@@ -1,0 +1,303 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Upload</h6>
+    <p class="modal_title text_xs">Upload Images / Video links</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onClose()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <div class="row_n">
+      <div class="col_12">
+        <div class="tabs_wrapper">
+          <ul class="tabs">
+            <li
+              [class.active]="selectedtab === 'gtab1'"
+              (click)="selectedtab = 'gtab1'"
+              id="gtab1"
+            >
+              Upload Images
+            </li>
+            <li
+              id="gtab2"
+              [class.active]="selectedtab === 'gtab2'"
+              (click)="selectedtab = 'gtab2'"
+            >
+              Upload Video Link
+            </li>
+          </ul>
+          <!-- tabs -->
+          <div class="tabs_container">
+            <div
+              class="tab_content"
+              [class.active]="selectedtab === 'gtab1'"
+              data-tab="gtab1"
+            >
+              <form
+                [formGroup]="addFormImage"
+                (ngSubmit)="addImageDetails()"
+                autocomplete="off"
+              >
+                <div class="row_n">
+                  <div class="col_12">
+                    <div class="input_wrap mb_3">
+                      <div class="d_flex">
+                        <input
+                          type="file"
+                          id="real-file"
+                          #imgupload
+                          hidden="hidden"
+                          (change)="uploadFile($event)"
+                          class="inpt_field"
+                        />
+                        <button
+                          type="button"
+                          (click)="imgupload.click()"
+                          id="custom-button"
+                        >
+                          <img
+                            src="../../../../../../assets/images_new/icons/file-upload.svg"
+                            alt=""
+                          />
+                        </button>
+                        <div
+                          class="file_txt"
+                          style="display: flex; flex-direction: column"
+                        >
+                          <span class="subtext">Upload Image</span>
+                          <span class="info" *ngIf="!fileName" id="custom-text"
+                            >No file chosen, yet.</span
+                          >
+                          <span
+                            class="info"
+                            *ngIf="fileName"
+                            id="custom-text"
+                            >{{ fileName }}</span
+                          >
+                        </div>
+                      </div>
+                      <small class="small"
+                        >Width: 78px, Height: 72px, Max size: 2Mb</small
+                      >
+                      <div
+                        class="login_error"
+                        *ngIf="addFormImage.value.submitted"
+                      >
+                        <div *ngIf="!fileName">Project logo is required</div>
+                        <div
+                          [hidden]="
+                            (bgValidation.valid && bgValidation.insize) ||
+                            (!bgValidation.valid && !bgValidation.insize)
+                          "
+                        >
+                          Invalid image!
+                        </div>
+                        <div [hidden]="bgValidation.insize">
+                          Image size cannot exceed 10 MB
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col_12">
+                    <div class="input_wrap mb_3">
+                      <label class="input_label r_lbl required">Show in</label>
+                      <div class="w_100 mt_1 d_block">
+                        <div
+                          class="form_check form_check_inline"
+                          *ngFor="let item of shownList"
+                        >
+                          <p-radioButton
+                            [value]="item.Value"
+                            id="item.Value"
+                            formControlName="showIn"
+                            (onClick)="onShowInChange($event)"
+                          ></p-radioButton>
+                          <label for="item.Value">{{ item.Text }}</label>
+                        </div>
+                      </div>
+                      <app-validation-error
+                        [submit]="addFormImage.value.submitted"
+                        [control]="addFormImage.get(['showIn'])"
+                        [field]="'Show In'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                  <div class="col_12">
+                    <div class="input_wrap mb_3">
+                      <label class="input_label required">Title</label>
+                      <input
+                        *ngIf="!this.addFormImage.value.id"
+                        type="text"
+                        class="inpt_field"
+                        name=""
+                        formControlName="caption"
+                        placeholder="Enter Title"
+                      />
+                      <p-autoComplete
+                        *ngIf="this.addFormImage.value.id"
+                        [suggestions]="filtereddefCaptions"
+                        (completeMethod)="filterData($event)"
+                        formControlName="caption"
+                      ></p-autoComplete>
+                      <app-validation-error
+                        [submit]="addFormImage.value.submitted"
+                        [control]="addFormImage.get(['caption'])"
+                        [field]="'Title'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                  <div class="col_12">
+                    <div class="input_wrap mb_3">
+                      <label class="input_label required">Add a Tagline</label>
+                      <textarea
+                        class="tet_field"
+                        id="Address"
+                        autocomplete="off"
+                        formControlName="tagLine"
+                        placeholder="Add a Tagline"
+                      ></textarea>
+                      <app-validation-error
+                        [submit]="addFormImage.value.submitted"
+                        [control]="addFormImage.get(['tagLine'])"
+                        [field]="'Tagline'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                </div>
+                <div class="d_flex justify_space_between">
+                  <button
+                    class="btn btn_secondary close"
+                    type="button"
+                    (click)="onClose()"
+                  >
+                    Cancel
+                  </button>
+                  <button class="btn btn_primary pop_btn" type="submit">
+                    Upload
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div
+              class="tab_content"
+              data-tab="gtab2"
+              [class.active]="selectedtab === 'gtab2'"
+            >
+              <form
+                [formGroup]="addFormVideo"
+                (ngSubmit)="addVideoDetails()"
+                autocomplete="off"
+              >
+                <div class="row_n">
+                  <div class="col_12">
+                    <div class="input_wrap mb_3">
+                      <label class="input_label required">Add Video Url</label>
+                      <input
+                        type="text"
+                        class="inpt_field"
+                        name=""
+                        formControlName="videoUrl"
+                        placeholder="Enter Video Url"
+                      />
+                      <app-validation-error
+                        [submit]="addFormVideo.value.submitted"
+                        [control]="addFormVideo.get(['videoUrl'])"
+                        [field]="'Video Url'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                  <div class="col_12">
+                    <div class="input_wrap mb_3">
+                      <label class="input_label r_lbl required">Show in</label>
+                      <div class="w_100 mt_1 d_block">
+                        <div
+                          class="form_check form_check_inline"
+                          *ngFor="let item of shownList"
+                        >
+                          <p-radioButton
+                            [value]="item.Value"
+                            id="item.Value"
+                            formControlName="showIn"
+                            (onClick)="onShowInChange($event)"
+                          ></p-radioButton>
+                          <label for="item.Value">{{ item.Text }}</label>
+                        </div>
+                        <app-validation-error
+                          [submit]="addFormVideo.value.submitted"
+                          [control]="addFormVideo.get(['showIn'])"
+                          [field]="'Show In'"
+                        ></app-validation-error>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col_12">
+                    <div class="input_wrap mb_3">
+                      <label class="input_label required">Title</label>
+                      <input
+                        *ngIf="!this.addFormVideo.value.id"
+                        type="text"
+                        class="inpt_field"
+                        name=""
+                        formControlName="caption"
+                        placeholder="Enter Title"
+                      />
+                      <p-autoComplete
+                        *ngIf="this.addFormVideo.value.id"
+                        [suggestions]="filtereddefCaptions"
+                        (completeMethod)="filterData($event)"
+                        formControlName="caption"
+                      ></p-autoComplete>
+                      <app-validation-error
+                        [submit]="addFormVideo.value.submitted"
+                        [control]="addFormVideo.get(['caption'])"
+                        [field]="'Title'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                  <div class="col_12">
+                    <div class="input_wrap mb_3">
+                      <label class="input_label required">Add a Tagline</label>
+                      <textarea
+                        class="tet_field"
+                        id="Address"
+                        autocomplete="off"
+                        formControlName="tagLine"
+                        placeholder="Add a Tagline"
+                      ></textarea>
+                      <app-validation-error
+                        [submit]="addFormVideo.value.submitted"
+                        [control]="addFormVideo.get(['tagLine'])"
+                        [field]="'TagLine'"
+                      ></app-validation-error>
+                    </div>
+                  </div>
+                </div>
+                <div class="d_flex justify_space_between">
+                  <button
+                    class="btn btn_secondary close"
+                    type="button"
+                    (click)="onClose()"
+                  >
+                    Cancel
+                  </button>
+                  <button class="btn btn_primary pop_btn" type="submit">
+                    Upload
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- tab content -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- modal_body -->
+</div>

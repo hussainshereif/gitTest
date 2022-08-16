@@ -1,0 +1,8 @@
+.mat-form-field + .mat-form-field {
+    margin-left: 8px;
+  }
+
+  .status-tbl {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }

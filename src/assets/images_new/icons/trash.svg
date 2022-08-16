@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+  <g id="trash" transform="translate(-1.5 -1.301)">
+    <rect id="Rectangle_879" data-name="Rectangle 879" width="33" height="40" transform="translate(10 9.801)" fill="none" stroke="#d90000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <line id="Line_79" data-name="Line 79" x2="47" transform="translate(3 9.801)" fill="none" stroke="#d90000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <line id="Line_80" data-name="Line 80" x2="11" transform="translate(21 2.801)" fill="none" stroke="#d90000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <line id="Line_81" data-name="Line 81" y2="18" transform="translate(21 18.801)" fill="none" stroke="#d90000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+    <line id="Line_82" data-name="Line 82" y2="18" transform="translate(32 18.801)" fill="none" stroke="#d90000" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
+  </g>
+</svg>

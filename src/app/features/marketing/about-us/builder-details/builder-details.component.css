@@ -1,0 +1,32 @@
+.heading-style-inline {
+  color: #231f20;
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  position: absolute;
+}
+
+.heading-style-sub {
+  color: #93949b;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  position: absolute;
+}
+
+.list-scrollable {
+  bottom: 0;
+  height: 64vh;
+  left: 0;
+  margin: auto;
+  overflow-x: hidden;
+  position: relative;
+  right: 0;
+  top: 0;
+}

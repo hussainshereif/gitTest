@@ -1,0 +1,43 @@
+<main class="page-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="form-group col-md-12">
+                <h1>Audit Trial
+                  
+                
+                </h1>
+                <!-- <div class="pull-right" style="color:red;float:right">{{uploadStatus}}</div> -->
+            </div>
+        </div>
+  
+        <div class="row">
+            <div class="form-group col-md-12">
+                <table class="table table-striped table-hover table-responsive w-100">
+                  <thead>
+                    <tr>
+                      <th width="55%"> Content</th>
+                      <th width="15%"> Date</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="auditTrialData.length>0">
+                    <tr *ngFor="let cp of auditTrialData;let i=index">
+                      <td>{{cp.auditContent}}</td>
+                      <td>{{cp.auditInsertedOn}}</td>
+                    </tr>          
+                  </tbody>
+                  <tbody *ngIf="auditTrialData.length==0">
+                    <tr>
+                      <td colspan="10" class="text-center">No data available!</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+  
+<div *ngIf="sizeofTable>recordsPerPage"> 
+    <ngb-pagination  [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage" aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+  </div>  
+    
+    </main>

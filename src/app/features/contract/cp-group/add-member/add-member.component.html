@@ -1,0 +1,38 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Member</h6>
+    <p class="modal_title text_xs">Add New Member</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        (click)="onClose()"
+        class="btn_close btn btn_close_white close"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <div class="row">
+      <div class="col_12">
+        <div class="input_wrap">
+          <label class="input_label required">Member</label>
+          <p-multiSelect
+            [options]="cpList"
+            [(ngModel)]="cpIds"
+            optionLabel="name"
+            optionValue="id"
+          ></p-multiSelect>
+        </div>
+      </div>
+    </div>
+    <div class="d_flex justify_space_between">
+      <button class="btn btn_secondary close" (click)="onClose()">
+        Cancel
+      </button>
+      <button class="btn btn_primary" (click)="onSave()">Create</button>
+    </div>
+  </div>
+  <!-- modal_body -->
+</div>

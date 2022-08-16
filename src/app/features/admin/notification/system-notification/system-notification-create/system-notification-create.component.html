@@ -1,0 +1,185 @@
+<div class="">
+  <div class="col-12 col-md-12 col-lg-12">
+    <div class="pro_form1">
+      <form [formGroup]="addForm" (ngSubmit)="addDetails()" autocomplete="off">
+        <div class="collateral_btn_div1">
+          <h4>#{{ data.id }}</h4>
+          <div class="heading-style-sub">Edit Notification</div>
+        </div>
+        <div class="">
+          <div class="collateral_btn_div2">
+            <div class="row mt-4">
+              <div class="col-6">
+                <div class="form-group">
+                  <label class="mb-2 mt-2">Subject</label>
+                  <input
+                    class="inpt form-control"
+                    type="text"
+                    formControlName="subject"
+                    required
+                  />
+                  <div
+                    class="error_message"
+                    *ngIf="
+                      addForm.value.submitted == 1 &&
+                      addForm.controls.subject.errors
+                    "
+                  >
+                    <div *ngIf="addForm.controls.subject.errors.required">
+                      Subject is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="mb-2 mt-2">Content</label>
+                  <textarea
+                    style="height: 160px"
+                    type="text"
+                    class="inpt form-control"
+                    formControlName="message"
+                    [readonly]="addForm.value.type === 'SMS'"
+                  >
+                  </textarea>
+                  <div
+                    class="error_message"
+                    *ngIf="
+                      addForm.value.submitted == 1 &&
+                      addForm.controls.message.errors
+                    "
+                  >
+                    <div *ngIf="addForm.controls.message.errors.required">
+                      Content is required.
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="mb-2 mt-1">Type of Notification</label>
+                      <label
+                        class="mb-3 w-auto d-flex align-items-center mr-2"
+                        *ngFor="let type of typeList; let i = index"
+                      >
+                        <input
+                          type="radio"
+                          formControlName="type"
+                          class="chk w-auto mr-2"
+                          [value]="type.Value"
+                        />
+                        <span class="label-text">{{ type.Text }}</span>
+                      </label>
+                      <div
+                        class="error_message"
+                        *ngIf="
+                          addForm.value.submitted == 1 &&
+                          addForm.controls.type.errors
+                        "
+                      >
+                        <div *ngIf="addForm.controls.type.errors.required">
+                          Type is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="mb-2 mt-1">Enabled</label>
+                      <label
+                        class="mb-3 w-auto d-flex align-items-center mr-2"
+                        *ngFor="let type of enabledList; let i = index"
+                      >
+                        <input
+                          type="radio"
+                          formControlName="enabled"
+                          class="chk w-auto mr-2"
+                          [value]="type.Value"
+                        />
+                        <span class="label-text">{{ type.Text }}</span>
+                      </label>
+                      <div
+                        class="error_message"
+                        *ngIf="
+                          addForm.value.submitted == 1 &&
+                          addForm.controls.enabled.errors
+                        "
+                      >
+                        <div *ngIf="addForm.controls.enabled.errors.required">
+                          Enabled is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="mb-2 mt-1">Recurring</label>
+                      <label
+                        class="mb-3 w-auto d-flex align-items-center mr-4"
+                        *ngFor="let type of enabledList; let i = index"
+                      >
+                        <input
+                          class="chk w-auto mr-2"
+                          type="radio"
+                          formControlName="recurring"
+                          [value]="type.Value"
+                        />
+                        <span class="label-text">{{ type.Text }}</span>
+                      </label>
+                      <div
+                        class="error_message"
+                        *ngIf="
+                          addForm.value.submitted == 1 &&
+                          addForm.controls.recurring.errors
+                        "
+                      >
+                        <div *ngIf="addForm.controls.recurring.errors.required">
+                          Recurring is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <label class="mb-2 mt-2">Period (in days)</label>
+                      <input
+                        type="number"
+                        class="inpt form-control"
+                        formControlName="period"
+                        required
+                      />
+                      <div
+                        class="error_message"
+                        *ngIf="
+                          addForm.value.submitted == 1 &&
+                          addForm.controls.period.errors
+                        "
+                      >
+                        <div *ngIf="addForm.controls.period.errors.required">
+                          Period is required.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div><hr /></div>
+
+        <div class="btn_div">
+          <button
+            type="button"
+            class="btn btn-secondary float-left"
+            (click)="onClose()"
+          >
+            Back
+          </button>
+          <button type="submit" class="btn btn-primary float-right">Add</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

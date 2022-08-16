@@ -1,0 +1,220 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <p-table
+      #dt
+      [value]="cpList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row allign_center">
+          <div class="col_3">
+            <h3 class="title mb_1 text_md">Manage CP</h3>
+            <p class="text_xs dark_text_2">
+              Your Channel Partners are listed here
+            </p>
+          </div>
+          <div class="col_9">
+            <div class="d_flex justify_end">
+              <a
+                class="btn link pe_0 me_3 pop_btn"
+                href="javascript:void(0)"
+                (click)="viewLog()"
+                >Import Log</a
+              >
+              <a class="btn link px_0 me_3" href="{{ cpExcel }}"
+                >Download Sample</a
+              >
+              <input
+                class="import_input"
+                type="file"
+                #fileInput
+                [(ngModel)]="currentFile"
+                name="fileInput"
+                (change)="uploadExcel($event)"
+              />
+              <button
+                class="btn btn_primary_g me_3"
+                (click)="fileInput.click()"
+              >
+                Import CP
+              </button>
+              <span class="p-input-icon-left tbl_search">
+                <i class="pi pi-search"></i>
+                <input
+                  class="search_groups"
+                  pInputText
+                  #searchVal
+                  [(ngModel)]="searchValues"
+                  type="text"
+                  (input)="searchValueOffset(0, 10, searchVal.value)"
+                  placeholder="Search..."
+                />
+              </span>
+              <button class="tbl_filter" (click)="openNav()">
+                <div class="icon">
+                  <img src="assets/images_new/icons/filter.svg" alt="" />
+                </div>
+              </button>
+              <button class="btn btn_primary" (click)="downloadExcel()">
+                Download
+              </button>
+              <button class="btn btn_primary ml-2" (click)="newLoginExcel()">
+                New Login Report
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>CP ID</th>
+          <th>CP Name</th>
+          <th>CP Company</th>
+          <th>Mobile Number</th>
+          <th>Email ID</th>
+          <th>Registration Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-cp>
+        <tr (click)="cpProfile(cp.id)">
+          <td>
+            <span class="dark_text_2"
+              >#{{ cp.cpMaster.crmId | nullValuesConverter }}</span
+            >
+          </td>
+          <td>{{ cp.name }}&nbsp;{{ cp.cpLastName }}</td>
+          <td>
+            {{ cp.cpMaster.companyName }}
+          </td>
+          <td>{{ cp.mobileNumber }}</td>
+          <td>{{ cp.email }}</td>
+          <td>{{ cp.createdOn | date: "dd/MM/yyyy" }}</td>
+          <td (click)="$event.stopPropagation()">
+            <div class="input_wrap tbl_dropdown_arrow in_tbl mb_0">
+              <p-dropdown
+                [(ngModel)]="cp.cpMaster.status"
+                [options]="statusList"
+                placeholder="Status"
+                optionLabel="Text"
+                optionValue="Value"
+                #status
+                (onChange)="onStatusChange(cp.id, status.value)"
+              ></p-dropdown>
+            </div>
+          </td>
+          <td (click)="$event.stopPropagation()">
+            <div class="input_wrap tbl_dropdown_arrow in_tbl mb_0">
+              <p-dropdown
+                [(ngModel)]="cp.active"
+                [options]="activationList"
+                optionLabel="Text"
+                optionValue="Value"
+                #active
+                (onChange)="activationStatusChange(cp.id, $event)"
+              ></p-dropdown>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-center" colspan="9">No data available!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<p-sidebar [(visible)]="showFilter" position="right">
+  <div class="filter_header mb_4">
+    <h5 class="filter_title text_xl">Filter</h5>
+    <p class="filter_title text_xs">Filter down the CP list</p>
+    <!-- filter title -->
+    <!--     <div class="close_wrap">
+            <span title="Close" class="btn_close btn btn_close_white close"></span>
+        </div> -->
+    <!-- close -->
+  </div>
+  <!-- filter header -->
+  <div class="filter_body">
+    <form [formGroup]="filterForm">
+      <div class="row mb_3">
+        <div class="col_12">
+          <div class="input_wrap filter_br">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label">CP Status</label>
+              <p-dropdown
+                [options]="statusList"
+                autoDisplayFirst="false"
+                placeholder="All"
+                formControlName="status"
+                optionLabel="Text"
+                optionValue="Value"
+              >
+              </p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap filter_br">
+            <div class="form_check form_check_inline">
+              <p-checkbox
+                #registeredOnApp
+                formControlName="registeredOnApp"
+                [binary]="true"
+                inputId="registeredOnApp"
+              ></p-checkbox>
+              <label for="registeredOnApp" class="ml-4">
+                Registered On App</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap filter_br">
+            <div class="form_check form_check_inline">
+              <p-checkbox
+                #loggedIn
+                formControlName="loggedIn"
+                [binary]="true"
+                inputId="inlineCheckbox1"
+                (onChange)="onChangeValue($event)"
+              ></p-checkbox>
+              <label for="inlineCheckbox1" class="ml-4"> Logged In </label>
+            </div>
+          </div>
+        </div>
+        <div class="col_12" *ngIf="isLoggedIn">
+          <div class="input_wrap filter_br">
+            <div class="input_wrap calendar_icon">
+              <label class="input_label">Cut Off Date</label>
+              <p-calendar
+                formControlName="loginCutOffDate"
+                placeholder="DD/MM/YYYY"
+                dateFormat="dd/mm/yy"
+              ></p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <a class="btn btn_secondary close" (click)="clearFilter()">Clear all</a>
+        <button class="btn btn_primary pop_f_btn" (click)="filterFormSubmit()">
+          Apply Filter
+        </button>
+      </div>
+    </form>
+  </div>
+</p-sidebar>

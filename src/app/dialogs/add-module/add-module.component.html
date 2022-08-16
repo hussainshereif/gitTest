@@ -1,0 +1,76 @@
+<div class="row">
+  <div class="col-md-12 col-xs-12">
+    <div class="pro_form1">
+
+      <form name="moduleForm" autocomplete="off" #moduleForm="ngForm"
+        (ngSubmit)="moduleForm.form.valid&&saveModuleDetails()" novalidate>
+        <div class="form-group">
+          <label class="mb-2 mt-2">Module Name</label>
+          <input name="module" maxlength="50" #module="ngModel" [(ngModel)]="newModule.moduleName" required>
+
+          <small *ngIf="showEModule&&!module.valid && module.errors && moduleForm.submitted"
+            class="error_message mt-3 float-left w-100" style="margin-top: -10px;">
+            <div [hidden]="!module.errors.required">
+              Module name is required
+            </div>
+          </small>
+        </div>
+
+        <div class="form-group float-left w-100 ">
+          <label class="mb-2 mt-2">Module thumbnail image</label>
+          <span class="browse-text">
+            <label for="file-upload" class="custom-file-upload">
+              <input type="text" name="mThumb" readonly [(ngModel)]="moduleThumb" #mThumb="ngModel" class="inpt1"
+                pattern="(.*)(.jpe?g|png)$" required>
+              <span class="cust">Browse file</span>
+            </label>
+            <input id="file-upload" type="file" name="mThumbFile" #mThumbFile (change)="addModuleThumb($event)"
+              pattern="(.*)(.jpe?g|png)$" required />
+          </span>
+          <span class="upload">
+            <a (click)="mThumbFile.click()">
+              <img src="assets/images/upload.svg" alt="">
+            </a>
+          </span>
+
+          <small *ngIf="showEModule&&!mThumb.valid && mThumb.errors && moduleForm.submitted"
+            class="error_message float-left w-100" style="margin-top: -10px;">
+            <div [hidden]="!mThumb.errors.required">
+              Thumbnail is required
+            </div>
+          </small>
+
+          <small *ngIf="showEModule" class="error_message float-left w-100" style="margin-top: -10px;">
+            <div
+              [hidden]="(bgValidation .valid && bgValidation.insize) || (!bgValidation.valid && !bgValidation.insize)">
+              Invalid image!
+            </div>
+            <div [hidden]="bgValidation.insize">
+              Image size cannot exceed 10 MB
+            </div>
+          </small>
+        </div>
+
+        <div class="form-group">
+          <label class="mb-2 mt-2">Description</label>
+          <textarea name="desc" #desc="ngModel" [(ngModel)]="newModule.description" maxlength="150"
+            pattern="[a-zA-Z0-9.'' ]*" required></textarea>
+          <small *ngIf="showEModule&&!desc.valid && desc.errors && moduleForm.submitted"
+            class="error_message mt-3 float-left w-100" style="margin-top: -10px;">
+            <div [hidden]="!desc.errors.required">
+              Description is required
+            </div>
+            <div [hidden]="desc.valid">
+              Allowed characters: a-z, A-Z, 0-9.''
+            </div>
+          </small>
+        </div>
+        <div class="col-md-12 float-left mt-5 pr-0 pl-0">
+          <span class="sub_1a">
+            <button type="submit" class="sub1 pull-right">Save Details</button>
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

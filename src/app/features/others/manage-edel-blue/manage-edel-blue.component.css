@@ -1,0 +1,36 @@
+.samplexlsx{
+    width: 32px;
+    display: block;
+    float: right;
+    margin-right: 5px;
+}
+
+.table disableselect{   
+      padding: 5px 10px;
+    font-size: 10px;
+      font-weight: 900;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 0.98;
+      letter-spacing: normal;
+      text-align: justify;
+      color: rgb(236, 236, 236) !important;
+      border-radius: 3.5px;
+      background-color: rgb(113, 113, 131) !important;
+    border: solid 0.7px rgb(113, 113, 131) !important;}
+
+
+    
+.disableselect{
+  background-color: gray !important;
+ }
+ .processing_status_div{
+  width:100%;
+  display: block;
+}
+.processing_status{
+  width: 10%;
+  float: right;
+  color: red;
+  font-size: 16px;
+}

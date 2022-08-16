@@ -1,0 +1,227 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <div class="">
+      <form
+        [formGroup]="editForm"
+        (ngSubmit)="editDetails()"
+        autocomplete="off"
+      >
+        <div class="row_n allign_center mb_4">
+          <div class="col_6">
+            <a class="back_a" (click)="onBack()">
+              <div class="icon">
+                <img src="../../assets/images_new/icons/back.svg" alt="" />
+              </div>
+              <div class="title">Back to List</div>
+            </a>
+            <h3 class="title mb_2">{{ cpData.name }}</h3>
+            <p class="text_xs dark_text_2">#{{ cpData.id }}</p>
+          </div>
+          <div class="col_6">
+            <div class="d_flex justify_end">
+              <button
+                *ngIf="!isEdit"
+                (click)="onEdit()"
+                type="button"
+                class="btn btn_secondary me_2"
+              >
+                Edit
+              </button>
+              <button *ngIf="isEdit" type="submit" class="btn btn_primary me_2">
+                Save
+              </button>
+              <button
+                class="btn btn_danger pop_btn"
+                type="button"
+                (click)="onDelete(cpData.id)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row_n mb_4">
+          <div class="col_3">
+            <h3 class="title text_lg mb_2">
+              {{
+                (groupAggregateData.bookingsCount
+                  ? groupAggregateData.bookingsCount
+                  : 0
+                ) | number
+              }}
+            </h3>
+            <p class="text_xs dark_text_2">Total No Bookings</p>
+          </div>
+          <div class="col_3">
+            <h3 class="title text_lg mb_2">
+              {{
+                (groupAggregateData.totalBookingsValue
+                  ? groupAggregateData.totalBookingsValue
+                  : 0
+                ) | number
+              }}
+            </h3>
+            <p class="text_xs dark_text_2">Total Value Bookings</p>
+          </div>
+          <div class="col_3">
+            <h3 class="title text_lg mb_2">
+              {{
+                (groupAggregateData.totalBrokerage
+                  ? groupAggregateData.totalBrokerage
+                  : 0
+                ) | number
+              }}
+            </h3>
+            <p class="text_xs dark_text_2">Total Brokerage</p>
+          </div>
+          <div class="col_3">
+            <h3 class="title text_lg mb_2">
+              {{
+                (groupAggregateData.avgBrokeragePercentage
+                  ? groupAggregateData.avgBrokeragePercentage
+                  : 0
+                ) | number: "1.0-0"
+              }}
+            </h3>
+            <p class="text_xs dark_text_2">Avg Brokerage %</p>
+          </div>
+        </div>
+
+        <div class="row_n">
+          <div class="col_4 mb_4">
+            <div class="selected_grup">
+              <h6 class="title">Ladders Applied</h6>
+              <div class="selected_wrap">
+                <div
+                  class="grup_item success"
+                  *ngFor="let ladder of ladderData"
+                >
+                  <div class="caption">
+                    <h5 class="name">{{ ladder.name }}</h5>
+                  </div>
+                  <button class="btn" type="button">
+                    <img
+                      src="../../assets/images_new/icons/remove.svg"
+                      alt=""
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row_n">
+          <div class="col_4">
+            <div class="input_wrap mb_0">
+              <label class="input_label">Name</label>
+              <input
+                type="text"
+                class="inpt_field"
+                formControlName="name"
+                [readonly]="isEdit ? false : true"
+              />
+              <app-validation-error
+                [submit]="submitted"
+                [control]="editForm.get(['name'])"
+                [field]="'Name'"
+              ></app-validation-error>
+            </div>
+          </div>
+          <div class="col_4">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label">Priority</label>
+              <p-dropdown
+                [options]="priority"
+                formControlName="priority"
+                [disabled]="isEdit ? null : 'disabled'"
+              ></p-dropdown>
+            </div>
+          </div>
+          <div class="col_4">
+            <div class="input_wrap mb_0">
+              <label class="input_label">No: of Members</label>
+              <input
+                type="text"
+                class="inpt_field"
+                name=""
+                placeholder=""
+                formControlName="usersSize"
+                readonly
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="row_n">
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="groupMemberData"
+      [rows]="10"
+      [paginator]="true"
+      [globalFilterFields]="['id', 'name', 'priority']"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row allign_center">
+          <div class="col_6">
+            <h3 class="title mb_1 text_md">Groups Members</h3>
+            <p class="text_xs dark_text_2">Members of this Group</p>
+          </div>
+          <div class="col_6">
+            <div class="d_flex justify_end">
+              <button class="btn btn_primary" (click)="onAddMember()">
+                Add New
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>#CP ID</th>
+          <th>CP Name</th>
+          <th>Company</th>
+          <th>Mobile No</th>
+          <th>Email Id</th>
+          <th>Registration Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-member>
+        <tr>
+          <td>
+            <span class="dark_text_2">#{{ member.id }}</span>
+          </td>
+          <td>{{ member.name }}</td>
+          <td>
+            <span class="dark_text_2 italic">{{ member.company }}</span>
+          </td>
+          <td>{{ member.mobileNumber }}</td>
+          <td>{{ member.email }}</td>
+          <td>
+            {{ member.cpMaster?.registrationDate | date: "dd MMM, yyyy" }}
+          </td>
+          <td>{{ member.cpMaster?.status }}</td>
+          <td (click)="$event.stopPropagation()">
+            <a
+              class="danger_text me_3"
+              (click)="onDeleteMember(member.id)"
+              href="javascript:void(0)"
+              >Remove</a
+            >
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

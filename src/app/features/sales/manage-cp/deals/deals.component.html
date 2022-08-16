@@ -1,0 +1,80 @@
+<div class="brokerage">
+  <div align="right" style="margin-bottom: 10px;">
+    <span>
+      <label class="margin_left">Search by</label>
+      <select #sort class="margin_left">
+        <!-- <option value="" disabled selected hidden>Lead Status</option> -->
+        <option value="{{option}}"  *ngFor="let option of leadOptions; let i=index">
+          {{option}}</option>
+      </select>
+      <input type="text" placeholder="Search ...." #sortByName name="sortByName">
+      <button type="submit"><i class="fa fa-search" (click)="getDeals(0,'',sort.value,sortByName.value)"></i></button>
+    </span>
+    <span>
+      <label class="margin_left">Filter by</label>
+      <select #leadsort (change)='getDeals(0,leadsort.value,"","")' class="margin_left">
+        <option value="" disabled selected hidden>All</option>
+        <option [value]="leadStatus" *ngFor="let leadStatus of statusArr; let i=index">
+          {{leadStatus}}</option>
+      </select>
+
+      <!-- <select #projectsort (change)='sortBy(projectsort.value,3)' [value]="1" class="margin_left">
+        <option [value]="1">Projects</option>
+        <option [value]="projectList.project_sfdcId" *ngFor="let projectList of filterProjectList;">
+          {{projectList.project_name}}</option>
+      </select> -->
+
+    </span>
+  </div>
+  <div class="row">
+    <div class="form-group col-md-12">
+      <table class="table table-striped table-hover table-responsive w-100">
+        <thead>
+          <tr>
+            <th width="10%">Customer ID</th>
+            <th width="15%">Project Name</th>
+            <th width="15%">Name</th>
+            <th width="15%">Phone no.</th>
+            <!-- <th width="10%">Calculation Date</th> -->
+            <th width="10%">Booking Status</th>
+            <th width="10%">Booking Date</th>
+            <!-- <th width="10%">ATS Registration Date</th> -->
+            <!-- <th width="10%">Agreement Value</th>
+            <th width="10%">Ladder Value (%)</th>
+            <th width="5%">Base Brokerage</th>
+            <th width="10%">Total Brokerage</th>
+            <th width="10%">Brokerage With 18% GST</th> -->
+          </tr>
+        </thead>
+        <tbody *ngIf="dealsList?.length>0">
+          <tr *ngFor="let deals of dealsList;">
+            <td>{{deals.cpCrmId}}</td>
+            <td>{{deals.projectName}}</td>
+            <td>{{deals.lead.name}}</td>
+            <td>{{deals.lead.mobileNumber}}</td>
+            <!-- <td></td> -->
+            <td>{{deals.status}}</td>
+            <td>{{deals.createdOn|date: 'dd/MM/yyyy'}}</td>
+            <!-- <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td> -->
+          </tr>
+        </tbody>
+        <tbody *ngIf="dealsList?.length==0">
+          <tr>
+            <td colspan="10" class="text-center">No data available!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="sizeofTable>recordsPerPage">
+  <ngb-pagination [collectionSize]="sizeofTable" [(page)]="offset" [maxSize]="3" [pageSize]="recordsPerPage"
+    aria-label="Default pagination" (pageChange)="paginatedSearch(offset)"></ngb-pagination>
+</div>

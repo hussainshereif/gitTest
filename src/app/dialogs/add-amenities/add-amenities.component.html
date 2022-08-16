@@ -1,0 +1,87 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">{{ headingText }}</h6>
+    <p class="modal_title text_xs" *ngIf="data.type != 2">{{ subText }}</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onCancel()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <form [formGroup]="addAmenitiesForm" autocomplete="off">
+      <div class="row">
+        <div class="col_12" *ngIf="data.type == 1">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label required">Select Amenity</label>
+            <p-dropdown
+              [options]="defAmenities"
+              autoDisplayFirst="false"
+              placeholder="Choose Amenity"
+              formControlName="title"
+              optionLabel="title"
+              optionValue="title"
+              (onChange)="onAmenityChange($event)"
+            >
+            </p-dropdown>
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addAmenitiesForm.get(['title'])"
+              [field]="'title'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12" *ngIf="showInput">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Title</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              placeholder="Enter title"
+              formControlName="input"
+              id="name"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addAmenitiesForm.get(['input'])"
+              [field]="'title'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_lg_12 mb_2">
+          <div class="input_wrap mb_3">
+            <label class="input_label required">Description</label>
+            <textarea
+              class="tet_field"
+              id=""
+              autocomplete="off"
+              formControlName="description"
+              placeholder="Enter Description"
+            ></textarea>
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addAmenitiesForm.get(['description'])"
+              [field]="'description'"
+            ></app-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <button class="btn btn_secondary close" (click)="onCancel()">
+          Cancel
+        </button>
+        <button class="btn btn_primary pop_btn" (click)="onSubmit()">
+          Add
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- modal_body -->
+</div>
+<!-- modal content -->

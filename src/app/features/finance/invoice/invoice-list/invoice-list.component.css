@@ -1,0 +1,110 @@
+.upload-btn-wrapper input[type="file"] {
+  width: 100%;
+  height: 100%;
+}
+
+.samplexlsx {
+  width: 32px;
+  display: block;
+  float: right;
+  margin-right: 5px;
+}
+
+.disableselect {
+  background-color: gray !important;
+}
+.mar_left {
+  margin-left: 10px;
+  height: 27px;
+}
+.no_data_text {
+  text-align: center;
+}
+.search_btn_div {
+  display: inline;
+  margin-bottom: 10px;
+}
+.import_list a {
+  border-radius: 4px;
+  background-color: #f7941e;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  color: #ffffff;
+  text-transform: uppercase;
+  float: right;
+  width: 154px;
+  height: 45px;
+  padding: 15px 22px;
+  position: relative;
+  transition: all 500ms ease;
+  cursor: pointer;
+}
+.import_list a:hover {
+  transition: all 500ms ease;
+  opacity: 0.7;
+  color: #fff;
+}
+
+.import_list a::before {
+  position: absolute;
+  content: "";
+  background: url(src\assets\images\import.svg) no-repeat right center;
+  width: 20px;
+  height: 20px;
+  right: 18px;
+  top: 13px;
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+
+@media (min-width: 320px) and (max-width: 767px) {
+  .import_list {
+    float: left;
+    margin-top: 15px;
+    width: 100%;
+  }
+}
+.excel_status {
+  color: red;
+  text-align: center;
+}
+.log-btn a {
+  border-radius: 4px;
+  background-color: #034ea2;
+  font-size: 10px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  float: right;
+  padding: 15px 22px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.icon_style_invoice {
+  color: #bbbdbf;
+  right: 20px;
+  position: relative;
+}
+.icon_view_log {
+  padding: 4px 8px !important;
+  margin-right: 10px;
+  margin-top: 4px;
+}
+.margin_div {
+  margin-bottom: 20px;
+}
+.div_inline {
+  display: inline;
+}

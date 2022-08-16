@@ -1,0 +1,133 @@
+<div class="content_div">
+  <div class="main_heading">
+    <div class="row">
+      <div class="col_12 mb_4">
+        <div class="">
+          <div class="row allign_center">
+            <div class="col_6">
+              <h3 class="title">Failed Transfer Logs</h3>
+            </div>
+            <div class="col_6">
+              <div class="d_flex justify_end">
+                <button class="btn btn_primary pop_f_btn" (click)="openNav()">
+                  Filter
+                </button> 
+                <!--     <div class="tbl_search">
+                      <div class="icon"></div>
+                      <input
+                        class="search_groups"
+                        type="text"
+                        placeholder="Search Projects"
+                      />
+                    </div> -->
+                <!--    <div class="tbl_filter">
+                      <div class="icon">
+                        <img src="./images_new/icons/filter.svg" alt="" />
+                      </div>
+                    </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col_12 mb_3">
+        <p-table
+          #dt
+          [value]="failedTransferList"
+          [rows]="10"
+          [lazy]="true"
+          [paginator]="true"
+          (onLazyLoad)="paginatedSearch($event)"
+          responsiveLayout="scroll"
+          [totalRecords]="totalRecords"
+          [rowHover]="true"
+          dataKey="id"
+          currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+          [showCurrentPageReport]="true"
+          styleClass="p-datatable-striped"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Record ID</th>
+              <th>Record Type</th>
+              <th>Failure Reason</th>
+              <th>Failure Date</th>
+              <th>Resolved</th>
+              <th>Retry count</th>
+
+              <th>Actions</th>
+            </tr>
+          </ng-template>
+          <ng-template
+            pTemplate="body"
+            let-failedTransfer
+            let-rowIndex="rowIndex"
+          >
+            <tr>
+              <td>{{ failedTransfer.failureId }}</td>
+              <td>{{ failedTransfer.entityType }}</td>
+              <td>{{ failedTransfer.reason }}</td>
+              <td>{{ failedTransfer.failureDate }}</td>
+              <td>{{ failedTransfer.isResolved }}</td>
+              <td>{{ failedTransfer.retryCount }}</td>
+             
+              <td>
+                <a *ngIf="!failedTransfer.isResolved"
+                  class="warning_text me_3"
+                  href="javascript:void(0)"
+                  (click)="retryNow(failedTransfer.failureId)"
+                  >Retry Now</a
+                ><a
+                  class="danger_text me_3 link_danger pop_btn"
+                  href="javascript:void(0)"
+                  (click)="deleteFailedTransferList(failedTransfer.failureId)"
+                  >Delete</a
+                >
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+              <td class="text-center" colspan="7">No data available!</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>
+
+ <p-sidebar [(visible)]="showFilter" position="right">
+  <div class="filter_header mb_4">
+    <h5 class="filter_title text_xl">Filter</h5>
+    <p class="filter_title text_xs">Filter down the list</p>
+
+  </div>
+  <div class="filter_body">
+    <form [formGroup]="filterForm">
+      <div class="row mb_3">
+   
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label">Status</label>
+            <p-dropdown
+              [options]="status"
+              autoDisplayFirst="false"
+              placeholder="Status"
+              formControlName="status"
+              optionLabel="name"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+        </div>
+      
+      </div>
+      <div class="d_flex justify_space_between">
+        <a class="btn btn_secondary close" (click)="clearFilter()">Clear all</a>
+        <button class="btn btn_primary pop_f_btn" (click)="filterFormSubmit()">
+          Apply Filter
+        </button>
+      </div>
+    </form>
+  </div>
+</p-sidebar>

@@ -1,0 +1,37 @@
+.btn_div {
+  text-align: right;
+  margin-top: 10px;
+}
+.hd4 {
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+.mid_div {
+  margin: 10px 0px;
+}
+.left {
+  margin-right: 15px;
+  font-size: 17px;
+}
+.val_message {
+  color: crimson;
+}
+/* .text_btn_div{
+    margin-top: 15px;
+} */
+.btn_margin {
+  margin-right: 5px;
+  margin-top: 15px;
+}
+.fileDiv {
+  position: relative;
+}
+.fileDuplicateName {
+  background-color: #fff;
+  color: #434141;
+  position: absolute;
+  left: 109px;
+  top: 3px;
+  width: 100px;
+  height: 41px;
+}

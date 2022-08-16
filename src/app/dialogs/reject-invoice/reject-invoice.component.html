@@ -1,0 +1,14 @@
+<form [formGroup]="rejectForm" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5>Enter the reason for rejection</h5>
+    <i class="zmdi zmdi-close col-md-1 pull-right" (click)="close()"></i>
+  </div>
+  <input type="text" class="inpt form-control" placeholder="Type here" formControlName="reason"
+    [ngClass]="{ 'is-invalid': submitted && f.reason.errors }">
+  <div *ngIf="submitted && f.reason.errors" class="invalid-feedback">
+    <div *ngIf="f.reason.errors.required"></div>
+  </div>
+  <div class="pro_form1">
+    <input type="submit" name="submit" class="btn btn-info btn-sm mr-2 sub2 mt-4 col-md-3 pull-right" value="Submit">
+  </div>
+</form>

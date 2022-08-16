@@ -1,0 +1,15 @@
+export const enum FormErrors {
+  badgePointOrder = "badgepointorder",
+  contactNumber = "contactnumber",
+  max = "max",
+  min = "minlength",
+  maxLength = "maxlength",
+  onlyAlphabets = "onlyAlphabets",
+  password = "password",
+  pattern = "pattern",
+  pincode = "pincode",
+  required = "required",
+  responseError = "responseerror",
+  totalCountMismatch = "totalCountMismatch",
+  uploadType = "uploadtype",
+}

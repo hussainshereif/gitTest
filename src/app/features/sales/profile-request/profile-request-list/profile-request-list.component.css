@@ -1,0 +1,38 @@
+.action-btn a {
+  border-radius: 4px;
+  background-color: #f7941e;
+  font-size: 14px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  float: right;
+  padding: 15px 22px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.action-new a {
+  background-color: #034ea2 !important;
+}
+.log-btn a {
+  border-radius: 4px;
+  background-color: #034ea2;
+  font-size: 10px;
+  font-weight: 900;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.1px;
+  color: #ffffff !important;
+  text-transform: uppercase;
+  float: right;
+  padding: 15px 22px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

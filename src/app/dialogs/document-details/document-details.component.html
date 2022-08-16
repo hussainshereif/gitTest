@@ -1,0 +1,41 @@
+<div>
+  <div class="form_div" *ngIf="isRera">
+    <form [formGroup]="reraForm" autocomplete="off" (ngSubmit)="reraFormSubmit()">
+      <div>
+        <label for="state">RERA State</label>
+        <input type="text" id="state" class="form-control" formControlName="state" readonly>
+        <div>
+          
+        </div>
+      </div>
+      <div>
+        <label for="number">RERA Number</label>
+        <input type="text" id="number" class="form-control" formControlName="number" readonly>
+      </div>
+      <div>
+        <label for="expiry">RERA Expiry Date</label>
+        <input type="text" id="expiry" class="form-control" formControlName="expiry" readonly>
+      </div>
+    </form>
+  </div>
+  <div class="form_div" *ngIf="!isRera">
+    <form [formGroup]="bankForm" autocomplete="off" (ngSubmit)="bankFormSubmit()">
+      <div>
+        <label for="Name">Beneficiary Name</label>
+        <input type="text" id="Name" class="form-control" formControlName="name" readonly>
+      </div>
+      <div>
+        <label for="bank">Bank Name</label>
+        <input type="text" id="bank" class="form-control" formControlName="bank" readonly>
+      </div>
+      <div>
+        <label for="b_Account">Bank Account Number</label>
+        <input type="text" id="b_Account" class="form-control" formControlName="account" readonly>
+      </div>
+      <div>
+        <label for="ifsc">IFSC Code</label>
+        <input type="text" id="ifsc" class="form-control" formControlName="ifsc" readonly>
+      </div>
+    </form>
+  </div>
+</div>

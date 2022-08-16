@@ -1,0 +1,112 @@
+<form [formGroup]="addLadderForm" autocomplete="off" (ngSubmit)="onSubmit()">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h5>Add Ladder</h5>
+    <i class="zmdi zmdi-close col-md-1 pull-right" (click)="close()"></i>
+  </div>
+  <input
+    type="text"
+    class="inpt form-control"
+    placeholder="Ladder Name"
+    formControlName="ladName"
+    [ngClass]="{ 'is-invalid': submitted && f.ladName.errors }"
+  />
+  <div *ngIf="submitted && f.ladName.errors" class="invalid-feedback">
+    <div *ngIf="f.ladName.errors.required"></div>
+  </div>
+
+  <div class="input-group d-flexw-100">
+    <input
+      class="inpt form-control mt-4"
+      placeholder="Start Date"
+      readonly
+      ngbDatepicker
+      #d1="ngbDatepicker"
+      (ngModelChange)="datechange()"
+      required
+      formControlName="ladStartDate"
+      [ngStyle]="
+        isStartDateError
+          ? { border: '.5px solid #dc3545' }
+          : { 'background-color': '' }
+      "
+      [ngClass]="{ 'is-invalid': submitted && f.ladStartDate.errors }"
+    />
+    <!-- <input class="inpt form-control mt-4" placeholder="Start Date" readonly ngbDatepicker #d1="ngbDatepicker" (ngModelChange)="datechange()" required formControlName="ladStartDate" [ngClass]="{ 'is-invalid': submitted && f.ladStartDate.errors }" [markDisabled]="isDisabled"> -->
+
+    <div class="input-group-append" style="margin-top: 24px">
+      <button
+        class="btn btn-outline-secondary"
+        (click)="d1.toggle()"
+        type="button"
+      >
+        <img
+          src="assets/images/date.svg"
+          style="width: 1.2rem; height: 1rem; cursor: pointer"
+        />
+      </button>
+    </div>
+  </div>
+
+  <div class="input-group d-flexw-100">
+    <input
+      class="inpt form-control mt-4"
+      placeholder="End Date"
+      readonly
+      ngbDatepicker
+      #d2="ngbDatepicker"
+      (ngModelChange)="datechange1()"
+      required
+      formControlName="ladEndDate"
+      [ngStyle]="
+        isEndDateError
+          ? { border: '.5px solid #dc3545' }
+          : { 'background-color': '' }
+      "
+      [ngClass]="{ 'is-invalid': submitted && f.ladEndDate.errors }"
+    />
+    <!-- <input class="inpt form-control mt-4" placeholder="End Date" readonly ngbDatepicker #d2="ngbDatepicker" (ngModelChange)="datechange1()" required formControlName="ladEndDate" [ngClass]="{ 'is-invalid': submitted && f.ladEndDate.errors }" [markDisabled]="isDisabled"> -->
+    <div class="input-group-append" style="margin-top: 24px">
+      <button
+        class="btn btn-outline-secondary"
+        (click)="d2.toggle()"
+        type="button"
+        [attr.disabled]="isEndDateDisable ? true : null"
+      >
+        <img
+          src="assets/images/date.svg"
+          style="width: 1.2rem; height: 1rem; cursor: pointer"
+        />
+      </button>
+    </div>
+  </div>
+
+  <div class="input-group" style="margin-top: 25px">
+    <label style="margin-right: 15px" class="margin_left">Select Group</label>
+    <select
+      class="margin_left"
+      required
+      formControlName="groupDetails"
+      [ngClass]="{ 'is-invalid': submitted && f.groupDetails.errors }"
+    >
+      <option [ngValue]="null">Select Group</option>
+      <option [ngValue]="gp.groupId" *ngFor="let gp of groups">
+        {{ gp.groupName }}
+      </option>
+    </select>
+    <div
+      *ngIf="submitted && f.groupDetails.errors"
+      class="error"
+      style="margin-left: 10px; color: red"
+    >
+      Please Select Group.
+    </div>
+  </div>
+  <div class="pro_form1">
+    <input
+      type="submit"
+      name="submit"
+      class="btn btn-info btn-sm mr-2 sub2 mt-4 col-md-3 pull-right"
+      value="Save Details"
+    />
+  </div>
+</form>

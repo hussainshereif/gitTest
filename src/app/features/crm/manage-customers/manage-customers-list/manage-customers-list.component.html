@@ -1,0 +1,194 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <p-table
+      #dt
+      [value]="customerList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row allign_center">
+          <div class="col_3">
+            <h3 class="title mb_1 text_md">Manage Customer</h3>
+            <p class="text_xs dark_text_2">Your Customers are listed here</p>
+          </div>
+          <div class="col_9">
+            <div class="d_flex justify_end">
+              <a class="btn link px_0 me_3" href="{{ customerExcel }}"
+                >Download Sample</a
+              >
+              <input
+                class="import_input"
+                type="file"
+                #fileInput
+                [(ngModel)]="currentFile"
+                name="fileInput"
+                (change)="uploadExcel($event)"
+              />
+              <button
+                class="btn btn_primary_g me_3"
+                (click)="fileInput.click()"
+              >
+                Import Customers
+              </button>
+              <span class="p-input-icon-left tbl_search">
+                <i class="pi pi-search"></i>
+                <input
+                  class="search_groups"
+                  pInputText
+                  #searchVal
+                  [(ngModel)]="searchValue"
+                  type="text"
+                  (input)="searchValueOffset(searchVal.value)"
+                  placeholder="Search..."
+                />
+              </span>
+              <button class="tbl_filter" (click)="openNav()">
+                <div class="icon">
+                  <img src="assets/images_new/icons/filter.svg" alt="" />
+                </div>
+              </button>
+              <button class="btn btn_primary ml-2" (click)="newLoginExcel()">
+                New Login Report
+              </button>
+              <!--        <button class="btn btn_primary" (click)="downloadExcel()">
+                Download
+              </button> -->
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Customer ID</th>
+          <th>Customer Name</th>
+          <th>Mobile Number</th>
+          <th>Email ID</th>
+          <th>Booking Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-cp>
+        <tr>
+          <td>
+            <span class="dark_text_2">#{{ cp.crmId }}</span>
+          </td>
+          <td>{{ cp.name }}</td>
+          <td>
+            {{ cp.mobileNumber }}
+          </td>
+          <td>{{ cp.email }}</td>
+          <td>{{ cp.createdOn | date: "dd/MM/yyyy" }}</td>
+          <td>{{ cp.status }}</td>
+          <td>
+            <div class="input_wrap tbl_dropdown_arrow in_tbl mb_0">
+              <p-dropdown
+                [options]="cpStatus"
+                [(ngModel)]="cp.active"
+                optionLabel="name"
+                (onChange)="activationStatusChange(cp.id, $event)"
+                optionValue="value"
+              ></p-dropdown>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-center" colspan="7">No data available!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+<p-sidebar [(visible)]="showFilter" position="right">
+  <div class="filter_header mb_4">
+    <h5 class="filter_title text_xl">Filter</h5>
+    <p class="filter_title text_xs">Filter down the list</p>
+  </div>
+
+  <div class="filter_body">
+    <form [formGroup]="filterForm">
+      <div class="row mb_3">
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label">Status</label>
+            <p-dropdown
+              [options]="status"
+              autoDisplayFirst="false"
+              placeholder="Status"
+              formControlName="status"
+              optionLabel="name"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow filter_br">
+            <label class="input_label">Project </label>
+            <p-dropdown
+              [options]="project"
+              autoDisplayFirst="false"
+              placeholder="All"
+              formControlName="project"
+              optionLabel="projectName"
+              optionValue="id"
+            >
+              <ng-template let-item pTemplate="item">
+                <div *ngIf="item.projectName.length > 25; else Short">
+                  {{ item.projectName | slice: 0:24 }} ..
+                </div>
+                <ng-template #Short>{{ item.projectName }}</ng-template>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+
+        <div class="col_12">
+          <div class="input_wrap">
+            <div class="form_check form_check_inline prime_checkbox">
+              <p-checkbox
+                #loggedIn
+                formControlName="loggedIn"
+                [binary]="true"
+                inputId="inlineCheckbox1"
+                (onChange)="checkValue($event)"
+              ></p-checkbox>
+              <label for="inlineCheckbox1" class="m_3"> Logged In </label>
+            </div>
+          </div>
+        </div>
+        <div class="col_12" *ngIf="isLoggedIn">
+          <div class="input_wrap filter_br">
+            <div class="input_wrap calendar_icon">
+              <label class="input_label">Cut Off Date</label>
+              <p-calendar
+                formControlName="cutOffDate"
+                (onSelect)="changeDate($event)"
+                placeholder="DD/MM/YYYY"
+              ></p-calendar>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <button class="btn btn_secondary close" (click)="clearFilter()">
+          Clear all
+        </button>
+        <button class="btn btn_primary pop_f_btn" (click)="filterFormSubmit()">
+          Apply Filter
+        </button>
+      </div>
+    </form>
+  </div>
+</p-sidebar>

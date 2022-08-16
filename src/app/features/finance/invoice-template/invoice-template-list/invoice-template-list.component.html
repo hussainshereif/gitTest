@@ -1,0 +1,90 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <div class="">
+      <div class="row_n allign_center">
+        <div class="col_6">
+          <h3 class="title">Invoice Template List</h3>
+        </div>
+        <div class="col_6">
+          <div class="d_flex justify_end">
+            <!--     <div class="tbl_search">
+                    <div class="icon"></div>
+                    <input
+                      class="search_groups"
+                      type="text"
+                      placeholder="Search Projects"
+                    />
+                  </div> -->
+            <!--    <div class="tbl_filter">
+                    <div class="icon">
+                      <img src="./images_new/icons/filter.svg" alt="" />
+                    </div>
+                  </div> -->
+            <button (click)="addInvoice()" class="btn btn_primary">
+              Add Invoice Template
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col_12 mb_3">
+    <p-table
+      #dt
+      [value]="invoiceList"
+      [rows]="10"
+      [lazy]="true"
+      [paginator]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      responsiveLayout="scroll"
+      [totalRecords]="totalRecords"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th>ID</th>
+          <th>Company Name</th>
+          <th>State</th>
+          <th>CIN (Company Identification Number)</th>
+          <th>PAN</th>
+          <th>GST Number</th>
+          <th>RERA Number</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-invoice let-rowIndex="rowIndex">
+        <tr>
+          <td>{{ invoice.id }}</td>
+          <td>{{ invoice.companyName }}</td>
+          <td>{{ invoice.state }}</td>
+          <td>{{ invoice.cin }}</td>
+          <td>{{ invoice.panNumber }}</td>
+          <td>{{ invoice.gstNumber }}</td>
+          <td>{{ invoice.reraNumber }}</td>
+          <td>
+            <a
+              class="warning_text me_3"
+              href=""
+              (click)="editinvoiceList(invoice.id, event)"
+              >Edit</a
+            ><a
+              class="danger_text me_3 link_danger pop_btn"
+              href=""
+              (click)="deleteinvoiceList(invoice.id, event)"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-center" colspan="8">No data available!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

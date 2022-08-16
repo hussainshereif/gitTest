@@ -1,0 +1,19 @@
+<main class="page-content">
+  <div class="container main">
+    <div class="row">
+      <div class="col-md-12">
+        <h5>Deals Count Date : {{date}}</h5>
+      </div>
+
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tiers_box" [routerLink]="['/tier-details']" [queryParams]="{loyalty:cp.loyaltyId,user:cp.userCount,label:labelArray[i]}" *ngFor="let cp of tierList; let i=index">
+          <!-- <h5>Tiers : {{cp.loyaltyId}}</h5> -->
+          <h5>{{labelArray[i]}}</h5>
+          <h5>User Count : {{cp.userCount}}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

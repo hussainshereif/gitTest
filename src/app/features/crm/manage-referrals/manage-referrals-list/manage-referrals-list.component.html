@@ -1,0 +1,176 @@
+<div class="row_n">
+  <div class="col_12 mb_4">
+    <p-table
+      #dt
+      [value]="leadList"
+      [rows]="recordsPerPage"
+      [paginator]="true"
+      [lazy]="true"
+      (onLazyLoad)="paginatedSearch($event)"
+      [totalRecords]="totalRecords"
+      responsiveLayout="scroll"
+      [rowHover]="true"
+      dataKey="id"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [showCurrentPageReport]="true"
+      styleClass="p-datatable-striped"
+    >
+      <ng-template pTemplate="caption">
+        <div class="row allign_center">
+          <div class="col_3">
+            <h3 class="title mb_1 text_md">Manage Referrals</h3>
+            <p class="text_xs dark_text_2">Your Referrals are listed here</p>
+          </div>
+          <div class="col_9">
+            <div class="d_flex justify_end">
+              <a class="btn link px_0 me_3" href="{{ customerLeadExcel }}"
+                >Download Sample</a
+              >
+              <input
+                class="import_input"
+                type="file"
+                #fileInput
+                [(ngModel)]="currentFile"
+                name="fileInput"
+                (change)="uploadExcel($event)"
+              />
+              <button
+                class="btn btn_primary_g me_3"
+                (click)="fileInput.click()"
+              >
+                Import Referrals
+              </button>
+              <span class="p-input-icon-left tbl_search">
+                <i class="pi pi-search"></i>
+                <input
+                  class="search_groups"
+                  pInputText
+                  #searchVal
+                  [(ngModel)]="searchValues"
+                  type="text"
+                  (input)="searchValueOffset(0, 10, searchVal.value)"
+                  placeholder="Search..."
+                />
+              </span>
+              <button class="tbl_filter" (click)="sidebarClicked(true)">
+                <div class="icon">
+                  <img src="assets/images_new/icons/filter.svg" alt="" />
+                </div>
+              </button>
+              <button class="btn btn_primary" (click)="downloadExcel()">
+                Download
+              </button>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Referral ID</th>
+          <th>Name</th>
+          <th>Project Name</th>
+          <th>Project ID</th>
+          <th>Status</th>
+          <th>Customer Name</th>
+          <th>Customer Mobile</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-cp>
+        <tr>
+          <td>
+            <span class="dark_text_2">#{{ cp.crmId }}</span>
+          </td>
+          <td>{{ cp.lead.name }}</td>
+          <td>
+            {{ cp.projectName }}
+          </td>
+          <td>{{ cp.projectsCrmId }}</td>
+          <td>{{ cp.status }}</td>
+          <td>{{ cp.parentName }}</td>
+          <td>{{ cp.parentMobileNumber }}</td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td class="text-center" colspan="7">No data available!</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+<p-sidebar [(visible)]="showFilter" position="right">
+  <div class="filter_header mb_4">
+    <h5 class="filter_title text_xl">Filter</h5>
+    <p class="filter_title text_xs">Filter down the list</p>
+  </div>
+  <!-- filter header -->
+  <div class="filter_body">
+    <form [formGroup]="filterForm">
+      <div class="row mb_3">
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label">Status</label>
+            <p-dropdown
+              [options]="status"
+              autoDisplayFirst="false"
+              placeholder="Status"
+              formControlName="status"
+              optionLabel="name"
+              optionValue="value"
+            ></p-dropdown>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap filter_br">
+            <div class="input_wrap dropdown_arrow">
+              <label class="input_label">Customer Name </label>
+              <p-dropdown
+                [options]="customerList"
+                autoDisplayFirst="false"
+                placeholder="All"
+                formControlName="customerID"
+                optionLabel="name"
+                optionValue="id"
+              >
+                <ng-template let-item pTemplate="item">
+                  <div *ngIf="item.name.length > 25; else Short">
+                    {{ item.name | slice: 0:24 }} ..
+                  </div>
+                  <ng-template #Short>{{ item.name }}</ng-template>
+                </ng-template>
+              </p-dropdown>
+            </div>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap dropdown_arrow">
+            <label class="input_label">Project </label>
+            <p-dropdown
+              [options]="project"
+              autoDisplayFirst="false"
+              placeholder="All"
+              formControlName="project"
+              optionLabel="projectName"
+              optionValue="id"
+            >
+              <ng-template let-item pTemplate="item">
+                <div *ngIf="item.projectName.length > 25; else Short">
+                  {{ item.projectName | slice: 0:24 }} ..
+                </div>
+                <ng-template #Short>{{ item.projectName }}</ng-template>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <button class="btn btn_secondary close" (click)="clearFilter()">
+          Clear all
+        </button>
+        <button class="btn btn_primary pop_f_btn" (click)="filterFormSubmit()">
+          Apply Filter
+        </button>
+      </div>
+    </form>
+  </div>
+</p-sidebar>

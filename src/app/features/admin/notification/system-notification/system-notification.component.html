@@ -1,0 +1,72 @@
+<div *ngIf="!edit" class="scrollable_form">
+  <div class="row" style="width: 100%">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="pro_form1">
+        <div class="collateral_btn_div1 mt-2"></div>
+        <div class="">
+          <div class="collateral_btn_div2">
+            <div *ngFor="let data of notificationData">
+              <div class="row">
+                <div class="col-12">
+                  <div class="">
+                    <div class="row">
+                      <div class="col-md col-2 col-lg-2">
+                        <div class="heading-style-sub">Notification ID</div>
+                        <label class="mt-4">{{ data.id }}</label>
+                      </div>
+                      <div class="col-md col-2 col-lg-2">
+                        <div class="heading-style-sub">Enabled</div>
+                        <label class="mt-4">
+                          {{ data.enabled ? "YES" : "NO" }}</label
+                        >
+                      </div>
+                      <div class="col-md col-2 col-lg-2">
+                        <div class="heading-style-sub">Recurring</div>
+                        <label class="mt-4">
+                          {{ data.recurring ? "YES" : "NO" }}</label
+                        >
+                      </div>
+                      <div class="col-md col-2 col-lg-2">
+                        <div class="heading-style-sub">Period (in days)</div>
+                        <label class="mt-4">{{ data.period }}</label>
+                      </div>
+                      <div class="col-md col-2 col-lg-2">
+                        <div class="heading-style-sub">Type</div>
+                        <label class="mt-4"> {{ data.type }} </label>
+                      </div>
+                      <button
+                        class="button-Link float-right mr-4 edit_button_style"
+                        (click)="onEdit(data)"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  </div>
+                  <h6 class="heading-style-inline">{{ data.subject }}</h6>
+                  <label class="mt-4">{{ data.message }} </label>
+                </div>
+              </div>
+              <div><hr /></div>
+            </div>
+            <div *ngIf="sizeofTable > recordsPerPage">
+              <ngb-pagination
+                [collectionSize]="sizeofTable"
+                [(page)]="offset"
+                [maxSize]="3"
+                [pageSize]="recordsPerPage"
+                aria-label="Default pagination"
+                (pageChange)="paginatedSearch()"
+              ></ngb-pagination>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-system-notification-create
+  *ngIf="edit"
+  [data]="this.selectedData"
+  (newItemEvent)="hideDetails($event)"
+></app-system-notification-create>

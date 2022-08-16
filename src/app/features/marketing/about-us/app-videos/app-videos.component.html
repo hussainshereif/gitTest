@@ -1,0 +1,77 @@
+<div *ngIf="!showDetails">
+  <div class="row" style="width: 100%">
+    <div class="col-12 col-md-12 col-lg-12">
+      <div class="pro_form1">
+        <div class="collateral_btn_div1 mt-2">
+          <h6 class="heading-style mt-6">App Tutorial Videos</h6>
+          <button
+            class="button-Link float-right"
+            style="color: #f7941e"
+            (click)="onAdd()"
+          >
+            Add New
+          </button>
+        </div>
+        <div class="">
+          <div class="collateral_btn_div2">
+            <div class="row" *ngIf="videoData.length > 0; else not">
+              <div class="col-4 mb-2" *ngFor="let data of videoData">
+                <div class="card mt-4 mb-4">
+                  <div class="card-body">
+                    <img
+                      id="view"
+                      src="{{ data.imageUrl }}"
+                      alt=""
+                      class="card-img-top mb-4 mt-2"
+                      style="width: 65%; height: 200px"
+                      (click)="showDetailData(data)"
+                    />
+                    <h6 class="card-subtitle mb-2">
+                      {{ data.title }}
+                    </h6>
+                    <label class="card-text">
+                      {{ data.description }}
+                    </label>
+                    <button class="button-Link mr-4" (click)="onEdit(data)">
+                      Edit
+                    </button>
+                    <button
+                      class="button-Link"
+                      style="color: #f7941e"
+                      (click)="onDelete(data.id)"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ng-template #not>
+              <div class="row">
+                <div class="text-center">
+                  No data available!
+               </div>
+              </div>
+            </ng-template>
+          </div>
+          <div *ngIf="sizeofTable > recordsPerPage">
+            <ngb-pagination
+              [collectionSize]="sizeofTable"
+              [(page)]="offset"
+              [maxSize]="3"
+              [pageSize]="recordsPerPage"
+              aria-label="Default pagination"
+              (pageChange)="paginatedSearch()"
+            ></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-videos-details-list
+  *ngIf="showDetails"
+  [videoData]="selectedData"
+  (newItemEvent)="hideDetails($event)"
+></app-videos-details-list>

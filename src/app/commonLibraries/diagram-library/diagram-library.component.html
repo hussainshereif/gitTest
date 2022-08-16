@@ -1,0 +1,51 @@
+<div>
+  <div>
+    <button class="btn" (click)="reShape(3)">Circle</button>
+    <button class="btn" (click)="reShape(1)">Square</button>
+    <button class="btn" (click)="reShape(2)">Triangle</button>
+    <i
+      class="fas fa-fill-drip color_fill_icon"
+      (click)="fillIcon()"
+      id="fillIcon"
+    ></i>
+  </div>
+  <form>
+    <div class="diagram">
+      <ejs-diagram
+        #diagram
+        id="diagram"
+        width="445px"
+        height="445px"
+        [getNodeDefaults]="getNodeDefaults"
+      >
+        <e-nodes>
+          <e-node
+            id="node1"
+            [offsetX]="150"
+            [offsetY]="150"
+            [style]="style"
+            [shape]="shape"
+          ></e-node>
+        </e-nodes>
+      </ejs-diagram>
+      <div
+        class="color_picker_div"
+        [hidden]="!colorFill"
+        (click)="colorPickerDiv($event)"
+      >
+        <div class="color_picker_sub_div">
+          <color-sketch (onChange)="handleChange($event)"></color-sketch>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <button class="btn btn-primary option_btn" (click)="onSave()">
+        Save
+      </button>
+      <button class="btn btn-danger option_btn" (click)="onClose()">
+        Close
+      </button>
+    </div>
+  </form>
+</div>

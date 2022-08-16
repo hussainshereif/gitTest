@@ -1,0 +1,17 @@
+.delete_icon{
+    color:#dc3545;
+    font-size: 15px;
+}
+.arrow_icon_div{
+    font-size: 22px;
+}
+.processing_status_div{
+    width:100%;
+    display: block;
+}
+.processing_status{
+    width: 10%;
+    float: right;
+    color: red;
+    font-size: 16px;
+}

@@ -1,0 +1,26 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">
+      {{ filename }}
+    </h6>
+    <p class="modal_title text_xs">Incentive Document</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        class="btn_close btn btn_close_white close"
+        (click)="onClose()"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <div class="modal_body">
+    <div class="row">
+      <div class="col_12">
+        <img class="w_100" src="{{ previewImage }}" alt="" />
+      </div>
+    </div>
+  </div>
+  <!-- modal_body -->
+</div>

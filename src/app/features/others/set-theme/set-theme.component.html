@@ -1,0 +1,81 @@
+<main class="page-content">
+  <div *ngIf="exitLayerBG" class="exitLayer" (click)="exitLayer()"></div>
+  <div class="container-fluid">
+      <div class="row">
+          <div class="form-group col-md-12">
+              <h1>Manage Theme</h1>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="theme_main_div">
+              <div class="heading">
+                <h1>Update Mobile Color Theme</h1>
+              </div>
+              <div class="theme_inside_box" [ngClass]="{'highliteBox':arrayNum==0}" (click)="themeBoxClick(0)">
+                <div class="field_set">Dark Theme Color Scheme</div>
+                <div>
+                  <div class="content_phr">Overall Theme Color</div>
+                  <div class="content_color"><span id="OTColor1" class="color_span" (click)="overallThemeColor1()"></span>
+                    <div class="color_sketch" *ngIf="isOverallThemeColor1"><color-sketch (onChange)="overallThemeColor1Change($event)"></color-sketch></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="content_phr">Button Theme Color</div>
+                  <div class="content_color"><span id="BTColor1" class="color_span" (click)="buttonThemeColor1()"></span>
+                    <div class="color_sketch" *ngIf="isButtonThemeColor1"><color-sketch (onChange)="buttonThemeColor1Change($event)"></color-sketch></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="content_phr">Title & Sub Title Color</div>
+                  <div class="content_color"><span id="TSTColor1" class="color_span" (click)="titleColor1()"></span>
+                    <div class="color_sketch" *ngIf="isTitleColor1"><color-sketch (onChange)="titleColor1Change($event)"></color-sketch></div>
+                  </div>
+                </div>
+              </div>
+                
+              <div class="theme_inside_box margin_left" [ngClass]="{'highliteBox':arrayNum==1}" (click)="themeBoxClick(1)">
+                <div class="field_set">Light Theme Color Scheme</div>
+                <div>
+                  <div class="content_phr">Overall Theme Color</div>
+                  <div class="content_color"><span id="OTColor2" class="color_span" (click)="overallThemeColor2()"></span>
+                    <div class="color_sketch" *ngIf="isOverallThemeColor2"><color-sketch (onChange)="overallThemeColor2Change($event)"></color-sketch></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="content_phr">Button Theme Color</div>
+                  <div class="content_color"><span id="BTColor2" class="color_span" (click)="buttonThemeColor2()"></span>
+                    <div class="color_sketch" *ngIf="isButtonThemeColor2"><color-sketch (onChange)="buttonThemeColor2Change($event)"></color-sketch></div>
+                  </div>
+                </div>
+                <div>
+                  <div class="content_phr">Title & Sub Title Color</div>
+                  <div class="content_color"><span id="TSTColor2" class="color_span" (click)="titleColor2()"></span>
+                    <div class="color_sketch" *ngIf="isTitleColor2"><color-sketch (onChange)="titleColor2Change($event)"></color-sketch></div>
+                  </div>
+                </div>
+                
+              </div>
+              <div>
+              </div>
+              <div class="row">
+                <div class="col-lg-8 col-md-8 col-8">
+        
+                </div>
+                <div class="col-lg-4 col-md-4 col-4">
+                    <div>
+                      <button class="btn btn-primary" (click)="saveThemeColor()">Save</button>
+                    </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+      </div> 
+      
+
+  </div>
+  
+  </main>

@@ -1,0 +1,54 @@
+<div *ngIf="!projectCP">
+  <div class="row mb_3 allign_center">
+    <div class="col_6">
+      <h3 class="title mb_1 text_md">Projects</h3>
+    </div>
+    <div class="col_6">
+      <div class="d_flex justify_end">
+        <button class="btn btn_primary pop_btn" (click)="addSMProject()">
+          Add Project
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col_12">
+      <div>
+        <div class="row" *ngIf="projectList.length > 0; else noProject">
+          <div class="col_4 px_2" *ngFor="let project of projectList">
+            <div class="proj_item">
+              <div class="idbtn">
+                <div class="idn">
+                  {{ project.crmId }}
+                </div>
+                <button
+                  class="rem_link"
+                  (click)="projectRemoveClicked(project.id)"
+                >
+                  Remove
+                </button>
+              </div>
+              <div class="title">
+                {{ project.projectName }}
+              </div>
+              <div class="address">
+                {{ project.address }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #noProject>
+          <div class="row">
+            <div class="text-center">No data available!</div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<app-project-cp
+  [id]="cpId"
+  [selectedProject]="selectedProject"
+  (itemEmit)="backAction($event)"
+  *ngIf="projectCP"
+></app-project-cp>

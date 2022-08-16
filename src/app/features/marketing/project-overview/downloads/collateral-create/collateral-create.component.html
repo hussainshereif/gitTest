@@ -1,0 +1,248 @@
+<div class="modal_content">
+  <div class="modal_header mb_4">
+    <h6 class="modal_title text_xl">Create Collateral</h6>
+    <p class="modal_title text_xs">Create new collateral</p>
+    <!-- modal title -->
+    <div class="close_wrap">
+      <span
+        title="Close"
+        (click)="onClose()"
+        class="btn_close btn btn_close_white close"
+      ></span>
+    </div>
+    <!-- close -->
+  </div>
+  <!-- modal header -->
+  <form [formGroup]="addForm" (ngSubmit)="saveCollateral()" autocomplete="off">
+    <div class="modal_body">
+      <div class="row mb_3">
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">Collateral Name</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="name"
+              placeholder="Enter Collateral Name"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['name'])"
+              [field]="'Collateral Name'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">Collateral Heading</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="heading"
+              placeholder="Enter Collateral heading"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['heading'])"
+              [field]="'Collateral Heading'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap mb_3">
+            <label class="input_label r_lbl required">Collateral Type</label>
+            <div class="w_100 mt_1 d_block">
+              <div
+                class="form_check form_check_inline"
+                *ngFor="let item of typeList"
+              >
+                <p-radioButton
+                  [value]="item.Value"
+                  class="form_check_input"
+                  id="item.Value"
+                  (click)="onCollateralType(item.Value)"
+                  formControlName="type"
+                ></p-radioButton>
+                <label class="form_check_label" for="item.Value">{{
+                  item.Text
+                }}</label>
+              </div>
+            </div>
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['type'])"
+              [field]="'Collateral Type'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_6" *ngIf="!isText">
+          <div class="input_wrap mb_0">
+            <div class="d_flex">
+              <input
+                type="file"
+                id="real-file"
+                #imgupload
+                hidden="hidden"
+                formControlName="file"
+                (change)="uploadFile($event)"
+                [accept]="uploadType"
+                class="inpt_field"
+              />
+              <button
+                type="button"
+                id="custom-button"
+                (click)="imgupload.click()"
+              >
+                <img
+                  src="../../../../../../assets/images_new/icons/file-upload.svg"
+                  alt=""
+                />
+              </button>
+              <div
+                class="file_txt"
+                style="display: flex; flex-direction: column"
+              >
+                <span class="subtext">Upload Icon</span>
+                <span class="info" *ngIf="!fileName" id="custom-text"
+                  >No file chosen, yet.</span
+                >
+                <span class="info" *ngIf="fileName" id="custom-text">{{
+                  fileName
+                }}</span>
+              </div>
+            </div>
+            <!-- <small class="small"
+              >Width: XXpx, Height: XXpx, Max size: XXMb</small
+            > -->
+          </div>
+        </div>
+
+        <div class="col_12 mt_3 mb_3" *ngIf="!isText">
+          <hr class="brdr_top_l2" />
+        </div>
+        <div class="col_12" *ngIf="!isText && isCustomCollateral">
+          <div class="input_wrap mb_3">
+            <label class="input_label r_lbl required"
+              >Customize the Document</label
+            >
+            <div class="w_100 mt_1 d_block">
+              <div
+                class="form_check form_check_inline"
+                *ngFor="let item of collateralList"
+              >
+                <p-radioButton
+                  [value]="item.Value"
+                  class="form_check_input"
+                  id="item.Value"
+                  (click)="onCustomise(item.Value)"
+                  formControlName="customise"
+                ></p-radioButton>
+                <label class="form_check_label" for="item.Value">{{
+                  item.Text
+                }}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col_12">
+          <div class="input_wrap">
+            <label class="input_label required">Instructions</label>
+            <input
+              type="text"
+              class="inpt_field"
+              name=""
+              formControlName="instructions"
+              placeholder="Enter Instructions"
+            />
+            <app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['instructions'])"
+              [field]="'Instruction'"
+            ></app-validation-error>
+          </div>
+        </div>
+        <div class="col_12">
+          <div class="input_wrap mb_0">
+            <label class="input_label required">Message</label>
+            <textarea
+              class="tet_field"
+              id="Address"
+              autocomplete="off"
+              formControlName="message"
+              placeholder="Enter Message"
+            ></textarea
+            ><app-validation-error
+              [submit]="submitted"
+              [control]="addForm.get(['message'])"
+              [field]="'Message'"
+            ></app-validation-error>
+            <div class="inpt_pill_wrp" *ngIf="isText && isCustomCollateral">
+              <div
+                class="inpt_pill"
+                (click)="addMessage('CP NAME PLACEHOLDER')"
+              >
+                CP Name
+              </div>
+              <div
+                class="inpt_pill"
+                (click)="addMessage('CP COMPANY NAME PLACEHOLDER')"
+              >
+                CP Company Name
+              </div>
+              <div
+                class="inpt_pill"
+                (click)="addMessage('CP ADDRESS PLACEHOLDER')"
+              >
+                CP Address
+              </div>
+              <div
+                class="inpt_pill"
+                (click)="addMessage('CP RERA NO. PLACEHOLDER')"
+              >
+                CP RERA Number
+              </div>
+              <div
+                class="inpt_pill"
+                (click)="addMessage('CP ACCOUNT OWNER NAME')"
+              >
+                CP Account Owner Name
+              </div>
+              <div
+                class="inpt_pill"
+                (click)="addMessage('CP PHONE PLACEHOLDER')"
+              >
+                CP Phone Number
+              </div>
+              <div
+                class="inpt_pill"
+                (click)="addMessage('CP E-MAIL PLACEHOLDER')"
+              >
+                CP Email
+              </div>
+              <div
+                class="inpt_pill"
+                (click)="addMessage('CP WEBSITE PLACEHOLDERR')"
+              >
+                CP Website
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d_flex justify_space_between">
+        <button
+          class="btn btn_secondary close"
+          (click)="onClose()"
+          type="button"
+        >
+          Cancel
+        </button>
+        <button class="btn btn_primary pop_btn" type="submit">Create</button>
+      </div>
+    </div>
+  </form>
+  <!-- modal_body -->
+</div>
